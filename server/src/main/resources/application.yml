@@ -1,0 +1,7 @@
+spring:
+  config:
+    import: optional:secrets.yml
+  datasource:
+    url: ${DATABASE_URL_DEV}
+    username: ${DATABASE_USER}
+    password: ${DATABASE_PASSWORD}
