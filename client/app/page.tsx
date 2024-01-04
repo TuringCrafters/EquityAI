@@ -20,7 +20,7 @@ export default function Home() {
       }
 
       const result = await response.json();
-      setResponse(result.response);
+      setResponse(result.responseAi);
     } catch (error) {
       console.error('There has been a problem with your fetch operation:', error);
     }
