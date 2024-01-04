@@ -1,0 +1,20 @@
+{
+  "name": "ai-server",
+  "version": "1.0.0",
+  "description": "generative ai server",
+  "main": "./src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TuringCrafters/EquityAI.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TuringCrafters/EquityAI/issues"
+  },
+  "homepage": "https://github.com/TuringCrafters/EquityAI#readme"
+}
