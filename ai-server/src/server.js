@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const port = 3000;
 const cors = require('cors');
+const { sendPromptToAi } = require('./index'); 
 
 app.use(cors({
     origin: 'http://localhost:3001' 
@@ -9,10 +10,15 @@ app.use(cors({
 
 app.use(express.json());
 
-app.post('/ai', (req, res) => {
+app.post('/ai', async (req, res) => {
     const userInput = req.body.text;
-    const response = userInput.toUpperCase();
-    res.json({ response });
+    try {
+        const responseAi = await sendPromptToAi(userInput);
+        res.json({ responseAi });
+    } catch (error) {
+        console.error("Error in AI processing:", error);
+        res.status(500).send("Error processing request");
+    }
 });
 
 app.listen(port, () => {
