@@ -14,6 +14,4 @@ async function run() {
     console.log(text);
   }
 
-  console.log(process.env.GEMINI_PRO_API_KEY);
-
   run();
