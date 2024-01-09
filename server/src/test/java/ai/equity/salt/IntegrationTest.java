@@ -12,16 +12,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class IntegrationTest {
 
-   // private final OpenAiProperties properties;
-
-   // public IntegrationTest(OpenAiProperties properties) {
-        //this.properties = properties;
-    //}
-
     Dotenv dotenv = Dotenv.load();
     LanguageModel model = OpenAiLanguageModel.builder()
             .apiKey(dotenv.get("OPENAI_API_KEY"))
-            //.organizationId(System.getenv("OPENAI_ORGANIZATION_ID"))
             .logRequests(true)
             .logResponses(true)
             .build();
