@@ -35,3 +35,6 @@ build/
 .vscode/
 src/main/resources/secrets.yml
 /src/main/resources/secrets.yml
+
+### env ###
+.env
