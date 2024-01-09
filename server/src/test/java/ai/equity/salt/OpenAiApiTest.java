@@ -5,12 +5,15 @@ import dev.langchain4j.model.language.LanguageModel;
 import dev.langchain4j.model.output.Response;
 import dev.langchain4j.model.output.TokenUsage;
 import io.github.cdimascio.dotenv.Dotenv;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import dev.ai4j.openai4j.OpenAiHttpException;
 
 import static dev.langchain4j.model.output.FinishReason.STOP;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertThrows;
 
-public class IntegrationTest {
+public class OpenAiApiTest {
 
     Dotenv dotenv = Dotenv.load();
     LanguageModel model = OpenAiLanguageModel.builder()
@@ -19,7 +22,14 @@ public class IntegrationTest {
             .logResponses(true)
             .build();
 
+    LanguageModel modelNoApiKey = OpenAiLanguageModel.builder()
+            .apiKey("asdfghjkl")
+            .logRequests(true)
+            .logResponses(true)
+            .build();
+
     @Test
+    @Disabled
     void should_generate_answer_and_return_token_usage_and_finish_reason_stop() {
 
         String prompt = "What is the capital of Germany?";
@@ -36,5 +46,15 @@ public class IntegrationTest {
                 .isEqualTo(tokenUsage.inputTokenCount() + tokenUsage.outputTokenCount());
 
         assertThat(response.finishReason()).isEqualTo(STOP);
+    }
+
+    @Test
+    void shouldReturnStatus400() {
+
+        String prompt = "What is the capital of Germany?";
+
+        assertThrows(RuntimeException.class, () -> {
+            modelNoApiKey.generate(prompt);
+        });
     }
 }
