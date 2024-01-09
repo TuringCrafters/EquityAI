@@ -3,5 +3,5 @@ spring:
     import: optional:secrets.yml
   datasource:
     url: ${DATABASE_URL_DEV}
-    username: ${DATABASE_USER}
-    password: ${DATABASE_PASSWORD}
+    username: ${DATABASE_USER_DEV}
+    password: ${DATABASE_PWD_DEV}
