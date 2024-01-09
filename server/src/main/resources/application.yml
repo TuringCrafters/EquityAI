@@ -5,3 +5,6 @@ spring:
     url: ${DATABASE_URL_DEV}
     username: ${DATABASE_USER}
     password: ${DATABASE_PASSWORD}
+openai:
+  api:
+    key: ${OPENAI_API_KEY}
