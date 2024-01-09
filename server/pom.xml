@@ -31,8 +31,9 @@
 		</dependency>
 
 		<dependency>
-			<groupId>dev.ai4j</groupId>
-			<artifactId>openai4j</artifactId>
+			<groupId>dev.langchain4j</groupId>
+			<artifactId>langchain4j-open-ai</artifactId>
+			<version>0.25.0</version>
 		</dependency>
 
 		<dependency>
@@ -69,13 +70,6 @@
 		<dependency>
 			<groupId>org.testcontainers</groupId>
 			<artifactId>postgresql</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>dev.langchain4j</groupId>
-			<artifactId>langchain4j-core</artifactId>
-			<classifier>tests</classifier>
-			<type>test-jar</type>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
