@@ -5,15 +5,17 @@ import dev.langchain4j.model.language.LanguageModel;
 import dev.langchain4j.model.output.Response;
 import dev.langchain4j.model.output.TokenUsage;
 import io.github.cdimascio.dotenv.Dotenv;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import dev.ai4j.openai4j.OpenAiHttpException;
 
 import static dev.langchain4j.model.output.FinishReason.STOP;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertThrows;
 
 public class OpenAiApiTest {
+
+    private static final String FAKE_API_KEY = "asdfghjkl";
 
     Dotenv dotenv = Dotenv.load();
     LanguageModel model = OpenAiLanguageModel.builder()
@@ -23,7 +25,7 @@ public class OpenAiApiTest {
             .build();
 
     LanguageModel modelNoApiKey = OpenAiLanguageModel.builder()
-            .apiKey("asdfghjkl")
+            .apiKey(FAKE_API_KEY)
             .logRequests(true)
             .logResponses(true)
             .build();
@@ -49,12 +51,16 @@ public class OpenAiApiTest {
     }
 
     @Test
-    void shouldReturnStatus400() {
-
+    void testExceptionMessage() {
         String prompt = "What is the capital of Germany?";
-
-        assertThrows(RuntimeException.class, () -> {
+        Exception exception = assertThrows(RuntimeException.class, () -> {
             modelNoApiKey.generate(prompt);
         });
+
+        String expectedMessage = "Incorrect API key provided: " + FAKE_API_KEY +
+                ". You can find your API key at https://platform.openai.com/account/api-keys.";
+        String actualMessage = exception.getMessage();
+
+        Assertions.assertTrue(actualMessage.contains(expectedMessage));
     }
 }
