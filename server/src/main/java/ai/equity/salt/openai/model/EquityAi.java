@@ -21,4 +21,6 @@ public class EquityAi {
         this.prompt = prompt;
         this.response = response;
     }
+
+    public EquityAi() {}
 }
