@@ -19,15 +19,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @Import(LocalDevTestcontainersConfig.class)
-class ApplicationIntegrationTest {
+public class ApplicationIntegrationTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Test
-    @Disabled("To decrease token usage")
+    @Disabled
     @SneakyThrows
-    void shouldReturnCorrectResponseFromAi() {
+    public void shouldReturnCorrectResponseFromAi() {
 
         String response = this.mockMvc.perform(post("/api/v1/ai")
                 .contentType(APPLICATION_JSON)
