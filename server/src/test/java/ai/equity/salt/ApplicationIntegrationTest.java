@@ -25,7 +25,7 @@ class ApplicationIntegrationTest {
     private MockMvc mockMvc;
 
     @Test
-    @Disabled
+    @Disabled("To decrease token usage")
     @SneakyThrows
     void shouldReturnCorrectResponseFromAi() {
 

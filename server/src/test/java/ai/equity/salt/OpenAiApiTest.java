@@ -31,7 +31,7 @@ public class OpenAiApiTest {
             .build();
 
     @Test
-    @Disabled
+    @Disabled("To decrease token usage")
     void should_generate_answer_and_return_token_usage_and_finish_reason_stop() {
 
         String prompt = "What is the capital of Germany?";
