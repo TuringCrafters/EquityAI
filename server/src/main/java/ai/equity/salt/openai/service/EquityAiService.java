@@ -13,10 +13,10 @@ public class EquityAiService {
     private final OpenAiModelFactory openAiModelFactory;
 
     private final JpaEquityAiRepo repository;
+
     public String getAiResponse(String prompt) {
 
-       // String prompt = "What is the capital of Germany?";
-        String response = model.generate(prompt).content();
+        String response = openAiModelFactory.create().generate(prompt).content();
         repository.save(new EquityAi(prompt, response));
         return response;
     }
