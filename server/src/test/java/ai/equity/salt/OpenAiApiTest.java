@@ -13,7 +13,7 @@ import static dev.langchain4j.model.output.FinishReason.STOP;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertThrows;
 
-public class OpenAiApiTest {
+class OpenAiApiTest {
 
     private static final String FAKE_API_KEY = "asdfghjkl";
 
