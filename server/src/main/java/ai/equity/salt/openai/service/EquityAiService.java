@@ -1,6 +1,5 @@
 package ai.equity.salt.openai.service;
 
-import ai.equity.salt.openai.OpenAiProperties;
 import ai.equity.salt.openai.model.EquityAi;
 import ai.equity.salt.openai.repository.JpaEquityAiRepo;
 import dev.langchain4j.model.language.LanguageModel;
