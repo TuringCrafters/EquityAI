@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 public class EquityAiService {
 
     Dotenv dotenv = Dotenv.load();
-//    private final OpenAiProperties properties;
     private final LanguageModel model = OpenAiLanguageModel.builder()
             .apiKey(dotenv.get("OPENAI_API_KEY"))
             .logRequests(true)
@@ -23,8 +22,6 @@ public class EquityAiService {
 
     private final JpaEquityAiRepo repository;
     public String getAiResponse(String prompt) {
-
-       // String prompt = "What is the capital of Germany?";
         String response = model.generate(prompt).content();
         repository.save(new EquityAi(prompt, response));
         return response;
