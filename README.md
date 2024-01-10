@@ -1,36 +1,31 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# EquityAi
 
-## Getting Started
+## Overview
+Equity AI is a predictive anomaly detection application designed to address the challenges associated with identifying and rectifying pay discrepancies within an organization. The app detects anomalies in payroll data, facilitating timely intervention and resolution of pay-related issues.
 
-First, run the development server:
+## The Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+**1. Predictive Anomaly Detection**
+<p>Use of advanced AI algorithms to analyze your pay data</p>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**2. Data Monitoring**
+<p>Identify any potential anomalies or discrepancies that may indicate bias or discrimination</p>
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Technologies Used:
+- **Frontend:** Leveraging NextJS and TypeScript for creating a responsive user interface
+- **Backend:** Building a solid backend infrastructure by using Java and the Spring Framework
+- **Cloud Hosting and Services:** Utilizing Fly.io for reliable and scalable cloud hosting solutions
+- **Other Tools:** ChatGPT
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Acknowledgments
+<p>We extend our gratitude to the open-source community, and the developers who have contributed to the frameworks, libraries, and tools used in making Equity AI possible.</p>
 
-## Learn More
+## Wanna Reach Out?
+- [Anastasia Kurayshevich](https://github.com/AnastasiaKurayshevich)
+- [Ibrahim Iqbal](https://github.com/dIB59)
+- [Marisa Pinheiro](https://github.com/Marisa-Pinheiro) 
+- [Anne Mariel Catapang](https://github.com/annemariel95)
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## 
+##### Built With:
+<img src="https://skillicons.dev/icons?i=java,spring,maven,html,ts,next&perline=8" />
