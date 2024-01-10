@@ -13,7 +13,7 @@ import static dev.langchain4j.model.output.FinishReason.STOP;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertThrows;
 
-class OpenAiApiTest {
+public class OpenAiApiTest {
 
     private static final String FAKE_API_KEY = "asdfghjkl";
 
@@ -31,7 +31,7 @@ class OpenAiApiTest {
             .build();
 
     @Test
-    @Disabled("To decrease token usage")
+    @Disabled
     void should_generate_answer_and_return_token_usage_and_finish_reason_stop() {
 
         String prompt = "What is the capital of Germany?";
@@ -43,7 +43,7 @@ class OpenAiApiTest {
 
         TokenUsage tokenUsage = response.tokenUsage();
         assertThat(tokenUsage.inputTokenCount()).isEqualTo(7);
-        assertThat(tokenUsage.outputTokenCount()).isPositive();
+        assertThat(tokenUsage.outputTokenCount()).isGreaterThan(0);
         assertThat(tokenUsage.totalTokenCount())
                 .isEqualTo(tokenUsage.inputTokenCount() + tokenUsage.outputTokenCount());
 
