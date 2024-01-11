@@ -25,7 +25,7 @@ public class ApplicationIntegrationTest {
     private MockMvc mockMvc;
 
     @Test
-    @Disabled
+    @Disabled("Disabled due to using tokens")
     @SneakyThrows
     public void shouldReturnCorrectResponseFromAi() {
 
