@@ -28,7 +28,6 @@ class OpenAiApiTest {
         String expectedMessage = "Incorrect API key provided: " + FAKE_API_KEY +
                 ". You can find your API key at https://platform.openai.com/account/api-keys.";
         String actualMessage = exception.getMessage();
-
         Assertions.assertTrue(actualMessage.contains(expectedMessage));
     }
 }

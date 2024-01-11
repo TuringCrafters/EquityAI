@@ -15,7 +15,7 @@ public class StatusController {
     @ResponseStatus(OK)
     public void status(){
     /*
-    This should return nothing because it only returns the status code 200
+    Only returns the status code 200
      */
     }
 }
