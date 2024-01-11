@@ -9,7 +9,7 @@ import static org.springframework.http.HttpStatus.CREATED;
 @RestController
 @RequestMapping("api/v1")
 @RequiredArgsConstructor
-@CrossOrigin("equity-ai.vercel.app")
+@CrossOrigin("*")
 public class EquityAiController {
 
     private final EquityAiService service;
