@@ -1,15 +1,3 @@
-spring:
-config:
-import: optional:secrets.yml
-datasource:
-url: ${DATABASE_URL_DEV}
-username: ${DATABASE_USER_DEV}
-password: ${DATABASE_PWD_DEV}
-jpa:
-hibernate:
-ddl-auto: update
-show-sql: false
-defer-datasource-initialization: true
-openai:
-api:
-key: ${OPENAI_API_KEY}
+website:
+  base-url:
+    frontend: https://localhost:3000/

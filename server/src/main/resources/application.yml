@@ -13,3 +13,7 @@ spring:
 openai:
   api:
     key: ${OPENAI_API_KEY}
+
+website:
+  base-url:
+    frontend: https://equity-ai.vercel.app/
