@@ -10,7 +10,7 @@ export default function Home() {
   const [prompt, setPrompt] = useState('');
 
   async function fetchAiResponse () {
-    const response = await axios.post('http://localhost:8080/api/v1/ai', { prompt });
+    const response = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/ai`, { prompt });
     return response.data;
   };
 
