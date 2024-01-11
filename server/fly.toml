@@ -21,7 +21,6 @@ primary_region = "arn"
     method = "HEAD"
     timeout = "5s"
     path = "/api/v1/status"
-
 [[vm]]
   cpu_kind = "shared"
   cpus = 1
