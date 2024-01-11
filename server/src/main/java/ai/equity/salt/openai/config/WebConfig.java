@@ -18,7 +18,6 @@ public class WebConfig{
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings (@NotNull CorsRegistry registry){
-                System.out.println(allowedApi);
                 registry.addMapping("/api/**")
                         .allowedOrigins(allowedApi)
                         .allowedMethods("GET", "POST", "DELETE", "PUT");
