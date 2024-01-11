@@ -1,4 +1,4 @@
-name: Run Equity Application Tests
+name: Run BE Open Ai Api Tests
 on:
   push:
     paths:
@@ -24,6 +24,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-m2
 
-      - name: Run Optout Application Tests
+      - name: Run BE Open Ai Api Tests
         run: |
           mvn -f server/pom.xml test -Dtest=OpenAiApiTest
