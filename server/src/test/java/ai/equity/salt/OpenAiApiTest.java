@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.assertThrows;
 
-public class OpenAiApiTest {
+class OpenAiApiTest {
 
     private static final String FAKE_API_KEY = "asdfghjkl";
 
