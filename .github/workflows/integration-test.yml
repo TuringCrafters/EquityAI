@@ -5,7 +5,7 @@ on:
       - "server/**"
 jobs:
   run_tests:
-    runs-on: ubuntu-23.10
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v2
