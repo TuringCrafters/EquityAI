@@ -1,8 +1,6 @@
 name: Run BE Equity Application Tests
-on:
-  push:
-    paths:
-      - "server/**"
+on: push
+
 jobs:
   run_tests:
     runs-on: ubuntu-23.10
