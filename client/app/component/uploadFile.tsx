@@ -23,7 +23,7 @@ const UploadFile = () => {
     const formData = new FormData();
 
     if (file) {
-      formData.append("image", file);
+      formData.append("file", file[0]);
     }
 
     const response = await axios.post(
