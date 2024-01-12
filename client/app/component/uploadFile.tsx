@@ -6,7 +6,7 @@ interface ClothingFormProps {
 }
 
 const UploadFile = () => {
-  const [file, setFile] = useState<Blob | null>(null);
+  const [file, setFile] = useState<FileList | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const [isSuccessVisible, setIsSuccessVisible] = useState(false);
