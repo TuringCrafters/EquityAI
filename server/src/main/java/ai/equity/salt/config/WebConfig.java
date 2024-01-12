@@ -1,5 +1,6 @@
-package ai.equity.salt.openai.config;
+package ai.equity.salt.config;
 
+import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -8,10 +9,10 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
+@RequiredArgsConstructor
 public class WebConfig{
 
-    @Value("${website.base-url.frontend}")
-    private String allowedApi;
+    private final WebsiteProperties properties;
 
     @Bean
     public WebMvcConfigurer corsConfigurer() {
@@ -19,10 +20,9 @@ public class WebConfig{
             @Override
             public void addCorsMappings (@NotNull CorsRegistry registry){
                 registry.addMapping("/api/**")
-                        .allowedOrigins(allowedApi)
+                        .allowedOrigins(properties.frontend())
                         .allowedMethods("GET", "POST", "DELETE", "PUT");
             }
         };
     }
-
 }
