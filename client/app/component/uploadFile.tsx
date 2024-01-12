@@ -13,7 +13,7 @@ const UploadFile = () => {
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
-      setFile(event.target.files[0]);
+      setFile(event.target.files);
     }
   };
 
@@ -35,11 +35,12 @@ const UploadFile = () => {
     setTimeout(() => {
       setIsSuccessVisible(false);
     }, 2000);
+    return response.data;
   };
 
   return (
     <div className="w-full max-w-md">
-      <form onSubmit={handleSubmit} className="w-full max-w-m px-1 py-6">
+      <form onSubmit={handleSubmit} className="w-full max-w-m px-1 py-6" encType="multipart/form-data">
         <div>
           <input
             type="file"
@@ -52,7 +53,7 @@ const UploadFile = () => {
         {isSuccessVisible && (
           <div className="text-green-600 text-center">Successful!</div>
         )}
-        <button onSubmit={() => handleSubmit}>Upload</button>
+        <button type="submit">Upload</button>
       </form>
     </div>
   );
