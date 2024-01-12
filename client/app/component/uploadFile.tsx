@@ -1,9 +1,6 @@
 "use client";
-import React, { ChangeEvent, useEffect, useRef, useState } from "react";
-
-interface ClothingFormProps {
-  id?: string;
-}
+import axios from "axios";
+import React, { ChangeEvent, useRef, useState } from "react";
 
 const UploadFile = () => {
   const [file, setFile] = useState<FileList | null>(null);
