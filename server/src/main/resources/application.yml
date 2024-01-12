@@ -10,6 +10,12 @@ spring:
       ddl-auto: update
     show-sql: false
     defer-datasource-initialization: true
+  profiles:
+    default: deploy
 openai:
   api:
     key: ${OPENAI_API_KEY}
+
+website:
+  base-url:
+    frontend: https://equity-ai.vercel.app/
