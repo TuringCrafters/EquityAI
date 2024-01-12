@@ -3,13 +3,14 @@ package ai.equity.salt.openai.controller;
 import ai.equity.salt.openai.service.EquityAiService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import static org.springframework.http.HttpStatus.CREATED;
 
 @RestController
 @RequestMapping("api/v1")
 @RequiredArgsConstructor
-@CrossOrigin(origins =  "https://equity-ai.vercel.app/")
+@CrossOrigin("*")
 public class EquityAiController {
 
     private final EquityAiService service;
@@ -20,5 +21,9 @@ public class EquityAiController {
         return service.getAiResponse(prompt);
     }
 
-
+    @PostMapping("upload-file")
+    @ResponseStatus(CREATED)
+    public String sendFile(@RequestParam MultipartFile file){
+        return file.getName();
+    }
 }
