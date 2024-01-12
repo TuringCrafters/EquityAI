@@ -26,6 +26,11 @@ const UploadFile = () => {
       formData.append("image", file);
     }
 
+    const response = await axios.post(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/upload-file`,
+       formData 
+    )
+
     setIsSuccessVisible(true);
     setTimeout(() => {
       setIsSuccessVisible(false);
