@@ -79,6 +79,4 @@ public class EquityAiService {
             throw new RuntimeException(e);
         }
     }
-
-
 }
