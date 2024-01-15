@@ -1,5 +1,6 @@
 package ai.equity.salt.openai.service;
 
+import ai.equity.salt.openai.controller.dto.EquityAiResponse;
 import ai.equity.salt.openai.model.EquityAi;
 import ai.equity.salt.openai.model.OpenAiModelFactory;
 import ai.equity.salt.openai.repository.JpaEquityAiRepo;
@@ -43,7 +44,7 @@ public class EquityAiService {
         return response;
     }
 
-    public String analyzeFile(MultipartFile file) throws IOException {
+    public EquityAiResponse analyzeFile(MultipartFile file) throws IOException {
         var inputStream = file.getInputStream();
 
         var fileData = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))
@@ -56,8 +57,9 @@ public class EquityAiService {
                 .generate(SYSTEM_MESSAGE + fileData);
 
         log.info(String.valueOf(response.tokenUsage()));
+        log.info("This is the response: " + response.content());
 
-        return response.content();
+        return new EquityAiResponse(response.content());
     }
 
 
