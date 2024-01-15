@@ -30,7 +30,7 @@ const Analysis = () => {
 
     
 
-const [information, setInformation] = useState<Analysis>()
+const [information, setInformation] = useState<Analysis | null>(null)
 
      const fetchAnalysis = async () => {
             try {
@@ -56,11 +56,9 @@ const [information, setInformation] = useState<Analysis>()
 
 
     return (
-
-        //map through the information and display it as graphs
-
-
-        <div>{}</div>
+        <div>{information && 
+            information.location_details.map(location  => {return <ul key={location.location}>
+                <li> Average salary: {location.salary.average}</li></ul>})}</div>
 
     )
 }
