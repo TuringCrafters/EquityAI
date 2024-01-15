@@ -5,12 +5,15 @@ import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useToast } from "@/components/ui/use-toast";
+import { ToastSimple } from "../ui/ToastSimple";
 
 const UploadFile = () => {
   const [file, setFile] = useState<FileList | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [progress, setProgress] = useState(0);
-  
+  const { toast } = useToast();
+
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>): void => {
     if (event.target.files) {
       setFile(event.target.files);
@@ -18,16 +21,15 @@ const UploadFile = () => {
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+
     e.preventDefault();
-    if (!file) {
-      return;
-    }
+  
 
     const formData = new FormData();
 
     if (file) {
       formData.append("file", file[0]);
-    }
+    }    
 
     const response = await axios.post(
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/file/analyze`,
@@ -41,7 +43,8 @@ const UploadFile = () => {
           setProgress(percentCompleted);
         },
         },
-    )    
+      )    
+
     return response.data;
   };
 
@@ -49,19 +52,17 @@ const UploadFile = () => {
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
       <div className="w-full max-w-md p-6 space-y-4">
       <form onSubmit={handleSubmit} className="w-full max-w-m px-1 py-6" encType="multipart/form-data">
-      <h1 className="text-3xl font-bold text-center">Upload File</h1>
-        <div>
+      <h1 className="text-4xl font-bold text-center">Upload File</h1>
+        <div className="flex justify-center m-4">
           <Label className="cursor-pointer" htmlFor="file">
-            <UploadIcon/>
+          <UploadIcon/>
             <span className="sr-only">Upload File</span>
           </Label>
           <Input
             type="file"
             ref={fileInputRef}
-            
+            className="hidden"
             onChange={handleFileChange}
-            className="block w-full text-sm text-gray-500 
-                       file:bg-primary-content file:btn btn-accent file:rounded-full file:border-0 file:text-sm file:font-normal file:text-secondary-content "
             id="file"
           />
         </div>
@@ -77,7 +78,12 @@ const UploadFile = () => {
             </div>
           </div>
         </div>
-        <Button className="w-full" type="submit">
+        <Button className="w-full h-14 mt-4 text-lg" type="submit" onClick={() => {
+          toast({
+                description: "Your message has been sent.",
+              })
+            }}
+          >
           Upload
         </Button>
       </form>
@@ -108,6 +114,7 @@ function FileIcon() {
 function UploadIcon() {
   return (
     <svg
+      className="h-12 w-12 jus"
       xmlns="http://www.w3.org/2000/svg"
       width="24"
       height="24"
