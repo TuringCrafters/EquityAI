@@ -80,9 +80,8 @@ const UploadFile = () => {
         </div>
         <Button className="w-full h-14 mt-4 text-lg" type="submit" onClick={() => {
           toast({
-                description: "Your message has been sent.",
-              })
-            }}
+                description: "Your file has been sent.",
+              })}}
           >
           Upload
         </Button>
