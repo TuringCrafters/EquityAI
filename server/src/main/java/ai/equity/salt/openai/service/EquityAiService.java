@@ -24,18 +24,16 @@ public class EquityAiService {
 
     private final JpaEquityAiRepo repository;
 
-    private final String SYSTEM_MESSAGE = "Analyze the provided dataset, which includes positions, salaries, age, " +
-            "and locality, to identify significant discrepancies. Focus on:\n" +
-            "\n" +
-            "Salary differences within the same positions.\n" +
-            "Salary distribution variations across localities.\n" +
-            "Age-related disparities in salaries and positions.\n" +
-            "Any unexpected patterns or outliers.\n" +
-            "\n" +
-            "Use statistical measures and visualizations to support your findings. " +
-            "Highlight and explain any noteworthy discrepancies beyond these areas. " +
-            "Ensure your analysis is thorough and accounts for possible contributing factors to these disparities.\n" +
-            "Provide the result in plain english.";
+    private final String SYSTEM_MESSAGE = """
+            Analyze the provided dataset, which includes positions, salaries, age, and locality, to identify significant discrepancies. Focus on:
+
+            Salary differences within the same positions.
+            Salary distribution variations across localities.
+            Age-related disparities in salaries and positions.
+            Any unexpected patterns or outliers.
+
+            Use statistical measures and visualizations to support your findings. Highlight and explain any noteworthy discrepancies beyond these areas. Ensure your analysis is thorough and accounts for possible contributing factors to these disparities.
+            Provide the result in plain english.""";
 
     public String getAiResponse(String prompt) {
 
