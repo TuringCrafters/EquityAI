@@ -72,13 +72,12 @@ public class EquityAiService {
                     .lines()
                     .collect(Collectors.joining());
 
-        log.info("This is the logged data: " + fileData);
-
-        var response = openAiModelFactory.createDefaultChatModel().generate(SYSTEM_MESSAGE + fileData);
-
-        log.info("This is the response: " + response);
-
-        return new EquityAiResponse(response);
+            var response = openAiModelFactory.createDefaultChatModel().generate(SYSTEM_MESSAGE + fileData);
+            log.info("Response: " + response);
+            return new EquityAiResponse(response, uniqueJobTitles, null);
+        } catch (CsvValidationException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
