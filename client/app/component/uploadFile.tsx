@@ -24,7 +24,7 @@ const UploadFile = () => {
     }
 
     const response = await axios.post(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/upload-file`,
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/file/analyze`,
        formData 
     )
 

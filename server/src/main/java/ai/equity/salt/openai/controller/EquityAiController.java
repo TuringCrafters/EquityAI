@@ -1,9 +1,12 @@
 package ai.equity.salt.openai.controller;
 
+import ai.equity.salt.openai.controller.dto.EquityAiResponse;
 import ai.equity.salt.openai.service.EquityAiService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 import static org.springframework.http.HttpStatus.CREATED;
 
@@ -20,9 +23,9 @@ public class EquityAiController {
         return service.getAiResponse(prompt);
     }
 
-    @PostMapping("upload-file")
+    @PostMapping("file/analyze")
     @ResponseStatus(CREATED)
-    public String sendFile(@RequestParam MultipartFile file){
-        return file.getName();
+    public EquityAiResponse sendFile(@RequestParam MultipartFile file) throws IOException {
+        return service.analyzeFile(file);
     }
 }
