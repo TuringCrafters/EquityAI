@@ -1,6 +1,7 @@
 package ai.equity.salt.openai.controller.dto;
 
 public record EquityAiResponse(
-        String response
+        String response,
+        EquityAiDatapointExperienceResponse datapointExperience
 ) {
 }
