@@ -4,15 +4,19 @@ import ai.equity.salt.openai.controller.dto.EquityAiResponse;
 import ai.equity.salt.openai.model.EquityAi;
 import ai.equity.salt.openai.model.OpenAiModelFactory;
 import ai.equity.salt.openai.repository.JpaEquityAiRepo;
+import com.opencsv.exceptions.CsvValidationException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import com.opencsv.CSVReaderHeaderAware;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
@@ -40,9 +44,33 @@ public class EquityAiService {
     public EquityAiResponse analyzeFile(MultipartFile file) throws IOException {
         var inputStream = file.getInputStream();
 
-        var fileData = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))
-                .lines()
-                .collect(Collectors.joining());
+        try(CSVReaderHeaderAware reader = new CSVReaderHeaderAware(new InputStreamReader(inputStream, StandardCharsets.UTF_8))){
+            List<String> jobTitles = new ArrayList<>();
+            Map<String, String> values;
+
+            while ((values = reader.readMap()) != null ) {
+                String jobTitle = values.get("Positions");
+                if (jobTitle != null && !jobTitle.isEmpty()){
+                    jobTitles.add(jobTitle);
+                }
+            }
+            Set<String> uniqueJobTitles = new HashSet<>(jobTitles);
+
+            String mostCommonJob = jobTitles
+                    .stream()
+                    .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+                    .entrySet()
+                    .stream()
+                    .max(Map.Entry.comparingByValue())
+                    .map(Map.Entry::getKey)
+                    .orElse(null);
+
+            log.info("Unique jobs: " + uniqueJobTitles);
+            log.info("Most common job: " + mostCommonJob);
+
+            var fileData = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))
+                    .lines()
+                    .collect(Collectors.joining());
 
         log.info("This is the logged data: " + fileData);
 
