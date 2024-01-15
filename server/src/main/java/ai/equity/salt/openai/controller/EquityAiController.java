@@ -5,6 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+
 import static org.springframework.http.HttpStatus.CREATED;
 
 @RestController
@@ -20,9 +22,9 @@ public class EquityAiController {
         return service.getAiResponse(prompt);
     }
 
-    @PostMapping("upload-file")
+    @PostMapping("file/analyze")
     @ResponseStatus(CREATED)
-    public String sendFile(@RequestParam MultipartFile file){
-        return file.getName();
+    public String sendFile(@RequestParam MultipartFile file) throws IOException {
+        return service.analyzeFile(file);
     }
 }
