@@ -6,7 +6,8 @@ import { Progress } from "@/components/ui/progress"
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/components/ui/use-toast";
-import { ToastSimple } from "../ui/ToastSimple";
+import UploadIcon from "@/components/icon/uploadIcon";
+import FileIcon from "@/components//icon/fileIcon";
 
 const UploadFile = () => {
   const [file, setFile] = useState<FileList | null>(null);
@@ -21,31 +22,38 @@ const UploadFile = () => {
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-
     e.preventDefault();
-  
 
-    const formData = new FormData();
+    try {
+      if (!file) {
+        return;
+      }
 
-    if (file) {
+      const formData = new FormData();
       formData.append("file", file[0]);
-    }    
 
-    const response = await axios.post(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/file/analyze`,
-       formData,
-      {
-        onUploadProgress: (progressEvent) => {
-          const percentCompleted = Math.round(
-            (progressEvent.loaded * 100) / (progressEvent.total ?? 0)
-          );
-          console.log(percentCompleted);
-          setProgress(percentCompleted);
-        },
-        },
-      )    
-
-    return response.data;
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/file/analyze`,
+        formData,
+        { onUploadProgress: (progressEvent) => {
+            const percentCompleted = Math.round(
+              (progressEvent.loaded * 100) / (progressEvent.total ?? 0)
+            );
+            setProgress(percentCompleted);
+          },
+        }
+      );
+      toast({
+        variant: "success",
+        description: "Your file has been sent.",
+      });
+    } catch (error: any) {
+      toast({
+        variant: "destructive",
+        title: "Upload Failed",
+        description: error.message ?? "Something went wrong",
+      });
+    }
   };
 
   return (
@@ -78,11 +86,7 @@ const UploadFile = () => {
             </div>
           </div>
         </div>
-        <Button className="w-full h-14 mt-4 text-lg" type="submit" onClick={() => {
-          toast({
-                description: "Your file has been sent.",
-              })}}
-          >
+        <Button className="w-full h-14 mt-4 text-lg" type="submit">
           Upload
         </Button>
       </form>
@@ -90,45 +94,5 @@ const UploadFile = () => {
     </div>
   );
 };
-
-function FileIcon() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
-      <polyline points="14 2 14 8 20 8" />
-    </svg>
-  )
-}
-
-function UploadIcon() {
-  return (
-    <svg
-      className="h-12 w-12 jus"
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-      <polyline points="17 8 12 3 7 8" />
-      <line x1="12" x2="12" y1="3" y2="15" />
-    </svg>
-  )
-}
 
 export default UploadFile;
