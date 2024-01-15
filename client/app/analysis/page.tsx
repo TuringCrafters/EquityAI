@@ -28,8 +28,6 @@ const Analysis = () => {
         experience_details: experience_details[];
     }
 
-    
-
 const [information, setInformation] = useState<Analysis | null>(null)
 
      const fetchAnalysis = async () => {
