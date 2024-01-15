@@ -46,16 +46,12 @@ public class EquityAiService {
 
         log.info("This is the logged data: " + fileData);
 
-        var response =  openAiModelFactory.create()
-                .generate(SYSTEM_MESSAGE + fileData);
+        var response = openAiModelFactory.createDefaultChatModel().generate(SYSTEM_MESSAGE + fileData);
 
-        log.info(String.valueOf(response.tokenUsage()));
-        log.info("This is the response: " + response.content());
+        log.info("This is the response: " + response);
 
-        return new EquityAiResponse(response.content());
+        return new EquityAiResponse(response);
     }
-
-
 
 
 }
