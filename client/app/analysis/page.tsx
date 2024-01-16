@@ -19,6 +19,7 @@ export interface location_details {
   };
 }
 
+
 export interface experience_details {
   years_of_experience: number;
   salary: {
