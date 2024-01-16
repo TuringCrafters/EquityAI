@@ -19,7 +19,7 @@ export default function BarChartGraph({data}:BarChartGraphProps) {
     >
       <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="location" />
-          <YAxis />
+          <YAxis unit="K SEK"/>
           <Tooltip />
           <Legend />
           <Bar dataKey="salary_below_average" fill="#82ca9d" activeBar={<Rectangle fill="gold" stroke="purple" />} />
