@@ -30,8 +30,7 @@ public class EquityAiService {
             -Point out if similar positions, years of experience and locality with similar job complexity have different salaries
             Highlight and explain any noteworthy discrepancies beyond these areas. Ensure your analysis is thorough and accounts for possible contributing factors to these disparities.
             Provide the result in plain english. Make sure the answer is in layman's terms""";
-    private final OpenAiModelFactory openAiModelFactory;
-    private final JpaEquityAiRepo repository;
+    private static final String DATA_HEADER = "Positions, Salaries, Experience, Age, Locality\n";
 
     public String getAiResponse(String prompt) {
 
@@ -87,7 +86,8 @@ public class EquityAiService {
     private static String createPrompt(List<EquityAiJobData> jobDataList) {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("Positions, Salaries, Experience, Age, Locality\n");
+        stringBuilder.append(DATA_HEADER);
+
         for (EquityAiJobData jobData : jobDataList) {
             stringBuilder.append(jobData.toString()).append("\n");
         }
