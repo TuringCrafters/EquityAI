@@ -44,6 +44,7 @@ const UploadFile = () => {
         }
       );
       toast({
+        className: "text-white font-bold tracking-wide",
         variant: "success",
         description: "Your file has been sent.",
       });
