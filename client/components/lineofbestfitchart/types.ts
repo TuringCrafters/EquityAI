@@ -5,7 +5,7 @@ export type LinearChartGraphProps = {
 };
 
 export type TransformedExperienceDetails = {
-    yearsOfExperience: number;
+  yearsOfExperience: number;
   salary_average: number;
   salary_above_average: number;
   salary_below_average: number;
