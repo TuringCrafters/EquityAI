@@ -10,7 +10,7 @@ const StaticBarChartgraph = dynamic(
     { ssr: false }
   )
 
-interface location_details {
+export interface location_details {
   location: string;
   salary: {
     average: number;
@@ -19,7 +19,7 @@ interface location_details {
   };
 }
 
-interface experience_details {
+export interface experience_details {
   years_of_experience: number;
   salary: {
     average: number;
@@ -70,7 +70,7 @@ const Analysis = () => {
       </div>
       <div>
         <Suspense>
-        <StaticBarChartgraph />
+        {information?.location_details && < StaticBarChartgraph data={information.location_details}/>}
         </Suspense>
       </div>
     </>
