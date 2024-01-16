@@ -12,13 +12,6 @@ import {
 import { LinearChartGraphProps, TransformedExperienceDetails } from './types';
 import { transformExperienceDetails } from '@/utils/dataConverter';
 
-const exampleData = [
-  { yearsOfExperience: 10000, salary_average: 1643, salary_below_average: 790, salary_above_average: 2496 },
-  { yearsOfExperience: 1666, red: 182, salary_below_average: 42, salary_above_average: 322 },
-  { yearsOfExperience: 625, red: 56, salary_below_average: 1, salary_above_average: 111 },
-  { yearsOfExperience: 300, redLine: 0 },
-  { yearsOfExperience: 10000, redLine: 1522 },
-];
 
 type LineOfBestFit = {
   yearsOfExperience: number;
