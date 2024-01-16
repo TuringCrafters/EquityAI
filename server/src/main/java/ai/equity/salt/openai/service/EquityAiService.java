@@ -85,16 +85,28 @@ public class EquityAiService {
         return jobDataList;
     }
 
-            while ((values = reader.readMap()) != null) {
-                String jobTitle = values.get("Positions");
-                if (jobTitle != null && !jobTitle.isEmpty()) {
-                    jobTitles.add(jobTitle);
-                }
-            }
-            return jobTitles;
-        } catch (CsvValidationException | IOException e) {
-            throw new RuntimeException(e);
+    private static String createPrompt(List<EquityAiJobData> jobDataList) {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("Positions, Salaries, Experience, Age, Locality\n");
+        for (EquityAiJobData jobData : jobDataList) {
+            stringBuilder.append(jobData.toString()).append("\n");
         }
+
+        return stringBuilder.toString();
+    }
+
+    private List<String> findUniqueJobs(List<EquityAiJobData> jobDataList) {
+        Set<String> uniqueJobTitles = new HashSet<>();
+
+        for (EquityAiJobData jobData : jobDataList) {
+            String jobTitle = jobData.getPosition();
+            if (jobTitle != null && !jobTitle.isEmpty()) {
+                uniqueJobTitles.add(jobTitle);
+            }
+        }
+
+        return new ArrayList<>(uniqueJobTitles);
     }
 
     private String mostCommonJob(List<String> jobTitles) {
