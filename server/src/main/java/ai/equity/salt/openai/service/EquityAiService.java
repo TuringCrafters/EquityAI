@@ -61,10 +61,29 @@ public class EquityAiService {
         return new EquityAiResponse(response, uniqueJobTitles, null);
     }
 
-    private List<String> findUniqueJobs(InputStream inputStream) {
-        try (CSVReaderHeaderAware reader = new CSVReaderHeaderAware(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
-            List<String> jobTitles = new ArrayList<>();
-            Map<String, String> values;
+    private static List<EquityAiJobData> readCSV(InputStream inputStream) throws IOException, CsvValidationException {
+        List<EquityAiJobData> jobDataList = new ArrayList<>();
+
+        try (CSVReader csvReader = new CSVReader((new InputStreamReader(inputStream, StandardCharsets.UTF_8)))) {
+            csvReader.readNext();
+
+            String[] nextRecord;
+            while ((nextRecord = csvReader.readNext()) != null) {
+                if (nextRecord.length < 5) {
+                    continue;
+                }
+                EquityAiJobData jobData = new EquityAiJobData();
+                jobData.setPosition(nextRecord[0]);
+                jobData.setSalary(Double.parseDouble(nextRecord[1]));
+                jobData.setExperience(Integer.parseInt(nextRecord[2]));
+                jobData.setAge(Integer.parseInt(nextRecord[3]));
+                jobData.setLocality(nextRecord[4]);
+
+                jobDataList.add(jobData);
+            }
+        }
+        return jobDataList;
+    }
 
             while ((values = reader.readMap()) != null) {
                 String jobTitle = values.get("Positions");
