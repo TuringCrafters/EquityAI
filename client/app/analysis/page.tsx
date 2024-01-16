@@ -69,7 +69,7 @@ const Analysis = () => {
             );
           })}
       </div> */}
-      <div>
+      <div className="flex row-auto justify-around m-14 items-center">
         <Suspense>
           {information?.location_details && (
             <StaticBarChartgraph data={information.location_details} />
