@@ -3,12 +3,12 @@
 import axios from "axios";
 import React, { Suspense, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic";
 
 const StaticBarChartgraph = dynamic(
-    () => import('@/components/barchart/BarChartGraph'),
-    { ssr: false }
-  )
+  () => import("@/components/barchart/BarChartGraph"),
+  { ssr: false }
+);
 
 export interface location_details {
   location: string;
@@ -18,7 +18,6 @@ export interface location_details {
     below_average: number;
   };
 }
-
 
 export interface experience_details {
   years_of_experience: number;
@@ -50,7 +49,7 @@ const Analysis = () => {
     }
   };
 
-  const {data: analysis} = useQuery({
+  useQuery({
     queryKey: ["analysis"],
     queryFn: fetchAnalysis,
     enabled: true,
@@ -71,7 +70,9 @@ const Analysis = () => {
       </div>
       <div>
         <Suspense>
-        {information?.location_details && < StaticBarChartgraph data={information.location_details}/>}
+          {information?.location_details && (
+            <StaticBarChartgraph data={information.location_details} />
+          )}
         </Suspense>
       </div>
     </>
