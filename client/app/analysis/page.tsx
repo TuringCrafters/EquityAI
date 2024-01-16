@@ -21,7 +21,6 @@ export interface location_details {
 }
 
 export interface experience_details {
-  // x = years of experience , y = average salary
   years_of_experience: number;
   salary: {
     average: number;
@@ -59,7 +58,8 @@ const Analysis = () => {
 
   return (
     <>
-      <div>
+    <div className="mt-10"></div>
+      {/* <div>
         {information &&
           information.location_details.map((location) => {
             return (
@@ -68,7 +68,7 @@ const Analysis = () => {
               </ul>
             );
           })}
-      </div>
+      </div> */}
       <div>
         <Suspense>
           {information?.location_details && (
