@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import {
   ComposedChart,
   Line,
@@ -8,10 +8,10 @@ import {
   Tooltip,
   Legend,
   Scatter,
-  ResponsiveContainer,
 } from 'recharts';
+import { LinearChartGraphProps } from './types';
 
-const data = [
+const exampleData = [
   { index: 10000, red: 1643, blue: 790 },
   { index: 1666, red: 182, blue: 42 },
   { index: 625, red: 56, blue: 11 },
@@ -22,14 +22,13 @@ const data = [
   { index: 10000, blueLine: 678 },
 ];
 
-export default function LineOfBestFitChart() {
-
+export default function LineOfBestFitChart({data}:LinearChartGraphProps) {
+    
     return (
-      <ResponsiveContainer width="100%" height="100%">
         <ComposedChart
           width={500}
           height={400}
-          data={data}
+          data={exampleData}
           margin={{
             top: 20,
             right: 80,
@@ -48,6 +47,5 @@ export default function LineOfBestFitChart() {
           <Line dataKey="blueLine" stroke="blue" dot={false} activeDot={false} legendType="none" />
           <Line dataKey="redLine" stroke="red" dot={false} activeDot={false} legendType="none" />
         </ComposedChart>
-      </ResponsiveContainer>
     );
   }
