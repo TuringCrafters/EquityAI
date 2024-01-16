@@ -50,7 +50,7 @@ const Analysis = () => {
     }
   };
 
-  const {} = useQuery({
+  const {data: analysis} = useQuery({
     queryKey: ["analysis"],
     queryFn: fetchAnalysis,
     enabled: true,
