@@ -46,7 +46,8 @@ export default function LineOfBestFitChart({data}:LinearChartGraphProps) {
           <Tooltip />
           <Legend />
 
-          <XAxis dataKey="yearsOfExperience" type="number" label={{ value: 'Years Of Experience', position: 'insideBottomRight', offset: 0 }} />
+          <XAxis dataKey="yearsOfExperience" type="number" 
+          label={{ value: 'Years Of Experience', position: 'insideBottom', offset: 0 }} />
           <YAxis unit="K SEK" type="number" label={{ value: 'Salary', angle: -90, position: 'insideLeft' }} />
           <Scatter name="Salary average" dataKey="salary_average" fill="red" />
           <Scatter name="Salary below average" dataKey="salary_below_average" fill="blue" />
