@@ -18,7 +18,7 @@ export default function BarChartGraph({data}:BarChartGraphProps) {
       }}
     >
       <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="Location" />
+          <XAxis dataKey="location" />
           <YAxis unit="K SEK"/>
           <Tooltip />
           <Legend />
