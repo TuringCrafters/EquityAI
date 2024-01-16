@@ -1,8 +1,9 @@
+import { location_details } from '@/app/analysis/page';
 import React, { PureComponent } from 'react';
 import { BarChart, Bar, Rectangle, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 
-const data = [
+const barData = [
   {
     name: 'Page A',
     uv: 4000,
@@ -17,12 +18,16 @@ const data = [
   },
 ]
 
-export default function BarChartGraph() {
+interface BarChartGraphProps {
+  data: location_details[]; 
+}
+
+export default function BarChartGraph({data}:BarChartGraphProps) {
   return (
     <BarChart
       width={500}
       height={300}
-      data={data}
+      data={barData}
       margin={{
         top: 5,
         right: 30,
