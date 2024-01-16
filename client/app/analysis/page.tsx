@@ -4,6 +4,7 @@ import axios from "axios";
 import React, { Suspense, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import dynamic from "next/dynamic";
+import LineOfBestFitChart from "@/components/lineofbestfitchart/LineOfBestFitChart";
 
 const StaticBarChartgraph = dynamic(
   () => import("@/components/barchart/BarChartGraph"),
@@ -19,7 +20,8 @@ export interface location_details {
   };
 }
 
-export interface experience_details { // x = years of experience , y = average salary
+export interface experience_details {
+  // x = years of experience , y = average salary
   years_of_experience: number;
   salary: {
     average: number;
@@ -72,6 +74,11 @@ const Analysis = () => {
         <Suspense>
           {information?.location_details && (
             <StaticBarChartgraph data={information.location_details} />
+          )}
+        </Suspense>
+        <Suspense>
+          {information?.experience_details && (
+            <LineOfBestFitChart data={information.experience_details} />
           )}
         </Suspense>
       </div>
