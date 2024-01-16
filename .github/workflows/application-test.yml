@@ -1,5 +1,8 @@
 name: Run BE Equity Application Tests
-on: push
+on:
+  push:
+    paths:
+      - "server/**"
 
 jobs:
   run_tests:
