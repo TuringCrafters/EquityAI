@@ -19,7 +19,7 @@ export interface location_details {
   };
 }
 
-export interface experience_details {
+export interface experience_details { // x = years of experience , y = average salary
   years_of_experience: number;
   salary: {
     average: number;

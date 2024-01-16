@@ -1,26 +1,7 @@
-import { location_details } from '@/app/analysis/page';
 import React from 'react';
 import { BarChart, Bar, Rectangle, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
-
-interface BarChartGraphProps {
-  data: location_details[]; 
-}
-
-export interface TransformedLocationDetails {
-  location: string;
-  salary_average: number;
-  salary_above_average: number;
-  salary_below_average: number;
-}
-
-export function transformLocationDetails(originalDetails: location_details): TransformedLocationDetails {
-  return {
-    location: originalDetails.location,
-    salary_average: originalDetails.salary.average,
-    salary_above_average: originalDetails.salary.above_average,
-    salary_below_average: originalDetails.salary.below_average,
-  };
-}
+import { BarChartGraphProps, TransformedLocationDetails } from './types';
+import { transformLocationDetails } from '@/utils/dataConverter';
 
 export default function BarChartGraph({data}:BarChartGraphProps) {
   const transformedData: TransformedLocationDetails[] = (data.map(dt => {return transformLocationDetails(dt)}));
