@@ -23,6 +23,9 @@ import java.util.stream.Collectors;
 @Slf4j
 public class EquityAiService {
 
+    private final OpenAiModelFactory openAiModelFactory;
+
+    private final JpaEquityAiRepo repository;
     private static final String SYSTEM_MESSAGE = """
             Analyze the provided dataset, which includes positions, salaries, age, and locality to identify significant discrepancies. Focus on:
             -Any unexpected patterns or outliers.
@@ -48,14 +51,7 @@ public class EquityAiService {
 
         String mostCommonJob = mostCommonJob(jobTitles);
 
-        log.info("Unique jobs: " + uniqueJobTitles);
-        log.info("Most common job: " + mostCommonJob);
-
-        var fileData = createPrompt(jobDataList);
-        log.info("Provided data: " + fileData);
-
-        var response = openAiModelFactory.createDefaultChatModel().generate(SYSTEM_MESSAGE + fileData);
-        log.info("Response: " + response);
+        var response = openAiModelFactory.createDefaultChatModel().generate(SYSTEM_MESSAGE + createPrompt(jobDataList));
         return new EquityAiResponse(response, uniqueJobTitles, null);
     }
 
@@ -91,7 +87,6 @@ public class EquityAiService {
         for (EquityAiJobData jobData : jobDataList) {
             stringBuilder.append(jobData.toString()).append("\n");
         }
-
         return stringBuilder.toString();
     }
 
@@ -104,7 +99,6 @@ public class EquityAiService {
                 uniqueJobTitles.add(jobTitle);
             }
         }
-
         return new ArrayList<>(uniqueJobTitles);
     }
 
