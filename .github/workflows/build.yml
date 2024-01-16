@@ -2,7 +2,7 @@ name: SonarCloud analysis
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "feat-sonar-cloud-analysis" ]
   pull_request:
     branches: [ "main" ]
   workflow_dispatch:
