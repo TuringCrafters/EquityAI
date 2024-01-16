@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import dynamic from 'next/dynamic'
 
 const StaticBarChartgraph = dynamic(
-    () => import('@/components/barchart/BarChartGraph'),
+    () => import('../../components/barchart/BarChartGraph'),
     { ssr: false }
   )
 
