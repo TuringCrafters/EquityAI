@@ -12,14 +12,19 @@ import {
 import { LinearChartGraphProps } from './types';
 
 const exampleData = [
-  { index: 10000, red: 1643, blue: 790 },
-  { index: 1666, red: 182, blue: 42 },
-  { index: 625, red: 56, blue: 11 },
-  // Calculation of line of best fit is not included in this demo
-  { index: 300, redLine: 0 },
-  { index: 10000, redLine: 1522 },
-  { index: 600, blueLine: 0 },
-  { index: 10000, blueLine: 678 },
+  //x = years of experience , y = average salary
+  //index is the years of experience
+  //red is the average salary
+  //blue is the below average salary
+  //green is the above average salary
+  { yearsOfExperience: 10000, salary_average: 1643, salary_below_average: 790, salary_above_average: 2496 },
+  { yearsOfExperience: 1666, salary_average: 182, salary_below_average: 42, salary_above_average: 322 },
+  { yearsOfExperience: 625, salary_average: 56, salary_below_average: 1, salary_above_average: 111 },
+  /* Line of best fit start then end */
+  { yearsOfExperience: 300, redLine: 0 },
+  { yearsOfExperience: 10000, redLine: 1522 },
+/*   { index: 600, blueLine: 0 },
+  { index: 10000, blueLine: 678 }, */
 ];
 
 export default function LineOfBestFitChart({data}:LinearChartGraphProps) {
@@ -40,11 +45,11 @@ export default function LineOfBestFitChart({data}:LinearChartGraphProps) {
           <Tooltip />
           <Legend />
 
-          <XAxis dataKey="index" type="number" label={{ value: 'Index', position: 'insideBottomRight', offset: 0 }} />
-          <YAxis unit="ms" type="number" label={{ value: 'Time', angle: -90, position: 'insideLeft' }} />
-          <Scatter name="red" dataKey="red" fill="red" />
-          <Scatter name="blue" dataKey="blue" fill="blue" />
-          <Line dataKey="blueLine" stroke="blue" dot={false} activeDot={false} legendType="none" />
+          <XAxis dataKey="yearsOfExperience" type="number" label={{ value: 'Years Of Experience', position: 'insideBottomRight', offset: 0 }} />
+          <YAxis unit="ms" type="number" label={{ value: 'Salary', angle: -90, position: 'insideLeft' }} />
+          <Scatter name="Salary average" dataKey="salary_average" fill="red" />
+          <Scatter name="Salary below average" dataKey="salary_below_average" fill="blue" />
+          <Scatter name="Salary above average" dataKey="salary_above_average" fill="green" />
           <Line dataKey="redLine" stroke="red" dot={false} activeDot={false} legendType="none" />
         </ComposedChart>
     );
