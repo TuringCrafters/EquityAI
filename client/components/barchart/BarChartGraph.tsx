@@ -7,18 +7,18 @@ export default function BarChartGraph({data}:BarChartGraphProps) {
   const transformedData: TransformedLocationDetails[] = (data.map(dt => {return transformLocationDetails(dt)}));
   return (
     <BarChart
-      width={500}
-      height={300}
+      width={600}
+      height={400}
       data={transformedData}
       margin={{
-        top: 5,
-        right: 30,
+        top: 20,
+        right: 80,
+        bottom: 20,
         left: 20,
-        bottom: 5
       }}
     >
       <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="location" />
+          <XAxis dataKey="Location" />
           <YAxis unit="K SEK"/>
           <Tooltip />
           <Legend />
