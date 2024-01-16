@@ -44,41 +44,21 @@ public class EquityAiService {
 
     public EquityAiResponse analyzeFile(MultipartFile file) throws IOException {
         var inputStream = file.getInputStream();
+        var jobTitles = findUniqueJobs(inputStream);
+        var uniqueJobTitles = new HashSet<>(jobTitles);
 
-        try(CSVReaderHeaderAware reader = new CSVReaderHeaderAware(new InputStreamReader(inputStream, StandardCharsets.UTF_8))){
-            List<String> jobTitles = new ArrayList<>();
-            Map<String, String> values;
+        String mostCommonJob = mostCommonJob(jobTitles);
 
-            while ((values = reader.readMap()) != null ) {
-                String jobTitle = values.get("Positions");
-                if (jobTitle != null && !jobTitle.isEmpty()){
-                    jobTitles.add(jobTitle);
-                }
-            }
-            Set<String> uniqueJobTitles = new HashSet<>(jobTitles);
+        log.info("Unique jobs: " + uniqueJobTitles);
+        log.info("Most common job: " + mostCommonJob);
 
-            String mostCommonJob = jobTitles
-                    .stream()
-                    .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
-                    .entrySet()
-                    .stream()
-                    .max(Map.Entry.comparingByValue())
-                    .map(Map.Entry::getKey)
-                    .orElse(null);
+        var fileData = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))
+                .lines()
+                .collect(Collectors.joining());
 
-            log.info("Unique jobs: " + uniqueJobTitles);
-            log.info("Most common job: " + mostCommonJob);
-
-            var fileData = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))
-                    .lines()
-                    .collect(Collectors.joining());
-
-            var response = openAiModelFactory.createDefaultChatModel().generate(SYSTEM_MESSAGE + fileData);
-            log.info("Response: " + response);
-            return new EquityAiResponse(response, uniqueJobTitles, null);
-        } catch (CsvValidationException e) {
-            throw new RuntimeException(e);
-        }
+        var response = openAiModelFactory.createDefaultChatModel().generate(SYSTEM_MESSAGE + fileData);
+        log.info("Response: " + response);
+        return new EquityAiResponse(response, uniqueJobTitles, null);
     }
 
     private List<String> findUniqueJobs(InputStream inputStream) {
