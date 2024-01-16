@@ -42,7 +42,7 @@ jobs:
         run: mvn -f server/pom.xml -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=TuringCrafters_EquityAI -DskipTests
         
   sonarcloud:
-    name: SonarCloud
+    name: Javascipt SonarCloud Scan
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -53,3 +53,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          projectBaseDir: ./client/
