@@ -44,7 +44,6 @@ const Analysis = () => {
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/file/data`
       );
       setInformation(response?.data);
-      console.log(response.data);
       return response.data;
     } catch (error) {
       console.error(error);
