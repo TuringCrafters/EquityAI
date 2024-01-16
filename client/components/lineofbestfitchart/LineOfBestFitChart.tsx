@@ -9,7 +9,8 @@ import {
   Legend,
   Scatter,
 } from 'recharts';
-import { LinearChartGraphProps } from './types';
+import { LinearChartGraphProps, TransformedExperienceDetails } from './types';
+import { transformExperienceDetails } from '@/utils/dataConverter';
 
 const exampleData = [
   //x = years of experience , y = average salary
@@ -28,12 +29,12 @@ const exampleData = [
 ];
 
 export default function LineOfBestFitChart({data}:LinearChartGraphProps) {
-    
+    const convertedData: TransformedExperienceDetails[] = data.map((item) => transformExperienceDetails(item) );
     return (
         <ComposedChart
           width={500}
           height={400}
-          data={exampleData}
+          data={convertedData}
           margin={{
             top: 20,
             right: 80,
@@ -46,7 +47,7 @@ export default function LineOfBestFitChart({data}:LinearChartGraphProps) {
           <Legend />
 
           <XAxis dataKey="yearsOfExperience" type="number" label={{ value: 'Years Of Experience', position: 'insideBottomRight', offset: 0 }} />
-          <YAxis unit="ms" type="number" label={{ value: 'Salary', angle: -90, position: 'insideLeft' }} />
+          <YAxis unit="K SEK" type="number" label={{ value: 'Salary', angle: -90, position: 'insideLeft' }} />
           <Scatter name="Salary average" dataKey="salary_average" fill="red" />
           <Scatter name="Salary below average" dataKey="salary_below_average" fill="blue" />
           <Scatter name="Salary above average" dataKey="salary_above_average" fill="green" />
