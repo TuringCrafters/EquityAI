@@ -1,20 +1,18 @@
 package ai.equity.salt.openai.service;
 
+import ai.equity.salt.openai.controller.dto.EquityAiJobData;
 import ai.equity.salt.openai.controller.dto.EquityAiResponse;
 import ai.equity.salt.openai.model.EquityAi;
 import ai.equity.salt.openai.model.OpenAiModelFactory;
 import ai.equity.salt.openai.repository.JpaEquityAiRepo;
+import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import com.opencsv.CSVReaderHeaderAware;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.function.Function;
@@ -42,9 +40,11 @@ public class EquityAiService {
         return response;
     }
 
-    public EquityAiResponse analyzeFile(MultipartFile file) throws IOException {
+    public EquityAiResponse analyzeFile(MultipartFile file) throws IOException, CsvValidationException {
         var inputStream = file.getInputStream();
-        var jobTitles = findUniqueJobs(inputStream);
+        List<EquityAiJobData> jobDataList = readCSV(inputStream);
+
+        var jobTitles = findUniqueJobs(jobDataList);
         var uniqueJobTitles = new HashSet<>(jobTitles);
 
         String mostCommonJob = mostCommonJob(jobTitles);
@@ -52,9 +52,8 @@ public class EquityAiService {
         log.info("Unique jobs: " + uniqueJobTitles);
         log.info("Most common job: " + mostCommonJob);
 
-        var fileData = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))
-                .lines()
-                .collect(Collectors.joining());
+        var fileData = createPrompt(jobDataList);
+        log.info("Provided data: " + fileData);
 
         var response = openAiModelFactory.createDefaultChatModel().generate(SYSTEM_MESSAGE + fileData);
         log.info("Response: " + response);
