@@ -13,6 +13,7 @@ import com.opencsv.CSVReaderHeaderAware;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
@@ -78,5 +79,35 @@ public class EquityAiService {
         } catch (CsvValidationException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private List<String> findUniqueJobs(InputStream inputStream) {
+        try (CSVReaderHeaderAware reader = new CSVReaderHeaderAware(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
+            List<String> jobTitles = new ArrayList<>();
+            Map<String, String> values;
+
+            while ((values = reader.readMap()) != null) {
+                String jobTitle = values.get("Positions");
+                if (jobTitle != null && !jobTitle.isEmpty()) {
+                    jobTitles.add(jobTitle);
+                }
+            }
+            return jobTitles;
+        } catch (CsvValidationException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private String mostCommonJob(List<String> jobTitles) {
+        return jobTitles
+                .stream()
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+                .entrySet()
+                .stream()
+                .max(Map.Entry.comparingByValue())
+                .map(Map.Entry::getKey)
+                .orElse(null);
     }
 }
