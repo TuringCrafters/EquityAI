@@ -73,9 +73,7 @@ public class EquityAiService {
                 }
             }
             return jobTitles;
-        } catch (CsvValidationException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
+        } catch (CsvValidationException | IOException e) {
             throw new RuntimeException(e);
         }
     }
