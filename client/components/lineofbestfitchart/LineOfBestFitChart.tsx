@@ -35,7 +35,7 @@ export default function LineOfBestFitChart({ data }: LinearChartGraphProps) {
 
   return (
     <ComposedChart
-      width={500}
+      width={600}
       height={400}
       data={convertedData}
       margin={{
@@ -51,6 +51,7 @@ export default function LineOfBestFitChart({ data }: LinearChartGraphProps) {
         layout="horizontal"
         verticalAlign="top"
         align="center"
+        iconSize={9}
         wrapperStyle={{ top: 0, left: 50 }}
         formatter={(value) => (
           <span className=" text-black text-xs font-semibold">{value}</span>
@@ -63,6 +64,8 @@ export default function LineOfBestFitChart({ data }: LinearChartGraphProps) {
         tickLine={{ stroke: "#ffffff" }}
         className="text-xs font-semibold"
         tick={{ fill: "#aab0b7" }}
+        dy={10}
+
       />
       <YAxis
         unit="k"
