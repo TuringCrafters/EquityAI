@@ -131,14 +131,8 @@ public class EquityAiService {
                     double average = calculateAverage(salaries);
                     double standardDeviation = calculateStandardDeviation(salaries, average);
 
-                    double aboveAverage = salaries.stream()
-                            .filter(salary -> salary > average + standardDeviation)
-                            .max(Double::compare)
-                            .orElse(average);
-                    double belowAverage = salaries.stream()
-                            .filter(salary -> salary < average - standardDeviation)
-                            .min(Double::compare)
-                            .orElse(average);
+                    double aboveAverage = findAboveAverage(salaries, average, standardDeviation);
+                    double belowAverage = findBelowAverage(salaries, average, standardDeviation);
 
                     return new SalaryByYearsOfExperienceDatapoint(
                             entry.getKey(),
@@ -166,14 +160,8 @@ public class EquityAiService {
                     double average = calculateAverage(salaries);
                     double standardDeviation = calculateStandardDeviation(salaries, average);
 
-                    double aboveAverage = salaries.stream()
-                            .filter(salary -> salary > average + standardDeviation)
-                            .max(Double::compare)
-                            .orElse(average);
-                    double belowAverage = salaries.stream()
-                            .filter(salary -> salary < average - standardDeviation)
-                            .min(Double::compare)
-                            .orElse(average);
+                    double aboveAverage = findAboveAverage(salaries, average, standardDeviation);
+                    double belowAverage = findBelowAverage(salaries, average, standardDeviation);
 
                     return new SalaryByLocationDatapoint(
                             entry.getKey(),
