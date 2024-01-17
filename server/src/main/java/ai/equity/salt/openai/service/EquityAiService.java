@@ -1,7 +1,6 @@
 package ai.equity.salt.openai.service;
 
-import ai.equity.salt.openai.controller.dto.EquityAiJobData;
-import ai.equity.salt.openai.controller.dto.EquityAiResponse;
+import ai.equity.salt.openai.controller.dto.*;
 import ai.equity.salt.openai.model.EquityAi;
 import ai.equity.salt.openai.model.OpenAiModelFactory;
 import ai.equity.salt.openai.repository.JpaEquityAiRepo;
@@ -51,8 +50,12 @@ public class EquityAiService {
 
         String mostCommonJob = mostCommonJob(jobTitles);
 
+        List<EquityAiYearsOfExperience> dataPoints = calculateAverageForYearsOfExperience(jobDataList, mostCommonJob);
+
+        EquityAiDatapointExperienceResponse datapointExperience = new EquityAiDatapointExperienceResponse(mostCommonJob, dataPoints);
+
         var response = openAiModelFactory.createDefaultChatModel().generate(SYSTEM_MESSAGE + createPrompt(jobDataList));
-        return new EquityAiResponse(response, uniqueJobTitles, null);
+        return new EquityAiResponse(response, uniqueJobTitles, datapointExperience);
     }
 
     private static List<EquityAiJobData> readCSV(InputStream inputStream) throws IOException, CsvValidationException {
