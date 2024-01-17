@@ -10,7 +10,8 @@ import {
   Scatter,
 } from "recharts";
 import { LinearChartGraphProps, TransformedExperienceDetails } from "./types";
-import { transformExperienceDetails } from "@/utils/dataConverter";
+import { convertToPolynomialDataPoints, transformExperienceDetails } from "@/utils/dataConverter";
+import regression, { DataPoint } from "regression";
 
 type LineOfBestFit = {
   yearsOfExperience: number;
@@ -18,35 +19,41 @@ type LineOfBestFit = {
 };
 
 export default function LineOfBestFitChart({ data }: LinearChartGraphProps) {
-  /* Sorting data by years of experience */
   const sortedData = data.sort(
     (a, b) => a.years_of_experience - b.years_of_experience
   );
 
+  const dataPoints: DataPoint[] = convertToPolynomialDataPoints(sortedData);
 
   const convertedData: TransformedExperienceDetails[] = sortedData.map((item) =>
     transformExperienceDetails(item)
   );
-  const lineOfBestFitStart: LineOfBestFit = {
-    yearsOfExperience: convertedData[0].yearsOfExperience,
-    line: convertedData[0].salary_average,
+
+  const slope = regression.linear(dataPoints);
+  console.log(slope);
+  console.log(slope.equation);
+  
+
+   const lineOfBestFitStart: LineOfBestFit = {
+    yearsOfExperience: slope.points[0][0],
+    line: (slope.equation[0]*slope.points[0][0]+ slope.equation[1])/1000
   };
   const lineOfBestFitEnd: LineOfBestFit = {
     yearsOfExperience:
-      convertedData[convertedData.length - 1].yearsOfExperience,
-    line: convertedData[convertedData.length - 1].salary_average,
+    slope.points[slope.points.length-1][0],
+    line: (slope.equation[0]*slope.points[slope.points.length-1][0]+ slope.equation[1])/1000,
   };
 
   const allData: any = convertedData;
-  allData.push(...convertedData);
   allData.push(lineOfBestFitStart);
   allData.push(lineOfBestFitEnd);
 
+  
   return (
     <ComposedChart
       width={500}
       height={400}
-      data={allData}
+      data={convertedData}
       margin={{
         top: 20,
         right: 80,
