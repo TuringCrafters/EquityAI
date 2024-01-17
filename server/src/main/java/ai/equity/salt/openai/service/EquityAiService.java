@@ -116,12 +116,12 @@ public class EquityAiService {
                 .orElse(null);
     }
 
-    public List<SalaryByYearsOfExperienceDatapoint> calculateAverageForYearsOfExperience(List<JobDataSet> jobDataList, String mostCommonJob) {
-        Map<Integer, Double> averageSalaryByExperience = jobDataList.stream()
+    private List<SalaryByYearsOfExperienceDatapoint> calculateAverageForYearsOfExperience(List<JobDataSet> jobDataList, String mostCommonJob) {
+        Map<Integer, List<Double>> averageSalaryByExperience = jobDataList.stream()
                 .filter(data -> data.getPosition().equals(mostCommonJob))
                 .collect(Collectors.groupingBy(
                         JobDataSet::getExperience,
-                        Collectors.averagingDouble(JobDataSet::getSalary)
+                        Collectors.mapping(JobDataSet::getSalary, Collectors.toList())
                 ));
 
         return averageSalaryByExperience.entrySet().stream()
