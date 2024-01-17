@@ -52,7 +52,7 @@ public class EquityAiService {
 
         List<SalaryByYearsOfExperienceDatapoint> dataPoints = calculateAverageForYearsOfExperience(jobDataList, mostCommonJob);
 
-        AverageSalaryByYearsOfExperienceResponse datapointExperience = new AverageSalaryByYearsOfExperienceResponse(mostCommonJob, dataPoints);
+        SalaryDataForExperienceAndLocationResponse datapointExperience = new SalaryDataForExperienceAndLocationResponse(mostCommonJob, dataPoints, null);
 
         var response = openAiModelFactory.createDefaultChatModel().generate(SYSTEM_MESSAGE + createPrompt(jobDataList));
         return new EquityAiResponse(response, uniqueJobTitles, datapointExperience);
