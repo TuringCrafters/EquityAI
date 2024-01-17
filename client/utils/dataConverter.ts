@@ -1,4 +1,5 @@
-import { experience_details, location_details } from "@/app/analysis/page";
+
+import { experience_details, location_details } from "@/app/analysis/types";
 import { TransformedLocationDetails } from "@/components/barchart/types";
 import {
   DataPoint,
