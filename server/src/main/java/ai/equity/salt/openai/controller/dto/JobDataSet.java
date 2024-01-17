@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class EquityAiJobData{
+public class JobDataSet {
 
     private String position;
     private double salary;
