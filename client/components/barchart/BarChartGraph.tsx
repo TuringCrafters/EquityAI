@@ -16,15 +16,16 @@ export default function BarChartGraph({data}:BarChartGraphProps) {
         bottom: 20,
         left: 20,
       }}
+      className='mt-10'
     >
-      <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="location" />
-          <YAxis unit="K SEK"/>
+      <CartesianGrid strokeDasharray="3 3" vertical={false}/>
+          <XAxis dataKey="location" axisLine={{ stroke: '#ffffff' }} tickLine={{ stroke: '#ffffff' }} className='text-xs font-semibold' tick={{ fill: '#aab0b7' }}/>
+          <YAxis unit="k" className='text-xs font-semibold' axisLine={{ stroke: '#ffffff' }} tickLine={{ stroke: '#ffffff' }} tick={{ fill: '#aab0b7' }} width={80}/>
           <Tooltip />
-          <Legend />
-          <Bar dataKey="salary_below_average" fill="#82ca9d" activeBar={<Rectangle fill="gold" stroke="purple" />} />
-          <Bar dataKey="salary_average" fill="#8884d8" activeBar={<Rectangle fill="pink" stroke="blue" />} />
-          <Bar dataKey="salary_above_average" fill="#ca9082" activeBar={<Rectangle fill="gold" stroke="purple" />} />
+          <Legend layout="horizontal" verticalAlign="top" align='center' wrapperStyle={{top: 12, left: 50}} formatter={(value, entry, index) => <span className=" text-black text-xs font-semibold">{value}</span>}/>
+          <Bar name="Below Average" dataKey="salary_below_average" fill="#62a46f" radius={[10, 10, 10, 10]} />
+          <Bar name="Average Salary" dataKey="salary_average" fill="#376bec" radius={[10, 10,  10, 10]}/>
+          <Bar name="Above Average" dataKey="salary_above_average" fill="#c03dbb" radius={[10, 10,  10, 10]} />
     </BarChart>
   );
 }
