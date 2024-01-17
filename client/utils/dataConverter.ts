@@ -32,7 +32,7 @@ export function convertToPolynomialDataPoints(
 ): DataPoint[] {
   const dataPoints: DataPoint[] = [];
 
-  for (let i = 0; i < sortedDetails.length; i++) {
+  for (const i in sortedDetails) {
     const yearsOfExperience: number = sortedDetails[i].years_of_experience;
     const averageSalary: number = sortedDetails[i].salary.average;
 
