@@ -35,6 +35,7 @@ export default function BarChartGraph({ data }: BarChartGraphProps) {
         tickLine={{ stroke: "#ffffff" }}
         className="text-xs font-semibold"
         tick={{ fill: "#aab0b7" }}
+        dy={10}
       />
       <YAxis
         unit="k"
@@ -49,6 +50,8 @@ export default function BarChartGraph({ data }: BarChartGraphProps) {
         layout="horizontal"
         verticalAlign="top"
         align="center"
+        iconSize={8}
+        iconType="square"
         wrapperStyle={{ top: 0, left: 50 }}
         formatter={(value) => (
           <span className=" text-black text-xs font-semibold">{value}</span>
