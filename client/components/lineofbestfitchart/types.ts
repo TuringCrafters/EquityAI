@@ -11,4 +11,10 @@ export type TransformedExperienceDetails = {
   salary_below_average: number;
 };
 
+  /// Currently not used
+export type LineOfBestFit = {
+  yearsOfExperience: number;
+  line: number;
+};
+
 export type DataPoint = [number, number];
