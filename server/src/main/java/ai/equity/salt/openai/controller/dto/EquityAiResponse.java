@@ -5,6 +5,6 @@ import java.util.Set;
 public record EquityAiResponse(
         String response,
         Set<String> uniqueJobTitles,
-        AverageSalaryByYearsOfExperienceResponse datapointExperience
+        SalaryDataForExperienceAndLocationResponse datapointExperience
 ) {
 }
