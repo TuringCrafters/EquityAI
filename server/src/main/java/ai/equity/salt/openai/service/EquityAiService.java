@@ -151,6 +151,41 @@ public class EquityAiService {
                 .toList();
     }
 
+    private List<SalaryByLocationDatapoint> calculateAverageForLocation(List<JobDataSet> jobDataList, String mostCommonJob) {
+        Map<String, List<Double>> averageSalaryByLocation = jobDataList.stream()
+                .filter(data -> data.getPosition().equals(mostCommonJob))
+                .collect(Collectors.groupingBy(
+                        JobDataSet::getLocality,
+                        Collectors.mapping(JobDataSet::getSalary, Collectors.toList())
+                ));
+
+        return averageSalaryByLocation.entrySet().stream()
+                .map(entry -> {
+                    List<Double> salaries = entry.getValue();
+                    double average = salaries.stream().mapToDouble(Double::doubleValue).average().orElse(0);
+                    double standardDeviation = calculateStandardDeviation(salaries, average);
+
+                    double aboveAverage = salaries.stream()
+                            .filter(salary -> salary > average + standardDeviation)
+                            .max(Double::compare)
+                            .orElse(average);
+                    double belowAverage = salaries.stream()
+                            .filter(salary -> salary < average - standardDeviation)
+                            .min(Double::compare)
+                            .orElse(average);
+
+                    return new SalaryByLocationDatapoint(
+                            entry.getKey(),
+                            new SalaryRangeDatapoint(
+                                    (double) Math.round(average * 100) / 100,
+                                    aboveAverage,
+                                    belowAverage
+                            )
+                    );
+                })
+                .toList();
+    }
+
     private double calculateStandardDeviation(List<Double> salaries, double mean) {
         double sumOfSquares = salaries.stream()
                 .mapToDouble(salary -> Math.pow(salary - mean, 2))
