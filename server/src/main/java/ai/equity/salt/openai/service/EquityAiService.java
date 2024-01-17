@@ -43,23 +43,23 @@ public class EquityAiService {
 
     public EquityAiResponse analyzeFile(MultipartFile file) throws IOException, CsvValidationException {
         var inputStream = file.getInputStream();
-        List<EquityAiJobData> jobDataList = readCSV(inputStream);
+        List<JobDataSet> jobDataList = readCSV(inputStream);
 
         var jobTitles = findUniqueJobs(jobDataList);
         var uniqueJobTitles = new HashSet<>(jobTitles);
 
         String mostCommonJob = mostCommonJob(jobTitles);
 
-        List<EquityAiYearsOfExperience> dataPoints = calculateAverageForYearsOfExperience(jobDataList, mostCommonJob);
+        List<SalaryByYearsOfExperienceDatapoint> dataPoints = calculateAverageForYearsOfExperience(jobDataList, mostCommonJob);
 
-        EquityAiDatapointExperienceResponse datapointExperience = new EquityAiDatapointExperienceResponse(mostCommonJob, dataPoints);
+        AverageSalaryByYearsOfExperienceResponse datapointExperience = new AverageSalaryByYearsOfExperienceResponse(mostCommonJob, dataPoints);
 
         var response = openAiModelFactory.createDefaultChatModel().generate(SYSTEM_MESSAGE + createPrompt(jobDataList));
         return new EquityAiResponse(response, uniqueJobTitles, datapointExperience);
     }
 
-    private static List<EquityAiJobData> readCSV(InputStream inputStream) throws IOException, CsvValidationException {
-        List<EquityAiJobData> jobDataList = new ArrayList<>();
+    private static List<JobDataSet> readCSV(InputStream inputStream) throws IOException, CsvValidationException {
+        List<JobDataSet> jobDataList = new ArrayList<>();
 
         try (CSVReader csvReader = new CSVReader((new InputStreamReader(inputStream, StandardCharsets.UTF_8)))) {
             csvReader.readNext();
@@ -69,7 +69,7 @@ public class EquityAiService {
                 if (nextRecord.length < 5) {
                     continue;
                 }
-                EquityAiJobData jobData = new EquityAiJobData();
+                JobDataSet jobData = new JobDataSet();
                 jobData.setPosition(nextRecord[0]);
                 jobData.setSalary(Double.parseDouble(nextRecord[1]));
                 jobData.setExperience(Integer.parseInt(nextRecord[2]));
@@ -82,21 +82,21 @@ public class EquityAiService {
         return jobDataList;
     }
 
-    private static String createPrompt(List<EquityAiJobData> jobDataList) {
+    private static String createPrompt(List<JobDataSet> jobDataList) {
         StringBuilder stringBuilder = new StringBuilder();
 
         stringBuilder.append(DATA_HEADER);
 
-        for (EquityAiJobData jobData : jobDataList) {
+        for (JobDataSet jobData : jobDataList) {
             stringBuilder.append(jobData.toString()).append("\n");
         }
         return stringBuilder.toString();
     }
 
-    private List<String> findUniqueJobs(List<EquityAiJobData> jobDataList) {
+    private List<String> findUniqueJobs(List<JobDataSet> jobDataList) {
         Set<String> uniqueJobTitles = new HashSet<>();
 
-        for (EquityAiJobData jobData : jobDataList) {
+        for (JobDataSet jobData : jobDataList) {
             String jobTitle = jobData.getPosition();
             if (jobTitle != null && !jobTitle.isEmpty()) {
                 uniqueJobTitles.add(jobTitle);
@@ -116,18 +116,18 @@ public class EquityAiService {
                 .orElse(null);
     }
 
-    public List<EquityAiYearsOfExperience> calculateAverageForYearsOfExperience(List<EquityAiJobData> jobDataList, String mostCommonJob) {
+    public List<SalaryByYearsOfExperienceDatapoint> calculateAverageForYearsOfExperience(List<JobDataSet> jobDataList, String mostCommonJob) {
         Map<Integer, Double> averageSalaryByExperience = jobDataList.stream()
                 .filter(data -> data.getPosition().equals(mostCommonJob))
                 .collect(Collectors.groupingBy(
-                        EquityAiJobData::getExperience,
-                        Collectors.averagingDouble(EquityAiJobData::getSalary)
+                        JobDataSet::getExperience,
+                        Collectors.averagingDouble(JobDataSet::getSalary)
                 ));
 
         return averageSalaryByExperience.entrySet().stream()
-                .map(entry -> new EquityAiYearsOfExperience(
+                .map(entry -> new SalaryByYearsOfExperienceDatapoint(
                         entry.getKey(),
-                        new EquityAiSalary(entry.getValue().intValue(), 0, 0)
+                        new SalaryRangeDatapoint(entry.getValue().intValue(), 0, 0)
                 ))
                 .collect(Collectors.toList());
     }
