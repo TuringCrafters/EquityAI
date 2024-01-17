@@ -50,12 +50,14 @@ public class EquityAiService {
 
         String mostCommonJob = mostCommonJob(jobTitles);
 
-        List<SalaryByYearsOfExperienceDatapoint> dataPoints = calculateAverageForYearsOfExperience(jobDataList, mostCommonJob);
+        List<SalaryByYearsOfExperienceDatapoint> experienceDataPoints = calculateAverageForYearsOfExperience(jobDataList, mostCommonJob);
+        List<SalaryByLocationDatapoint> locationDataPoints = calculateAverageForLocation(jobDataList, mostCommonJob);
 
-        AverageSalaryByYearsOfExperienceResponse datapointExperience = new AverageSalaryByYearsOfExperienceResponse(mostCommonJob, dataPoints);
+        SalaryDataForExperienceAndLocationResponse datapointExperience =
+                new SalaryDataForExperienceAndLocationResponse(mostCommonJob, experienceDataPoints, locationDataPoints);
 
-        var response = openAiModelFactory.createDefaultChatModel().generate(SYSTEM_MESSAGE + createPrompt(jobDataList));
-        return new EquityAiResponse(response, uniqueJobTitles, datapointExperience);
+//        var response = openAiModelFactory.createDefaultChatModel().generate(SYSTEM_MESSAGE + createPrompt(jobDataList));
+        return new EquityAiResponse(null, uniqueJobTitles, datapointExperience);
     }
 
     private static List<JobDataSet> readCSV(InputStream inputStream) throws IOException, CsvValidationException {
@@ -140,6 +142,41 @@ public class EquityAiService {
                             .orElse(average);
 
                     return new SalaryByYearsOfExperienceDatapoint(
+                            entry.getKey(),
+                            new SalaryRangeDatapoint(
+                                    (double) Math.round(average * 100) / 100,
+                                    aboveAverage,
+                                    belowAverage
+                            )
+                    );
+                })
+                .toList();
+    }
+
+    private List<SalaryByLocationDatapoint> calculateAverageForLocation(List<JobDataSet> jobDataList, String mostCommonJob) {
+        Map<String, List<Double>> averageSalaryByLocation = jobDataList.stream()
+                .filter(data -> data.getPosition().equals(mostCommonJob))
+                .collect(Collectors.groupingBy(
+                        JobDataSet::getLocality,
+                        Collectors.mapping(JobDataSet::getSalary, Collectors.toList())
+                ));
+
+        return averageSalaryByLocation.entrySet().stream()
+                .map(entry -> {
+                    List<Double> salaries = entry.getValue();
+                    double average = salaries.stream().mapToDouble(Double::doubleValue).average().orElse(0);
+                    double standardDeviation = calculateStandardDeviation(salaries, average);
+
+                    double aboveAverage = salaries.stream()
+                            .filter(salary -> salary > average + standardDeviation)
+                            .max(Double::compare)
+                            .orElse(average);
+                    double belowAverage = salaries.stream()
+                            .filter(salary -> salary < average - standardDeviation)
+                            .min(Double::compare)
+                            .orElse(average);
+
+                    return new SalaryByLocationDatapoint(
                             entry.getKey(),
                             new SalaryRangeDatapoint(
                                     (double) Math.round(average * 100) / 100,
