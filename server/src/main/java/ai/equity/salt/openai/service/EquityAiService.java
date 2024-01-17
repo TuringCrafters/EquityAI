@@ -130,8 +130,14 @@ public class EquityAiService {
                     double average = salaries.stream().mapToDouble(Double::doubleValue).average().orElse(0);
                     double standardDeviation = calculateStandardDeviation(salaries, average);
 
-                    double aboveAverage = salaries.stream().filter(salary -> salary > average + standardDeviation).max(Double::compare).get();
-                    double belowAverage = salaries.stream().filter(salary -> salary < average - standardDeviation).count();
+                    double aboveAverage = salaries.stream()
+                            .filter(salary -> salary > average + standardDeviation)
+                            .max(Double::compare)
+                            .orElse(average);
+                    double belowAverage = salaries.stream()
+                            .filter(salary -> salary < average - standardDeviation)
+                            .min(Double::compare)
+                            .orElse(average);
 
                     return new SalaryByYearsOfExperienceDatapoint(
                             entry.getKey(),
