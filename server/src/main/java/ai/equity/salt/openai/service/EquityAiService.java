@@ -56,8 +56,8 @@ public class EquityAiService {
         SalaryDataForExperienceAndLocationResponse datapointExperience =
                 new SalaryDataForExperienceAndLocationResponse(mostCommonJob, experienceDataPoints, locationDataPoints);
 
-        var response = openAiModelFactory.createDefaultChatModel().generate(SYSTEM_MESSAGE + createPrompt(jobDataList));
-        return new EquityAiResponse(response, uniqueJobTitles, datapointExperience);
+//        var response = openAiModelFactory.createDefaultChatModel().generate(SYSTEM_MESSAGE + createPrompt(jobDataList));
+        return new EquityAiResponse(null, uniqueJobTitles, datapointExperience);
     }
 
     private static List<JobDataSet> readCSV(InputStream inputStream) throws IOException, CsvValidationException {
