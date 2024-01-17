@@ -3,12 +3,13 @@
 import axios from "axios";
 import React, { Suspense, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic";
+import LineOfBestFitChart from "@/components/lineofbestfitchart/LineOfBestFitChart";
 
 const StaticBarChartgraph = dynamic(
-    () => import('@/components/barchart/BarChartGraph'),
-    { ssr: false }
-  )
+  () => import("@/components/barchart/BarChartGraph"),
+  { ssr: false }
+);
 
 export interface location_details {
   location: string;
@@ -18,7 +19,6 @@ export interface location_details {
     below_average: number;
   };
 }
-
 
 export interface experience_details {
   years_of_experience: number;
@@ -43,14 +43,13 @@ const Analysis = () => {
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/file/data`
       );
       setInformation(response?.data);
-      console.log(response.data);
       return response.data;
     } catch (error) {
       console.error(error);
     }
   };
 
-  const {} = useQuery({
+  useQuery({
     queryKey: ["analysis"],
     queryFn: fetchAnalysis,
     enabled: true,
@@ -59,7 +58,8 @@ const Analysis = () => {
 
   return (
     <>
-      <div>
+    <div className="mt-10"></div>
+      {/* <div>
         {information &&
           information.location_details.map((location) => {
             return (
@@ -68,10 +68,17 @@ const Analysis = () => {
               </ul>
             );
           })}
-      </div>
-      <div>
+      </div> */}
+      <div className="flex row-auto justify-around m-14 items-center">
         <Suspense>
-        {information?.location_details && < StaticBarChartgraph data={information.location_details}/>}
+          {information?.location_details && (
+            <StaticBarChartgraph data={information.location_details} />
+          )}
+        </Suspense>
+        <Suspense>
+          {information?.experience_details && (
+            <LineOfBestFitChart data={information.experience_details} />
+          )}
         </Suspense>
       </div>
     </>
