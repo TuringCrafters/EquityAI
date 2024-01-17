@@ -35,7 +35,6 @@ public class EquityAiService {
     private static final String DATA_HEADER = "Positions, Salaries, Experience, Age, Locality\n";
 
     public String getAiResponse(String prompt) {
-
         String response = openAiModelFactory.create().generate(prompt).content();
         repository.save(new EquityAi(prompt, response));
         return response;
@@ -56,8 +55,8 @@ public class EquityAiService {
         SalaryDataForExperienceAndLocationResponse datapointExperience =
                 new SalaryDataForExperienceAndLocationResponse(mostCommonJob, experienceDataPoints, locationDataPoints);
 
-//        var response = openAiModelFactory.createDefaultChatModel().generate(SYSTEM_MESSAGE + createPrompt(jobDataList));
-        return new EquityAiResponse(null, uniqueJobTitles, datapointExperience);
+       var response = openAiModelFactory.createDefaultChatModel().generate(SYSTEM_MESSAGE + createPrompt(jobDataList));
+        return new EquityAiResponse(response, uniqueJobTitles, datapointExperience);
     }
 
     private static List<JobDataSet> readCSV(InputStream inputStream) throws IOException, CsvValidationException {
