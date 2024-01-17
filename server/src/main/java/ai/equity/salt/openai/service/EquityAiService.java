@@ -125,10 +125,30 @@ public class EquityAiService {
                 ));
 
         return averageSalaryByExperience.entrySet().stream()
-                .map(entry -> new SalaryByYearsOfExperienceDatapoint(
-                        entry.getKey(),
-                        new SalaryRangeDatapoint(entry.getValue().intValue(), 0, 0)
-                ))
+                .map(entry -> {
+                    List<Double> salaries = entry.getValue();
+                    double average = salaries.stream().mapToDouble(Double::doubleValue).average().orElse(0);
+                    double standardDeviation = calculateStandardDeviation(salaries, average);
+
+                    double aboveAverage = salaries.stream().filter(salary -> salary > average + standardDeviation).max(Double::compare).get();
+                    double belowAverage = salaries.stream().filter(salary -> salary < average - standardDeviation).count();
+
+                    return new SalaryByYearsOfExperienceDatapoint(
+                            entry.getKey(),
+                            new SalaryRangeDatapoint(
+                                    (double) Math.round(average * 100) / 100,
+                                    aboveAverage,
+                                    belowAverage
+                            )
+                    );
+                })
                 .collect(Collectors.toList());
+    }
+
+    private double calculateStandardDeviation(List<Double> salaries, double mean) {
+        double sumOfSquares = salaries.stream()
+                .mapToDouble(salary -> Math.pow(salary - mean, 2))
+                .sum();
+        return Math.sqrt(sumOfSquares / salaries.size());
     }
 }
