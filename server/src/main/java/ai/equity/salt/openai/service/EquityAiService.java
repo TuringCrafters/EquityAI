@@ -112,4 +112,20 @@ public class EquityAiService {
                 .map(Map.Entry::getKey)
                 .orElse(null);
     }
+
+    public List<EquityAiYearsOfExperience> calculateAverageForYearsOfExperience(List<EquityAiJobData> jobDataList, String mostCommonJob) {
+        Map<Integer, Double> averageSalaryByExperience = jobDataList.stream()
+                .filter(data -> data.getPosition().equals(mostCommonJob))
+                .collect(Collectors.groupingBy(
+                        EquityAiJobData::getExperience,
+                        Collectors.averagingDouble(EquityAiJobData::getSalary)
+                ));
+
+        return averageSalaryByExperience.entrySet().stream()
+                .map(entry -> new EquityAiYearsOfExperience(
+                        entry.getKey(),
+                        new EquityAiSalary(entry.getValue().intValue(), 0, 0)
+                ))
+                .collect(Collectors.toList());
+    }
 }
