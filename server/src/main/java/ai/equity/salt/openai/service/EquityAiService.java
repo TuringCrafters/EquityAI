@@ -148,7 +148,7 @@ public class EquityAiService {
                             )
                     );
                 })
-                .collect(Collectors.toList());
+                .toList();
     }
 
     private double calculateStandardDeviation(List<Double> salaries, double mean) {
