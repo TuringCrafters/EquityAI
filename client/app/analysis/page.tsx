@@ -62,8 +62,7 @@ const Analysis = () => {
         {information?.location_details && (
           <StaticBarChartgraph data={information.location_details} />
         )}
-      </Suspense>
-      <Suspense>
+ 
         {information?.experience_details && (
           <LineOfBestFitChart data={information.experience_details} />
         )}
