@@ -1,3 +1,6 @@
 website:
   base-url:
     frontend: http://localhost:3000/
+spring:
+  jackson:
+    property-naming-strategy: SNAKE_CASE
