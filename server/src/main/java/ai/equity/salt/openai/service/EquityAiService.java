@@ -128,7 +128,7 @@ public class EquityAiService {
         return averageSalaryByExperience.entrySet().stream()
                 .map(entry -> {
                     List<Double> salaries = entry.getValue();
-                    double average = salaries.stream().mapToDouble(Double::doubleValue).average().orElse(0);
+                    double average = calculateAverage(salaries);
                     double standardDeviation = calculateStandardDeviation(salaries, average);
 
                     double aboveAverage = salaries.stream()
@@ -163,7 +163,7 @@ public class EquityAiService {
         return averageSalaryByLocation.entrySet().stream()
                 .map(entry -> {
                     List<Double> salaries = entry.getValue();
-                    double average = salaries.stream().mapToDouble(Double::doubleValue).average().orElse(0);
+                    double average = calculateAverage(salaries);
                     double standardDeviation = calculateStandardDeviation(salaries, average);
 
                     double aboveAverage = salaries.stream()
@@ -185,6 +185,10 @@ public class EquityAiService {
                     );
                 })
                 .toList();
+    }
+
+    private double calculateAverage(List<Double> salaries) {
+        return salaries.stream().mapToDouble(Double::doubleValue).average().orElse(0);
     }
 
     private double calculateStandardDeviation(List<Double> salaries, double mean) {
