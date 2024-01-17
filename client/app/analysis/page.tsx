@@ -57,31 +57,18 @@ const Analysis = () => {
   });
 
   return (
-    <>
-    <div className="mt-10"></div>
-      {/* <div>
-        {information &&
-          information.location_details.map((location) => {
-            return (
-              <ul key={location.location}>
-                <li> Average salary: {location.salary.average}</li>
-              </ul>
-            );
-          })}
-      </div> */}
-      <div className="flex row-auto justify-around m-14 items-center">
-        <Suspense>
-          {information?.location_details && (
-            <StaticBarChartgraph data={information.location_details} />
-          )}
-        </Suspense>
-        <Suspense>
-          {information?.experience_details && (
-            <LineOfBestFitChart data={information.experience_details} />
-          )}
-        </Suspense>
-      </div>
-    </>
+    <div className="flex row-auto justify-around m-14 items-center">
+      <Suspense>
+        {information?.location_details && (
+          <StaticBarChartgraph data={information.location_details} />
+        )}
+      </Suspense>
+      <Suspense>
+        {information?.experience_details && (
+          <LineOfBestFitChart data={information.experience_details} />
+        )}
+      </Suspense>
+    </div>
   );
 };
 

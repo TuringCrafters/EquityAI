@@ -10,3 +10,5 @@ export type TransformedExperienceDetails = {
   salary_above_average: number;
   salary_below_average: number;
 };
+
+export type DataPoint = [number, number];
