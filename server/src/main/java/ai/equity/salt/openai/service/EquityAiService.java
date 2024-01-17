@@ -197,4 +197,18 @@ public class EquityAiService {
                 .sum();
         return Math.sqrt(sumOfSquares / salaries.size());
     }
+
+    private double findAboveAverage(List<Double> salaries, double average, double standardDeviation) {
+        return salaries.stream()
+                .filter(salary -> salary > average + standardDeviation)
+                .max(Double::compare)
+                .orElse(average);
+    }
+
+    private double findBelowAverage(List<Double> salaries, double average, double standardDeviation) {
+        return salaries.stream()
+                .filter(salary -> salary < average - standardDeviation)
+                .min(Double::compare)
+                .orElse(average);
+    }
 }
