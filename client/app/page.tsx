@@ -1,9 +1,11 @@
 "use client";
-import { useState } from "react";
-import axios from "axios";
-import { useQuery } from "@tanstack/react-query";
 import UploadFile from "@/components/upload/UploadFile"
+import { DataContext } from "@/utils/provider";
+import { useContext } from "react";
 
 export default function Home() {
+
+  const data = useContext(DataContext);
+  console.log(data);
   return <UploadFile/>;
 }
