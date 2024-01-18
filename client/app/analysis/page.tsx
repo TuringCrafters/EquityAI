@@ -38,4 +38,4 @@ const AnalysisPage = () => {
   );
 };
 
-export default Analysis;
+export default AnalysisPage;
