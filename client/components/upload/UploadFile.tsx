@@ -1,6 +1,6 @@
 "use client";
 import axios from "axios";
-import React, { ChangeEvent, useRef, useState } from "react";
+import React, { ChangeEvent, useContext, useRef, useState } from "react";
 import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
 import { Input } from "@/components/ui/input";
@@ -8,12 +8,15 @@ import { Label } from "@/components/ui/label";
 import { useToast } from "@/components/ui/use-toast";
 import UploadIcon from "@/components/icon/uploadIcon";
 import FileIcon from "@/components//icon/fileIcon";
+import { DataContext } from "@/utils/provider";
+import router from "next/router";
 
 const UploadFile = () => {
   const [file, setFile] = useState<FileList | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [progress, setProgress] = useState(0);
   const { toast } = useToast();
+  const {data, setData} = useContext(DataContext);
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>): void => {
     if (event.target.files) {
@@ -43,6 +46,7 @@ const UploadFile = () => {
           },
         }
       );
+      setData(response.data);
       toast({
         className: "text-white font-bold tracking-wide",
         variant: "success",
@@ -56,6 +60,7 @@ const UploadFile = () => {
       });
     }
   };
+  console.log(data)
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
@@ -91,6 +96,7 @@ const UploadFile = () => {
           Upload
         </Button>
       </form>
+      <button onClick = {() => (router.push('/analysis'))}></button>
       </div>
     </div>
   );
