@@ -5,8 +5,7 @@ import ai.equity.salt.openai.controller.dto.SalaryDatapoint;
 import ai.equity.salt.openai.controller.dto.SalaryRangeDatapoint;
 import lombok.RequiredArgsConstructor;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -65,5 +64,28 @@ public class DataAnalysis {
                     );
                 })
                 .toList();
+    }
+
+    public static List<String> findUniqueJobs(List<JobDataSet> jobDataList) {
+        Set<String> uniqueJobTitles = new HashSet<>();
+
+        for (JobDataSet jobData : jobDataList) {
+            String jobTitle = jobData.getPosition();
+            if (jobTitle != null && !jobTitle.isEmpty()) {
+                uniqueJobTitles.add(jobTitle);
+            }
+        }
+        return new ArrayList<>(uniqueJobTitles);
+    }
+
+    public static String mostCommonJob(List<String> jobTitles) {
+        return jobTitles
+                .stream()
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+                .entrySet()
+                .stream()
+                .max(Map.Entry.comparingByValue())
+                .map(Map.Entry::getKey)
+                .orElse(null);
     }
 }

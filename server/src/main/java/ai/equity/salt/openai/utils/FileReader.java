@@ -3,7 +3,6 @@ package ai.equity.salt.openai.utils;
 import ai.equity.salt.openai.controller.dto.JobDataSet;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
-import lombok.AllArgsConstructor;
 
 import java.io.IOException;
 import java.io.InputStream;
