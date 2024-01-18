@@ -17,12 +17,17 @@ const UploadFile = () => {
   const [progress, setProgress] = useState(0);
   const { toast } = useToast();
   const {data, setData} = useContext(DataContext);
+  const router = useRouter();
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>): void => {
     if (event.target.files) {
       setFile(event.target.files);
     }
   };
+
+  const sendToAnalysis = () => {
+    router.push("/analysis")
+  }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
