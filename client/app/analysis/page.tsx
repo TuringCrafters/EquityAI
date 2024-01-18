@@ -1,11 +1,7 @@
 "use client";
-
-import React, { useContext, useEffect, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import React, { useContext } from "react";
 import dynamic from "next/dynamic";
 import LineOfBestFitChart from "@/components/lineofbestfitchart/LineOfBestFitChart";
-import { Analysis } from "./types";
-import fetchAnalysis from "@/utils/fetchAnalysis";
 import { DataContext } from "@/utils/provider";
 
 const StaticBarChartgraph = dynamic(
