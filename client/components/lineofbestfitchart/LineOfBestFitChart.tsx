@@ -10,13 +10,13 @@ import {
   Scatter,
 } from "recharts";
 import { LinearChartGraphProps, TransformedExperienceDetails } from "./types";
-import { convertToPolynomialDataPoints, transformExperienceDetails } from "@/utils/dataConverter";
-import regression, { DataPoint } from "regression";
+import {
+  convertToPolynomialDataPoints,
+  transformExperienceDetails,
+} from "@/utils/dataConverter";
+import { DataPoint } from "regression";
+import { calculateLineOfBestFit } from "@/utils/lineOfBestFit";
 
-type LineOfBestFit = {
-  yearsOfExperience: number;
-  line: number;
-};
 
 export default function LineOfBestFitChart({ data }: LinearChartGraphProps) {
   const sortedData = data.sort(
@@ -29,29 +29,13 @@ export default function LineOfBestFitChart({ data }: LinearChartGraphProps) {
     transformExperienceDetails(item)
   );
 
-  const slope = regression.linear(dataPoints);
-  console.log(slope);
-  console.log(slope.equation);
-  
+  const lineOfBestFit = calculateLineOfBestFit(dataPoints);
+  const allData : any= convertedData;
+  allData.push(...lineOfBestFit);
 
-   const lineOfBestFitStart: LineOfBestFit = {
-    yearsOfExperience: slope.points[0][0],
-    line: (slope.equation[0]*slope.points[0][0]+ slope.equation[1])/1000
-  };
-  const lineOfBestFitEnd: LineOfBestFit = {
-    yearsOfExperience:
-    slope.points[slope.points.length-1][0],
-    line: (slope.equation[0]*slope.points[slope.points.length-1][0]+ slope.equation[1])/1000,
-  };
-
-  const allData: any = convertedData;
-  allData.push(lineOfBestFitStart);
-  allData.push(lineOfBestFitEnd);
-
-  
   return (
     <ComposedChart
-      width={500}
+      width={600}
       height={400}
       data={convertedData}
       margin={{
@@ -61,38 +45,53 @@ export default function LineOfBestFitChart({ data }: LinearChartGraphProps) {
         left: 20,
       }}
     >
-      <CartesianGrid stroke="#f5f5f5" />
+      <CartesianGrid strokeDasharray="3 3" vertical={false} />
       <Tooltip />
-      <Legend />
-
+      <Legend
+        layout="horizontal"
+        verticalAlign="top"
+        align="center"
+        iconSize={9}
+        wrapperStyle={{ top: 0, left: 50 }}
+        formatter={(value) => (
+          <span className=" text-black text-xs font-semibold">{value}</span>
+        )}
+      />
       <XAxis
         dataKey="yearsOfExperience"
         type="number"
-        label={{
-          value: "Years Of Experience",
-          position: "insideBottom",
-          offset: 0,
-        }}
+        axisLine={{ stroke: "#ffffff" }}
+        tickLine={{ stroke: "#ffffff" }}
+        className="text-xs font-semibold"
+        tick={{ fill: "#aab0b7" }}
+        dy={10}
+
       />
       <YAxis
-        unit="K SEK"
+        unit="k"
         type="number"
-        label={{ value: "Salary", angle: -90, position: "insideLeft" }}
+        className="text-xs font-semibold"
+        axisLine={{ stroke: "#ffffff" }}
+        tickLine={{ stroke: "#ffffff" }}
+        tick={{ fill: "#aab0b7" }}
+        width={80}
       />
-      <Scatter name="Salary average" dataKey="salary_average" fill="red" />
+      <Scatter name="Average Salary" dataKey="salary_average" fill="#c03dbb" />
       <Scatter
-        name="Salary below average"
+        name="Below average"
         dataKey="salary_below_average"
-        fill="blue"
+        fill="#62a46f"
       />
       <Scatter
-        name="Salary above average"
+        name="Above Average"
         dataKey="salary_above_average"
-        fill="green"
+        fill="#376bec"
       />
       <Line
         dataKey="line"
-        stroke="red"
+        stroke="#c03dbb"
+        strokeWidth={2}
+        strokeDasharray="3 3"
         dot={false}
         activeDot={false}
         legendType="none"

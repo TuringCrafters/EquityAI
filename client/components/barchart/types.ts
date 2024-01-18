@@ -1,4 +1,4 @@
-import { location_details } from "@/app/analysis/page";
+import { location_details } from "@/app/analysis/types";
 
 export type TransformedLocationDetails = {
     location: string;
