@@ -53,11 +53,8 @@ public class EquityAiService {
         List<SalaryByYearsOfExperienceDatapoint> experienceDataPoints = calculateAverageForYearsOfExperience(jobDataList, mostCommonJob);
         List<SalaryByLocationDatapoint> locationDataPoints = calculateAverageForLocation(jobDataList, mostCommonJob);
 
-        SalaryDataForExperienceAndLocationResponse datapointExperience =
-                new SalaryDataForExperienceAndLocationResponse(mostCommonJob, experienceDataPoints, locationDataPoints);
-
 //        var response = openAiModelFactory.createDefaultChatModel().generate(SYSTEM_MESSAGE + createPrompt(jobDataList));
-        return new EquityAiResponse(null, uniqueJobTitles, datapointExperience);
+        return new EquityAiResponse("null", uniqueJobTitles, mostCommonJob, experienceDataPoints, locationDataPoints);
     }
 
     private static List<JobDataSet> readCSV(InputStream inputStream) throws IOException, CsvValidationException {
