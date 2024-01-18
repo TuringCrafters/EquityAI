@@ -50,11 +50,10 @@ public class EquityAiService {
 
         String mostCommonJob = mostCommonJob(jobTitles);
 
-        List<SalaryByYearsOfExperienceDatapoint> experienceDataPoints = calculateAverageForYearsOfExperience(jobDataList, mostCommonJob);
-        List<SalaryByLocationDatapoint> locationDataPoints = calculateAverageForLocation(jobDataList, mostCommonJob);
+        List<SalaryDatapoint<Integer>> experienceDataPoints = averageSalaryByDatapoint(jobDataList, mostCommonJob, JobDataSet::getExperience);
+        List<SalaryDatapoint<String>> locationDataPoints = averageSalaryByDatapoint(jobDataList, mostCommonJob, JobDataSet::getLocality);
 
-//        var response = openAiModelFactory.createDefaultChatModel().generate(SYSTEM_MESSAGE + createPrompt(jobDataList));
-        return new EquityAiResponse("null", uniqueJobTitles, mostCommonJob, experienceDataPoints, locationDataPoints);
+        return new EquityAiResponse<>("null", uniqueJobTitles, mostCommonJob, experienceDataPoints, locationDataPoints);
     }
 
     private static String createPrompt(List<JobDataSet> jobDataList) {
