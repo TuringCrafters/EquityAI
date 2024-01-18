@@ -65,7 +65,6 @@ const UploadFile = () => {
       });
     }
   };
-  console.log(data)
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
@@ -101,7 +100,7 @@ const UploadFile = () => {
           Upload
         </Button>
       </form>
-      <button onClick = {() => (router.push('/analysis'))}></button>
+       <Button disabled={!data} onClick={sendToAnalysis}>Go to Analysis</Button>
       </div>
     </div>
   );
