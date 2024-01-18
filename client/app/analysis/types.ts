@@ -17,6 +17,7 @@ export type experience_details = {
 }
 
 export interface Analysis {
+  response: string;
   location_details: location_details[];
   experience_details: experience_details[];
 }
