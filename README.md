@@ -3,13 +3,24 @@
 ## Overview
 Equity AI is a predictive anomaly detection application designed to address the challenges associated with identifying and rectifying pay discrepancies within an organization. The app detects anomalies in payroll data, facilitating timely intervention and resolution of pay-related issues.
 
-## The Features
+## Minimum Viable Product (MVP)
+Equity AI includes the following features:
 
-**1. Predictive Anomaly Detection**
-<p>Use of advanced AI algorithms to analyze your pay data</p>
+**1. File Upload and AI Data Analysis:**
+<p>Users easily upload files for efficient and accurate data analysis.</p>
 
-**2. Data Monitoring**
-<p>Identify any potential anomalies or discrepancies that may indicate bias or discrimination</p>
+**2. Data Visualizations:**
+<p>Generate clear and insightful visualizations to enhance data comprehension.</p>
+
+**3. Downloadable PDF Reports:**
+<p>Generate and download comprehensive analysis reports in PDF format.</p>
+
+**4. User-Friendly Interface:**
+<p>Ensure a straightforward and user-friendly interface to facilitate a seamless experience.
+</p>
+
+**5. Native Sharing Integration**
+<p>Enable users to share reports and analysis</p>
 
 ## Technologies Used:
 - **Frontend:** Leveraging NextJS and TypeScript for creating a responsive user interface
@@ -19,6 +30,9 @@ Equity AI is a predictive anomaly detection application designed to address the 
 
 ## Pitch Deck 
 [![Pitch deck video](https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/DqOw0xm7iNI)
+
+## Project Board
+[Click Here](https://github.com/orgs/TuringCrafters/projects/1/views/1)
 
 ## Acknowledgments
 <p>We extend our gratitude to the open-source community, and the developers who have contributed to the frameworks, libraries, and tools used in making Equity AI possible.</p>
