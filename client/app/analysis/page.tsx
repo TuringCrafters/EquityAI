@@ -1,29 +1,33 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import dynamic from "next/dynamic";
 import LineOfBestFitChart from "@/components/lineofbestfitchart/LineOfBestFitChart";
 import { Analysis } from "./types";
 import fetchAnalysis from "@/utils/fetchAnalysis";
+import { DataContext } from "@/utils/provider";
 
 const StaticBarChartgraph = dynamic(
   () => import("@/components/barchart/BarChartGraph"),
   { ssr: false }
 );
+
 const Analysis = () => {
   const [information, setInformation] = useState<Analysis | null>(null);
 
-  const { data } = useQuery({
-    queryKey: ["analysis"],
-    queryFn: fetchAnalysis,
-    enabled: true,
-    refetchOnWindowFocus: false,
-  });
+  const {data} = useContext(DataContext);
+  console.log(data)
+  // const { data } = useQuery({
+  //   queryKey: ["analysis"],
+  //   queryFn: fetchAnalysis,
+  //   enabled: true,
+  //   refetchOnWindowFocus: false,
+  // });
 
-  useEffect(() => {
-    setInformation(data);
-  }, [data]);
+  // useEffect(() => {
+  //   setInformation(data);
+  // }, [data]);
 
   return (
     <main>
