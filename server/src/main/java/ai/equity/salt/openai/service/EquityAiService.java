@@ -1,6 +1,8 @@
 package ai.equity.salt.openai.service;
 
-import ai.equity.salt.openai.controller.dto.*;
+import ai.equity.salt.openai.controller.dto.EquityAiResponse;
+import ai.equity.salt.openai.controller.dto.JobDataSet;
+import ai.equity.salt.openai.controller.dto.SalaryDatapoint;
 import ai.equity.salt.openai.model.EquityAi;
 import ai.equity.salt.openai.model.OpenAiModelFactory;
 import ai.equity.salt.openai.repository.JpaEquityAiRepo;
@@ -10,13 +12,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.*;
+import java.io.IOException;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import static ai.equity.salt.openai.utils.DataAnalysis.averageSalaryByDatapoint;
 import static ai.equity.salt.openai.utils.FileReader.readCSV;
-import static ai.equity.salt.openai.utils.DataAnalysis.*;
 
 @Service
 @RequiredArgsConstructor
@@ -41,7 +43,7 @@ public class EquityAiService {
         return response;
     }
 
-    public EquityAiResponse analyzeFile(MultipartFile file) throws IOException, CsvValidationException {
+    public EquityAiResponse<Integer, String> analyzeFile(MultipartFile file) throws IOException, CsvValidationException {
         var inputStream = file.getInputStream();
         List<JobDataSet> jobDataList = readCSV(inputStream);
 
@@ -53,7 +55,9 @@ public class EquityAiService {
         List<SalaryDatapoint<Integer>> experienceDataPoints = averageSalaryByDatapoint(jobDataList, mostCommonJob, JobDataSet::getExperience);
         List<SalaryDatapoint<String>> locationDataPoints = averageSalaryByDatapoint(jobDataList, mostCommonJob, JobDataSet::getLocality);
 
-        return new EquityAiResponse<>("null", uniqueJobTitles, mostCommonJob, experienceDataPoints, locationDataPoints);
+        var response = openAiModelFactory.createDefaultChatModel().generate(SYSTEM_MESSAGE + createPrompt(jobDataList));
+
+        return new EquityAiResponse<>("something", uniqueJobTitles, mostCommonJob, experienceDataPoints, locationDataPoints);
     }
 
     private static String createPrompt(List<JobDataSet> jobDataList) {
