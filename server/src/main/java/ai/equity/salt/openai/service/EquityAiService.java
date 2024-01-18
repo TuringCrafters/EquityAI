@@ -17,7 +17,7 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import static ai.equity.salt.openai.utils.DataAnalysis.averageSalaryByDatapoint;
+import static ai.equity.salt.openai.utils.DataAnalysis.*;
 import static ai.equity.salt.openai.utils.FileReader.readCSV;
 
 @Service
@@ -69,28 +69,5 @@ public class EquityAiService {
             stringBuilder.append(jobData.toString()).append("\n");
         }
         return stringBuilder.toString();
-    }
-
-    private List<String> findUniqueJobs(List<JobDataSet> jobDataList) {
-        Set<String> uniqueJobTitles = new HashSet<>();
-
-        for (JobDataSet jobData : jobDataList) {
-            String jobTitle = jobData.getPosition();
-            if (jobTitle != null && !jobTitle.isEmpty()) {
-                uniqueJobTitles.add(jobTitle);
-            }
-        }
-        return new ArrayList<>(uniqueJobTitles);
-    }
-
-    private String mostCommonJob(List<String> jobTitles) {
-        return jobTitles
-                .stream()
-                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
-                .entrySet()
-                .stream()
-                .max(Map.Entry.comparingByValue())
-                .map(Map.Entry::getKey)
-                .orElse(null);
     }
 }
