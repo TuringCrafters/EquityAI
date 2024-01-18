@@ -1,6 +1,6 @@
 "use client";
 import axios from "axios";
-import React, { ChangeEvent, useRef, useState } from "react";
+import React, { ChangeEvent, useContext, useRef, useState } from "react";
 import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
 import { Input } from "@/components/ui/input";
@@ -8,18 +8,26 @@ import { Label } from "@/components/ui/label";
 import { useToast } from "@/components/ui/use-toast";
 import UploadIcon from "@/components/icon/uploadIcon";
 import FileIcon from "@/components//icon/fileIcon";
+import { DataContext } from "@/utils/provider";
+import { useRouter } from "next/navigation";
 
 const UploadFile = () => {
   const [file, setFile] = useState<FileList | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [progress, setProgress] = useState(0);
   const { toast } = useToast();
+  const {data, setData} = useContext(DataContext);
+  const router = useRouter();
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>): void => {
     if (event.target.files) {
       setFile(event.target.files);
     }
   };
+
+  const sendToAnalysis = () => {
+    router.push("/analysis")
+  }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -43,6 +51,7 @@ const UploadFile = () => {
           },
         }
       );
+      setData(response.data);
       toast({
         className: "text-white font-bold tracking-wide",
         variant: "success",
@@ -91,6 +100,7 @@ const UploadFile = () => {
           Upload
         </Button>
       </form>
+       <Button disabled={!data} onClick={sendToAnalysis}>Go to Analysis</Button>
       </div>
     </div>
   );
