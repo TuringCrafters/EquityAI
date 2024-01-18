@@ -9,7 +9,7 @@ import { useToast } from "@/components/ui/use-toast";
 import UploadIcon from "@/components/icon/uploadIcon";
 import FileIcon from "@/components//icon/fileIcon";
 import { DataContext } from "@/utils/provider";
-import router from "next/router";
+import { useRouter } from "next/navigation";
 
 const UploadFile = () => {
   const [file, setFile] = useState<FileList | null>(null);
