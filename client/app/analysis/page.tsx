@@ -1,7 +1,7 @@
 "use client";
 
 import axios from "axios";
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useContext, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import dynamic from "next/dynamic";
 import LineOfBestFitChart from "@/components/lineofbestfitchart/LineOfBestFitChart";
@@ -40,7 +40,7 @@ const Analysis = () => {
   const fetchAnalysis = async () => {
     try {
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/file/data`
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/file/analyze`
       );
       setInformation(response?.data);
       return response.data;

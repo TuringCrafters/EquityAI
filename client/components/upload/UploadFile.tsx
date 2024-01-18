@@ -42,7 +42,7 @@ const UploadFile = () => {
             setProgress(percentCompleted);
           },
         }
-      );
+      ); 
       toast({
         className: "text-white font-bold tracking-wide",
         variant: "success",
