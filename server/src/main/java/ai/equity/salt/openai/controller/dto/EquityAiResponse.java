@@ -3,11 +3,11 @@ package ai.equity.salt.openai.controller.dto;
 import java.util.List;
 import java.util.Set;
 
-public record EquityAiResponse(
+public record EquityAiResponse<T, R>(
         String response,
         Set<String> uniqueJobTitles,
         String jobTitle,
-        List<SalaryByYearsOfExperienceDatapoint> experienceDetails,
-        List<SalaryByLocationDatapoint> locationDetails
+        List<SalaryDatapoint<T>> experienceDetails,
+        List<SalaryDatapoint<R>> locationDetails
 ) {
 }
