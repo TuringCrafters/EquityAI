@@ -9,38 +9,26 @@ const StaticBarChartgraph = dynamic(
   { ssr: false }
 );
 
-const Analysis = () => {
-  const [information, setInformation] = useState<Analysis | null>(null);
+const AnalysisPage = () => {
 
   const {data} = useContext(DataContext);
-  console.log(data)
-  // const { data } = useQuery({
-  //   queryKey: ["analysis"],
-  //   queryFn: fetchAnalysis,
-  //   enabled: true,
-  //   refetchOnWindowFocus: false,
-  // });
-
-  // useEffect(() => {
-  //   setInformation(data);
-  // }, [data]);
 
   return (
     <main>
       <article className="">
         <section className="flex flex-row align-middle h-3/6 justify-center items-center border-2 border-red-700">
           <div className="items-center h-full border-2 border-green-600">
-            {information?.location_details &&(
+            {data?.location_details &&(
               <>  <h2>Bar Chart</h2>
-              <StaticBarChartgraph data={information.location_details} />
+              <StaticBarChartgraph data={data.location_details} />
               </>
             )}
           </div>
           <div className="items-center  max-h-100 border-2 border-blue-600">
-            {information?.experience_details && (
+            {data?.experience_details && (
               <>
               <h2>Line Chart</h2>
-              <LineOfBestFitChart data={information.experience_details} />
+              <LineOfBestFitChart data={data.experience_details} />
               </>
             )}
           </div>
