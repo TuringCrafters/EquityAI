@@ -4,8 +4,7 @@ import dynamic from "next/dynamic";
 import { useReactToPrint } from "react-to-print";
 import { DataContext } from "@/services/provider";
 import LineOfBestFitChart from "@/components/LineChart";
-import { Button } from "../../components/UI/button"
-
+import { Button } from "../../components/ui/button";
 
 const StaticBarChartgraph = dynamic(() => import("@/components/BarChart"), {
   ssr: false,
@@ -21,7 +20,12 @@ const AnalysisPage = () => {
 
   return (
     <main className="h-dvh">
-      <Button onClick={handlePDF} className="absolute top-4 right-6 rounded-full bg-blue-600 ">Save as PDF</Button>
+      <Button
+        onClick={handlePDF}
+        className="absolute top-4 right-6 rounded-full bg-blue-600 "
+      >
+        Save as PDF
+      </Button>
       <article ref={pageRef}>
         <section className="flex flex-col items-center md:flex-row md:items-start align-middle h-3/6 justify-center mt-10">
           <h2>{data?.job_title}</h2>

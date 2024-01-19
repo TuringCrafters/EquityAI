@@ -2,12 +2,12 @@
 import axios from "axios";
 import React, { ChangeEvent, useContext, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { useToast } from "../UI/use-toast"
+import { useToast } from "../ui/use-toast";
 import { DataContext } from "@/services/provider";
 import { Progress } from "@radix-ui/react-progress";
 import { UploadIcon } from "lucide-react";
-import { Button } from "../UI/button";
-import { Input } from "../UI/input";
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
 
 const UploadFile = () => {
   const [file, setFile] = useState<FileList | null>(null);
@@ -25,10 +25,10 @@ const UploadFile = () => {
     router.push("/analysis");
   };
 
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsLoading(true)
+    setIsLoading(true);
     try {
       if (!file) {
         return;
@@ -53,9 +53,8 @@ const UploadFile = () => {
         variant: "success",
         description: "Analysis Completed: Presenting insights from your file",
       });
-    
-      router.push("/analysis");
 
+      router.push("/analysis");
     } catch (error: any) {
       toast({
         variant: "destructive",
@@ -63,7 +62,7 @@ const UploadFile = () => {
         description: error.message ?? "Something went wrong",
       });
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
   };
   return (
@@ -95,16 +94,19 @@ const UploadFile = () => {
           >
             Submit
           </Button>
-          {progress > 0 && 
-          <div className="mt-6 text-center flex flex-col">
-            <div className="text-xs italic">Generating insights...</div>
-           <Progress
-              className={"h-4 w-full bg-gray-200 rounded-full " + (isLoading ? "animate-pulse" : "")}
-              max={100}
-              value={progress}
-            />
-          </div>
-          }
+          {progress > 0 && (
+            <div className="mt-6 text-center flex flex-col">
+              <div className="text-xs italic">Generating insights...</div>
+              <Progress
+                className={
+                  "h-4 w-full bg-gray-200 rounded-full " +
+                  (isLoading ? "animate-pulse" : "")
+                }
+                max={100}
+                value={progress}
+              />
+            </div>
+          )}
         </form>
       </div>
     </div>
