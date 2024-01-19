@@ -75,21 +75,18 @@ export default function LineOfBestFitChart({ data }: LinearChartGraphProps) {
       />
       <Scatter
         name="Average Salary"
-        key={`scatter-average-salary`}
+        key={`scatter-salary-average`}
         dataKey="salary_average"
         fill="#c03dbb"
       />
 
-      {convertedData.map(
-        (item) => item.salary_below_average !== item.salary_average
-      ) && (
         <Scatter
           name="Below average"
           key={`scatter-below-salary`}
           dataKey="salary_below_average"
           fill="#62a46f"
         />
-      )}
+
       <Scatter
         name="Above Average"
         key={`scatter-above-salary`}
