@@ -27,8 +27,8 @@ const AnalysisPage = () => {
         Save as PDF
       </Button>
       <article ref={pageRef}>
-        <section className="flex flex-col items-center md:flex-row md:items-start align-middle h-3/6 justify-center mt-10">
-          <h2>{data?.job_title}</h2>
+      <h2 className="flex ml-72 pl-6 text-2xl mt-10 mb-5">{data?.job_title}</h2>
+        <section className="flex flex-col items-center md:flex-row md:items-start align-middle h-3/6 justify-center my-10">
           <div className="items-center h-full border-r-2 border-r-#aab0b7">
             {data?.location_details && (
               <>
@@ -56,7 +56,10 @@ const AnalysisPage = () => {
             )}
           </div>
         </section>
-        <p className="my-10 text-justify">{data?.response}</p>
+        <div className=" flex align-middle justify-center flex-col text-justify" style={{ maxWidth: "1200px",  margin: "auto" }}>
+        <p className="mb-5">{data?.response}</p>
+        <p className="mb-10">{data?.product_recommendation}</p>
+        </div>
       </article>
     </main>
   );
