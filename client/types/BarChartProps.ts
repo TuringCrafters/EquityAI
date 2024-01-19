@@ -1,5 +1,6 @@
-import { location_details } from "@/app/analysis/types";
+import { LocationDetails } from "./LocationDetails";
+
 
 export type BarChartGraphProps = {
-    data: location_details[]; 
+    data: LocationDetails[]; 
   }

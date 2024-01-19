@@ -1,5 +1,5 @@
-import { experience_details } from "@/app/analysis/types";
+import { ExperienceDetails } from "./ExperienceDetails";
 
 export type LinearChartGraphProps = {
-  data: experience_details[];
+  data: ExperienceDetails[];
 };
