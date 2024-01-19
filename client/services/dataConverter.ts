@@ -10,9 +10,9 @@ export function transformLocationDetails(
 ): TransformedLocationDetails {
   return {
     location: originalDetails.data_value,
-    salary_average: originalDetails.salary.average,
-    salary_above_average: originalDetails.salary.above_average,
-    salary_below_average: originalDetails.salary.below_average,
+    salary_average: originalDetails.salary.average/1000,
+    salary_above_average: originalDetails.salary.above_average/1000,
+    salary_below_average: originalDetails.salary.below_average/1000,
   };
 }
 
@@ -21,9 +21,9 @@ export function transformExperienceDetails(
 ): TransformedExperienceDetails {
   return {
     yearsOfExperience: originalDetails.data_value,
-    salary_average: originalDetails.salary.average,
-    salary_above_average: originalDetails.salary.above_average,
-    salary_below_average: originalDetails.salary.below_average,
+    salary_average: originalDetails.salary.average/1000,
+    salary_above_average: originalDetails.salary.above_average/1000,
+    salary_below_average: originalDetails.salary.below_average/1000,
   };
 }
 
