@@ -12,6 +12,8 @@ spring:
     defer-datasource-initialization: true
   profiles:
     default: deploy
+  jackson:
+    property-naming-strategy: SNAKE_CASE
 openai:
   api:
     key: ${OPENAI_API_KEY}
