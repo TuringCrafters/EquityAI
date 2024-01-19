@@ -51,7 +51,8 @@ public class EquityAiService {
         var sysarbRecommendation = openAiModelFactory.createDefaultChatModel()
                 .generate(response + PRODUCT_RECOMMENDATION_PROMPT + SYSARB_PRODUCTS);
 
-        return new EquityAiResponse<>("something", uniqueJobTitles, mostCommonJob, experienceDataPoints, locationDataPoints);
+        return new EquityAiResponse<>(response, sysarbRecommendation,
+                uniqueJobTitles, mostCommonJob, experienceDataPoints, locationDataPoints);
     }
 
     private static String createPrompt(List<JobDataSet> jobDataList) {
