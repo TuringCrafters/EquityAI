@@ -6,13 +6,11 @@ import { Toaster } from "@/components/UI/toaster";
 import NavBar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-const inter = Inter({ subsets: ["latin"] });
-
+const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
-  title: "Equity Ai",
-  description: "Equity Ai",
-};
-
+  title: 'Equity Ai',
+  description: 'Equity Ai',
+}
 export default function RootLayout({
   children,
 }: {
