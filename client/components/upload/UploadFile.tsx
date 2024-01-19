@@ -89,19 +89,22 @@ const UploadFile = () => {
             />
           </div>
           <Button
-            className="w-full h-8 mt-4 text-lg bg-blue-600 rounded-full"
+            className="w-full h-8 mt-8 text-lg bg-blue-600 rounded-full"
             disabled={!file}
             type="submit"
           >
             Submit
           </Button>
-          <div className="mt-2">
+          {progress > 0 && 
+          <div className="mt-6 text-center flex flex-col">
+            <div className="text-xs italic">Generating insights...</div>
            <Progress
-              className={"h-4 mt-10 w-full bg-gray-200 rounded-full " + (isLoading ? "animate-pulse" : "")}
+              className={"h-4 w-full bg-gray-200 rounded-full " + (isLoading ? "animate-pulse" : "")}
               max={100}
               value={progress}
             />
           </div>
+          }
         </form>
       </div>
     </div>
