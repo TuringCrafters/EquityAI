@@ -14,9 +14,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.*;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
+import static ai.equity.salt.openai.utils.AiPromptData.*;
 import static ai.equity.salt.openai.utils.DataAnalysis.*;
 import static ai.equity.salt.openai.utils.FileReader.readCSV;
 
@@ -47,7 +46,10 @@ public class EquityAiService {
         List<SalaryDatapoint<Integer>> experienceDataPoints = averageSalaryByDatapoint(jobDataList, mostCommonJob, JobDataSet::getExperience);
         List<SalaryDatapoint<String>> locationDataPoints = averageSalaryByDatapoint(jobDataList, mostCommonJob, JobDataSet::getLocality);
 
-        var response = openAiModelFactory.createDefaultChatModel().generate(SYSTEM_MESSAGE + createPrompt(jobDataList));
+        var response = openAiModelFactory.createDefaultChatModel()
+                .generate(SALARY_ANALYSIS_PROMPT + createPrompt(jobDataList));
+        var sysarbRecommendation = openAiModelFactory.createDefaultChatModel()
+                .generate(response + PRODUCT_RECOMMENDATION_PROMPT + SYSARB_PRODUCTS);
 
         return new EquityAiResponse<>("something", uniqueJobTitles, mostCommonJob, experienceDataPoints, locationDataPoints);
     }
