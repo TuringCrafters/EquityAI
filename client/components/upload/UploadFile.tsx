@@ -26,12 +26,13 @@ const UploadFile = () => {
   };
 
   const sendToAnalysis = () => {
-    router.push("/analysis")
-  }
+    router.push("/analysis");
+  };
 
+  const [isLoading, setIsLoading] = useState(false)
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+    setIsLoading(true)
     try {
       if (!file) {
         return;
@@ -63,6 +64,8 @@ const UploadFile = () => {
         title: "Upload Failed",
         description: error.message ?? "Something went wrong",
       });
+    } finally {
+      setIsLoading(false)
     }
   };
 
