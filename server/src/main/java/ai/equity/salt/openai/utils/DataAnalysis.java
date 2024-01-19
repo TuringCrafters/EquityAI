@@ -48,20 +48,14 @@ public class DataAnalysis {
         return averageSalaryByDatapoint.entrySet().stream()
                 .map(entry -> {
                     List<Double> salaries = entry.getValue();
+                    T datapoint = entry.getKey();
                     double average = calculateAverage(salaries);
                     double standardDeviation = calculateStandardDeviation(salaries, average);
 
                     double aboveAverage = findAboveAverage(salaries, average, standardDeviation);
                     double belowAverage = findBelowAverage(salaries, average, standardDeviation);
 
-                    return new SalaryDatapoint<>(
-                            entry.getKey(),
-                            new SalaryRangeDatapoint(
-                                    (double) Math.round(average * 100) / 100,
-                                    aboveAverage,
-                                    belowAverage
-                            )
-                    );
+                    return new SalaryDatapoint<>(datapoint, new SalaryRangeDatapoint(average, aboveAverage, belowAverage));
                 })
                 .toList();
     }
