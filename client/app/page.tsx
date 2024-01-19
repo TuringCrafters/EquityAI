@@ -1,5 +1,6 @@
 "use client";
-import UploadFile from "@/components/Upload"
+
+import UploadFile from "@/components/Upload";
 
 export default function Home() {
   return <div className={"bg-cover bg-center bg-no-repeat h-screen w-screen absolute inset-0 -z-10"}
