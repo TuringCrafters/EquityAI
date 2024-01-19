@@ -8,8 +8,9 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
-import { BarChartGraphProps, TransformedLocationDetails } from "./types";
+import { BarChartGraphProps } from "../../types/BarChartProps";
 import { transformLocationDetails } from "@/services/dataConverter";
+import { TransformedLocationDetails } from "@/types/TransformedLocationDetails";
 
 export default function BarChartGraph({ data }: BarChartGraphProps) {
   const transformedData: TransformedLocationDetails[] = data.map((dt) => {

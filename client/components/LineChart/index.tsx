@@ -9,13 +9,14 @@ import {
   Legend,
   Scatter,
 } from "recharts";
-import { LinearChartGraphProps, TransformedExperienceDetails } from "./types";
 import {
   convertToPolynomialDataPoints,
   transformExperienceDetails,
 } from "@/services/dataConverter";
 import { DataPoint } from "regression";
 import { calculateLineOfBestFit } from "@/services/lineOfBestFit";
+import { LinearChartGraphProps } from "@/types/LinearChartGraphProps";
+import { TransformedExperienceDetails } from "@/types/TransformedExperienceDetails";
 
 export default function LineOfBestFitChart({ data }: LinearChartGraphProps) {
   const sortedData = data.sort((a, b) => a.data_value - b.data_value);
