@@ -3,6 +3,9 @@
 ## Overview
 Equity AI is a predictive anomaly detection application designed to address the challenges associated with identifying and rectifying pay discrepancies within an organization. The app detects anomalies in payroll data, facilitating timely intervention and resolution of pay-related issues.
 
+## Try the App
+[EquityAi](https://equity-ai.vercel.app/)
+
 ## Minimum Viable Product (MVP)
 Equity AI includes the following features:
 
@@ -23,10 +26,10 @@ Equity AI includes the following features:
 <p>Enable users to share reports and analysis</p>
 
 ## Technologies Used:
-- **Frontend:** Leveraging NextJS and TypeScript for creating a responsive user interface
+- **Frontend:** Leveraging NextJS, TypeScript and Tailwind for creating a responsive user interface
 - **Backend:** Building a solid backend infrastructure by using Java and the Spring Framework
 - **Cloud Hosting and Services:** Utilizing Fly.io for reliable and scalable cloud hosting solutions
-- **Other Tools:** ChatGPT
+- **Other Tools:** ChatGPT, LangChain and Recharts
 
 ## Pitch Deck 
 [![Pitch deck video](https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/DqOw0xm7iNI)
