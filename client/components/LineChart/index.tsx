@@ -9,19 +9,17 @@ import {
   Legend,
   Scatter,
 } from "recharts";
-import { LinearChartGraphProps, TransformedExperienceDetails } from "./types";
 import {
   convertToPolynomialDataPoints,
   transformExperienceDetails,
-} from "@/utils/dataConverter";
+} from "@/services/dataConverter";
 import { DataPoint } from "regression";
-import { calculateLineOfBestFit } from "@/utils/lineOfBestFit";
-
+import { calculateLineOfBestFit } from "@/services/lineOfBestFit";
+import { LinearChartGraphProps } from "@/types/LinearChartGraphProps";
+import { TransformedExperienceDetails } from "@/types/TransformedExperienceDetails";
 
 export default function LineOfBestFitChart({ data }: LinearChartGraphProps) {
-  const sortedData = data.sort(
-    (a, b) => a.years_of_experience - b.years_of_experience
-  );
+  const sortedData = data.sort((a, b) => a.data_value - b.data_value);
 
   const dataPoints: DataPoint[] = convertToPolynomialDataPoints(sortedData);
 
@@ -30,7 +28,7 @@ export default function LineOfBestFitChart({ data }: LinearChartGraphProps) {
   );
 
   const lineOfBestFit = calculateLineOfBestFit(dataPoints);
-  const allData : any= convertedData;
+  const allData: any = convertedData;
   allData.push(...lineOfBestFit);
 
   return (
@@ -65,7 +63,6 @@ export default function LineOfBestFitChart({ data }: LinearChartGraphProps) {
         className="text-xs font-semibold"
         tick={{ fill: "#aab0b7" }}
         dy={10}
-
       />
       <YAxis
         unit="k"
@@ -76,14 +73,26 @@ export default function LineOfBestFitChart({ data }: LinearChartGraphProps) {
         tick={{ fill: "#aab0b7" }}
         width={80}
       />
-      <Scatter name="Average Salary" dataKey="salary_average" fill="#c03dbb" />
       <Scatter
-        name="Below average"
-        dataKey="salary_below_average"
-        fill="#62a46f"
+        name="Average Salary"
+        key={`scatter-average-salary`}
+        dataKey="salary_average"
+        fill="#c03dbb"
       />
+
+      {convertedData.map(
+        (item) => item.salary_below_average !== item.salary_average
+      ) && (
+        <Scatter
+          name="Below average"
+          key={`scatter-below-salary`}
+          dataKey="salary_below_average"
+          fill="#62a46f"
+        />
+      )}
       <Scatter
         name="Above Average"
+        key={`scatter-above-salary`}
         dataKey="salary_above_average"
         fill="#376bec"
       />

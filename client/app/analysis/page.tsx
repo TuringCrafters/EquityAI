@@ -1,38 +1,58 @@
 "use client";
-import React, { useContext } from "react";
+import React, { useContext, useRef } from "react";
 import dynamic from "next/dynamic";
-import LineOfBestFitChart from "@/components/lineofbestfitchart/LineOfBestFitChart";
-import { DataContext } from "@/utils/provider";
+import { useReactToPrint } from "react-to-print";
+import { DataContext } from "@/services/provider";
+import { Button } from "@/components/UI/button";
+import LineOfBestFitChart from "@/components/LineChart";
 
-const StaticBarChartgraph = dynamic(
-  () => import("@/components/barchart/BarChartGraph"),
-  { ssr: false }
-);
+
+const StaticBarChartgraph = dynamic(() => import("@/components/BarChart"), {
+  ssr: false,
+});
 
 const AnalysisPage = () => {
-
-  const {data} = useContext(DataContext);
+  const { data } = useContext(DataContext);
+  const pageRef = useRef<HTMLElement | null>(null);
+  const handlePDF = useReactToPrint({
+    content: () => pageRef.current,
+    documentTitle: "analysis-data",
+  });
 
   return (
-    <main>
-      <article className="">
-        <section className="flex flex-row align-middle h-3/6 justify-center items-center border-2 border-red-700">
-          <div className="items-center h-full border-2 border-green-600">
-            {data?.location_details &&(
-              <>  <h2>Bar Chart</h2>
-              <StaticBarChartgraph data={data.location_details} />
+    <main className="h-dvh">
+      <Button onClick={handlePDF} className="absolute top-4 right-6 rounded-full bg-blue-600 ">Save as PDF</Button>
+      <article ref={pageRef}>
+        <section className="flex flex-col items-center md:flex-row md:items-start align-middle h-3/6 justify-center mt-10">
+          <h2>{data?.job_title}</h2>
+          <div className="items-center h-full border-r-2 border-r-#aab0b7">
+            {data?.location_details && (
+              <>
+                <h3 className="ml-10 mt-5 font-semibold tracking-tighter">
+                  Salary per location
+                </h3>
+                <StaticBarChartgraph
+                  key="barchart"
+                  data={data.location_details}
+                />
               </>
             )}
           </div>
-          <div className="items-center  max-h-100 border-2 border-blue-600">
+          <div className="items-center  max-h-100">
             {data?.experience_details && (
               <>
-              <h2>Line Chart</h2>
-              <LineOfBestFitChart data={data.experience_details} />
+                <h3 className="ml-10 mt-5 mb-10 font-semibold tracking-tighter">
+                  Salary per years
+                </h3>
+                <LineOfBestFitChart
+                  key="linechart"
+                  data={data.experience_details}
+                />
               </>
             )}
           </div>
         </section>
+        <p className="my-10 text-justify">{data?.response}</p>
       </article>
     </main>
   );

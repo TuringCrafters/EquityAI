@@ -80,3 +80,14 @@
     @apply bg-neutral-100 text-neutral-700;
   }
 }
+
+@media print {
+  @page {
+    size: A4;
+    margin: 1cm; 
+  }
+
+  body {
+    margin: 1cm;
+  }
+}

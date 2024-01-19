@@ -8,8 +8,9 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
-import { BarChartGraphProps, TransformedLocationDetails } from "./types";
-import { transformLocationDetails } from "@/utils/dataConverter";
+import { BarChartGraphProps } from "../../types/BarChartProps";
+import { transformLocationDetails } from "@/services/dataConverter";
+import { TransformedLocationDetails } from "@/types/TransformedLocationDetails";
 
 export default function BarChartGraph({ data }: BarChartGraphProps) {
   const transformedData: TransformedLocationDetails[] = data.map((dt) => {
@@ -27,10 +28,14 @@ export default function BarChartGraph({ data }: BarChartGraphProps) {
         left: 20,
       }}
       className="mt-10"
+      barCategoryGap={5}
+      barGap={8}
+      barSize={25}
     >
       <CartesianGrid strokeDasharray="3 3" vertical={false} />
       <XAxis
         dataKey="location"
+        key={"barchart-xaxys"}
         axisLine={{ stroke: "#ffffff" }}
         tickLine={{ stroke: "#ffffff" }}
         className="text-xs font-semibold"
@@ -39,6 +44,7 @@ export default function BarChartGraph({ data }: BarChartGraphProps) {
       />
       <YAxis
         unit="k"
+        key={"barchart-yaxys"}
         className="text-xs font-semibold"
         axisLine={{ stroke: "#ffffff" }}
         tickLine={{ stroke: "#ffffff" }}
@@ -47,6 +53,7 @@ export default function BarChartGraph({ data }: BarChartGraphProps) {
       />
       <Tooltip />
       <Legend
+        key={"barchart-legend"}
         layout="horizontal"
         verticalAlign="top"
         align="center"
@@ -59,21 +66,28 @@ export default function BarChartGraph({ data }: BarChartGraphProps) {
       />
       <Bar
         name="Below Average"
+        key="bellow-average"
         dataKey="salary_below_average"
         fill="#62a46f"
-        radius={[10, 10, 10, 10]}
+        radius={[100, 100, 100, 100]}
+
+        
       />
       <Bar
         name="Average Salary"
+        key="average"
         dataKey="salary_average"
         fill="#376bec"
-        radius={[10, 10, 10, 10]}
+        radius={[100, 100, 100, 100]}
+
       />
       <Bar
         name="Above Average"
+        key="above-average"
         dataKey="salary_above_average"
         fill="#c03dbb"
-        radius={[10, 10, 10, 10]}
+        radius={[100, 100, 100, 100]}
+
       />
     </BarChart>
   );

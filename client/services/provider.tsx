@@ -1,5 +1,6 @@
 "use client";
-import { Analysis } from "@/app/analysis/types";
+
+import { Analysis } from "@/types/Analysis";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createContext, useState } from "react";
 
