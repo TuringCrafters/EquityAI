@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class DataAnalysis {
 
     public static double calculateAverage(List<Double> salaries) {
-        return salaries.stream().mapToDouble(Double::doubleValue).average().orElse(0);
+        return round(salaries.stream().mapToDouble(Double::doubleValue).average().orElse(0));
     }
 
     public static double calculateStandardDeviation(List<Double> salaries, double mean) {
@@ -57,7 +57,7 @@ public class DataAnalysis {
                     return new SalaryDatapoint<>(
                             entry.getKey(),
                             new SalaryRangeDatapoint(
-                                    (double) Math.round(average * 100) / 100,
+                                    average,
                                     aboveAverage,
                                     belowAverage
                             )
@@ -87,5 +87,9 @@ public class DataAnalysis {
                 .max(Map.Entry.comparingByValue())
                 .map(Map.Entry::getKey)
                 .orElse(null);
+    }
+
+    public static double round(double number){
+        return (double) Math.round(number * 100)/100;
     }
 }
