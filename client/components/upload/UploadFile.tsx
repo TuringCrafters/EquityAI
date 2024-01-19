@@ -1,13 +1,11 @@
 "use client";
 import axios from "axios";
 import React, { ChangeEvent, useContext, useRef, useState } from "react";
-import { Button } from "@/components/ui/button"
-import { Progress } from "@/components/ui/progress"
+import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { useToast } from "@/components/ui/use-toast";
 import UploadIcon from "@/components/icon/uploadIcon";
-import FileIcon from "@/components//icon/fileIcon";
 import { DataContext } from "@/utils/provider";
 import { useRouter } from "next/navigation";
 
@@ -16,15 +14,13 @@ const UploadFile = () => {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [progress, setProgress] = useState(0);
   const { toast } = useToast();
-  const {data, setData} = useContext(DataContext);
+  const { data, setData } = useContext(DataContext);
   const router = useRouter();
-
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>): void => {
     if (event.target.files) {
       setFile(event.target.files);
     }
   };
-
   const sendToAnalysis = () => {
     router.push("/analysis");
   };
@@ -58,6 +54,9 @@ const UploadFile = () => {
         variant: "success",
         description: "Your file has been sent.",
       });
+    
+      router.push("/analysis");
+
     } catch (error: any) {
       toast({
         variant: "destructive",
