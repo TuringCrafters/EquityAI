@@ -3,8 +3,8 @@ import React, { useContext, useRef } from "react";
 import dynamic from "next/dynamic";
 import { useReactToPrint } from "react-to-print";
 import { DataContext } from "@/services/provider";
-import { Button } from "@/components/UI/button";
 import LineOfBestFitChart from "@/components/LineChart";
+import { Button } from "../../components/UI/button"
 
 
 const StaticBarChartgraph = dynamic(() => import("@/components/BarChart"), {
