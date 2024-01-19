@@ -6,12 +6,10 @@ import { Toaster } from "@/components/ui/toaster"
 import NavBar from '@/components/navbar/NavBar'
 
 const inter = Inter({ subsets: ['latin'] })
-
 export const metadata: Metadata = {
   title: 'Equity Ai',
   description: 'Equity Ai',
 }
-
 export default function RootLayout({
   children,
 }: {
@@ -19,8 +17,8 @@ export default function RootLayout({
 }) {
   return (
     <Providers>
-    <html lang="en" className='h-full'>
-      <body className={inter.className} >
+    <html lang="en">
+      <body className={inter.className}>
         <NavBar/>
         {children}
         <Toaster/>
