@@ -18,7 +18,7 @@ export default function BarChartGraph({ data }: BarChartGraphProps) {
   });
   return (
     <BarChart
-      width={500}
+      width={600}
       height={400}
       data={transformedData}
       margin={{
@@ -28,6 +28,9 @@ export default function BarChartGraph({ data }: BarChartGraphProps) {
         left: 20,
       }}
       className="mt-10"
+      barCategoryGap={5}
+      barGap={8}
+      barSize={25}
     >
       <CartesianGrid strokeDasharray="3 3" vertical={false} />
       <XAxis
@@ -67,7 +70,7 @@ export default function BarChartGraph({ data }: BarChartGraphProps) {
         dataKey="salary_below_average"
         fill="#62a46f"
         radius={[100, 100, 100, 100]}
-        barSize={20}
+
         
       />
       <Bar
@@ -76,7 +79,7 @@ export default function BarChartGraph({ data }: BarChartGraphProps) {
         dataKey="salary_average"
         fill="#376bec"
         radius={[100, 100, 100, 100]}
-        barSize={20}
+
       />
       <Bar
         name="Above Average"
@@ -84,7 +87,7 @@ export default function BarChartGraph({ data }: BarChartGraphProps) {
         dataKey="salary_above_average"
         fill="#c03dbb"
         radius={[100, 100, 100, 100]}
-        barSize={20}
+
       />
     </BarChart>
   );
