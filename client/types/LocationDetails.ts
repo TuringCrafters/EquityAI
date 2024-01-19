@@ -1,5 +1,5 @@
 export type LocationDetails = {
-    data_value: string;
+    locationDetails: string;
     salary: {
       average: number;
       above_average: number;
