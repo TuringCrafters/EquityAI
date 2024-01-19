@@ -55,14 +55,7 @@ public class DataAnalysis {
                     double aboveAverage = findAboveAverage(salaries, average, standardDeviation);
                     double belowAverage = findBelowAverage(salaries, average, standardDeviation);
 
-                    return new SalaryDatapoint<>(
-                            entry.getKey(),
-                            new SalaryRangeDatapoint(
-                                    average,
-                                    aboveAverage,
-                                    belowAverage
-                            )
-                    );
+                    return new SalaryDatapoint<>(datapoint, new SalaryRangeDatapoint(average, aboveAverage, belowAverage));
                 })
                 .toList();
     }
