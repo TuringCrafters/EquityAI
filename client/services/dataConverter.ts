@@ -1,34 +1,34 @@
-import { experience_details, location_details } from "@/app/analysis/types";
-import { TransformedLocationDetails } from "@/components/BarChart/types";
-import {
-  DataPoint,
-  TransformedExperienceDetails,
-} from "@/components/LineChart/types";
+import { ExperienceDetails } from "@/types/ExperienceDetails";
+import { LocationDetails } from "@/types/LocationDetails";
+import { TransformedExperienceDetails } from "@/types/TransformedExperienceDetails";
+import { TransformedLocationDetails } from "@/types/TransformedLocationDetails";
+import { DataPoint } from "regression";
+
 
 export function transformLocationDetails(
-  originalDetails: location_details
+  originalDetails: LocationDetails
 ): TransformedLocationDetails {
   return {
     location: originalDetails.data_value,
-    salary_average: originalDetails.salary.average / 1000,
-    salary_above_average: originalDetails.salary.above_average / 1000,
-    salary_below_average: originalDetails.salary.below_average / 1000,
+    salary_average: originalDetails.salary.average,
+    salary_above_average: originalDetails.salary.above_average,
+    salary_below_average: originalDetails.salary.below_average,
   };
 }
 
 export function transformExperienceDetails(
-  originalDetails: experience_details
+  originalDetails: ExperienceDetails
 ): TransformedExperienceDetails {
   return {
     yearsOfExperience: originalDetails.data_value,
-    salary_average: originalDetails.salary.average / 1000,
-    salary_above_average: originalDetails.salary.above_average / 1000,
-    salary_below_average: originalDetails.salary.below_average / 1000,
+    salary_average: originalDetails.salary.average,
+    salary_above_average: originalDetails.salary.above_average,
+    salary_below_average: originalDetails.salary.below_average,
   };
 }
 
 export function convertToPolynomialDataPoints(
-  sortedDetails: experience_details[]
+  sortedDetails: ExperienceDetails[]
 ): DataPoint[] {
   const dataPoints: DataPoint[] = [];
 
