@@ -2,7 +2,7 @@
 import axios from "axios";
 import React, { ChangeEvent, useContext, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { useToast } from "../UI/use-toast";
+import { useToast } from "../UI/use-toast"
 import { DataContext } from "@/services/provider";
 import { Progress } from "@radix-ui/react-progress";
 import { UploadIcon } from "lucide-react";
