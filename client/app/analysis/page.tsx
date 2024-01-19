@@ -33,7 +33,7 @@ const AnalysisPage = () => {
             {data?.location_details && (
               <>
                 <h3 className="ml-10 mt-5 font-semibold tracking-tighter">
-                  Salary per location
+                  Salary based on Location
                 </h3>
                 <StaticBarChartgraph
                   key="barchart"
@@ -46,7 +46,7 @@ const AnalysisPage = () => {
             {data?.experience_details && (
               <>
                 <h3 className="ml-10 mt-5 mb-10 font-semibold tracking-tighter">
-                  Salary per years
+                  Salary based on Years of Experience
                 </h3>
                 <LineOfBestFitChart
                   key="linechart"
@@ -56,7 +56,7 @@ const AnalysisPage = () => {
             )}
           </div>
         </section>
-        <div className=" flex align-middle justify-center flex-col text-justify" style={{ maxWidth: "1200px",  margin: "auto" }}>
+        <div className=" flex align-middle justify-center flex-col text-justify" style={{ maxWidth: "1100px",  margin: "auto" }}>
         <p className="mb-5">{data?.response}</p>
         <p className="mb-10">{data?.product_recommendation}</p>
         </div>
