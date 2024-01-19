@@ -57,8 +57,8 @@ export default function BarChartGraph({ data }: BarChartGraphProps) {
         layout="horizontal"
         verticalAlign="top"
         align="center"
-        iconSize={8}
-        iconType="square"
+        iconSize={9}
+        iconType="circle"
         wrapperStyle={{ top: 0, left: 50 }}
         formatter={(value) => (
           <span className=" text-black text-xs font-semibold">{value}</span>

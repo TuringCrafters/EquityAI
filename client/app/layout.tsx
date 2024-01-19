@@ -4,7 +4,7 @@ import "./globals.css";
 import Providers from "../services/provider";
 import { Toaster } from "@/components/ui/toaster";
 import NavBar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+/* import Footer from "@/components/Footer"; */
 
 const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
@@ -23,7 +23,7 @@ export default function RootLayout({
           <NavBar />
           {children}
           <Toaster />
-          <Footer />
+        {/*   <Footer /> */}
         </body>
       </html>
     </Providers>
