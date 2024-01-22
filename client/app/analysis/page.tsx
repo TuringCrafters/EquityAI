@@ -50,17 +50,19 @@ const AnalysisPage = () => {
                 <h3 className="ml-10 mt-5 mb-10 font-semibold tracking-tighter">
                   Salary based on Years of Experience
                 </h3>
-                <LineOfBestFitChart
-                  key="linechart"
-                  data={data.experience_details}
-                />
+                <div className="chart-for-print">
+                  <LineOfBestFitChart
+                    key="linechart"
+                    data={data.experience_details}
+                  />
+                </div>
               </>
             )}
           </div>
         </section>
-        <div className=" flex align-middle justify-center flex-col text-justify" style={{ maxWidth: "1100px",  margin: "auto" }}>
-        <p className="mb-5">{data?.response}</p>
-        <p className="mb-10">{data?.product_recommendation}</p>
+        <div className=" flex align-middle justify-center flex-col text-justify" style={{ maxWidth: "1100px", margin: "auto" }}>
+          <p className="mb-5">{data?.response}</p>
+          <p className="mb-10">{data?.product_recommendation}</p>
         </div>
       </article>
     </main>
