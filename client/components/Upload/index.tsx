@@ -113,7 +113,7 @@ const UploadFile = () => {
               <div className="text-xs italic">Generating insights...</div>
               <Progress
                 className={
-                  "h-4 w-full bg-gray-200 rounded-full " +
+                  "h-4 w-full bg-purple-500 rounded-full " +
                   (isLoading ? "animate-pulse" : "")
                 }
                 max={100}
