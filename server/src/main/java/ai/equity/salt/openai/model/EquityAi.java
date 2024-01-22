@@ -16,10 +16,12 @@ public class EquityAi {
     long id;
     String prompt;
     String response;
+    private String recommendation;
 
-    public EquityAi(String prompt, String response) {
-        this.prompt = prompt;
+    public EquityAi(List<String> userData, String response, String recommendation) {
+        this.userData = userData;
         this.response = response;
+        this.recommendation = recommendation;
     }
 
     public EquityAi() {}
