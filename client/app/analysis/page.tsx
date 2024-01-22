@@ -27,7 +27,7 @@ const AnalysisPage = () => {
         Save as PDF
       </Button>
       <article ref={pageRef}>
-      <h2 className="flex ml-72 pl-6 text-2xl mt-10 mb-5">{data?.job_title}</h2>
+        <h2 className="flex ml-72 pl-6 text-2xl mt-10 mb-5">{data?.job_title}</h2>
         <section className="flex flex-col items-center md:flex-row md:items-start align-middle h-3/6 justify-center my-10">
           <div className="items-center h-full border-r-2 border-r-#aab0b7">
             {data?.location_details && (
@@ -35,10 +35,12 @@ const AnalysisPage = () => {
                 <h3 className="ml-10 mt-5 font-semibold tracking-tighter">
                   Salary based on Location
                 </h3>
-                <StaticBarChartgraph
-                  key="barchart"
-                  data={data.location_details}
-                />
+                <div className="chart-for-print">
+                  <StaticBarChartgraph
+                    key="barchart"
+                    data={data.location_details}
+                  />
+                </div>
               </>
             )}
           </div>
