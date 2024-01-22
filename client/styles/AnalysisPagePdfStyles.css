@@ -1,0 +1,13 @@
+@media print {
+    .title-for-print {
+        margin: 0;
+    }
+
+    .subtitle-for-print-one {
+        margin: 0 0 1rem 0;
+    }
+
+    .subtitle-for-print-two {
+        margin: 0 0 2rem 0;
+    }
+}
