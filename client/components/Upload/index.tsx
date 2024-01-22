@@ -86,6 +86,20 @@ const UploadFile = () => {
               onChange={handleFileChange}
               id="file"
             />
+            {file && (
+              <div
+                className="absolute right-3 top-2 font-bold font-mono cursor-pointer text-red-600"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setFile(null);
+                  if (fileInputRef.current) {
+                    fileInputRef.current.value = "";
+                  }
+                }}
+              >
+                X
+              </div>
+            )}
           </div>
           <Button
             className="w-full h-8 mt-8 text-lg bg-blue-600 rounded-full"
