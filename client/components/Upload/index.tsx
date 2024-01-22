@@ -16,6 +16,7 @@ const UploadFile = () => {
   const { toast } = useToast();
   const { data, setData } = useContext(DataContext);
   const router = useRouter();
+
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>): void => {
     if (event.target.files) {
       setFile(event.target.files);
@@ -29,12 +30,15 @@ const UploadFile = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
+
     try {
       if (!file) {
         return;
       }
+
       const formData = new FormData();
       formData.append("file", file[0]);
+
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/file/analyze`,
         formData,
@@ -47,6 +51,7 @@ const UploadFile = () => {
           },
         }
       );
+
       setData(response.data);
       toast({
         className: "text-white font-bold tracking-wide",
@@ -65,6 +70,15 @@ const UploadFile = () => {
       setIsLoading(false);
     }
   };
+
+  const handleFileClear = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    setFile(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+  };
+
   return (
     <div className="flex flex-col items-center justify-center pt-[20vh] dark:bg-gray-900">
       <div className="w-full max-w-md p-6 space-y-4 bg-neutral-50/100 rounded-lg">
@@ -76,7 +90,7 @@ const UploadFile = () => {
           <h1 className="text-4xl font-bold text-center">Upload File</h1>
           <div className="relative">
             <UploadIcon
-              className="absolute left-2 top-2"
+              className="absolute left-2 top-2 cursor-pointer"
               onClick={() => fileInputRef.current?.click()}
             />
             <Input
@@ -88,15 +102,9 @@ const UploadFile = () => {
             />
             {file && (
               <div
-              role="button"
+                role="button"
                 className="absolute right-3 top-2 font-bold font-inter cursor-pointer"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setFile(null);
-                  if (fileInputRef.current) {
-                    fileInputRef.current.value = "";
-                  }
-                }}
+                onClick={handleFileClear}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -126,10 +134,9 @@ const UploadFile = () => {
             <div className="mt-6 text-center flex flex-col">
               <div className="text-xs italic">Generating insights...</div>
               <Progress
-                className={
-                  "h-4 w-full bg-purple-500 rounded-full " +
-                  (isLoading ? "animate-pulse" : "")
-                }
+                className={`h-4 w-full bg-purple-500 rounded-full ${
+                  isLoading ? "animate-pulse" : ""
+                }`}
                 max={100}
                 value={progress}
               />
