@@ -22,9 +22,6 @@ const UploadFile = () => {
       setFile(event.target.files);
     }
   };
-  const sendToAnalysis = () => {
-    router.push("/analysis");
-  };
 
   const [isLoading, setIsLoading] = useState(false);
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -71,7 +68,7 @@ const UploadFile = () => {
     }
   };
 
-  const handleFileClear = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleFileClear = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     setFile(null);
     if (fileInputRef.current) {
@@ -101,8 +98,7 @@ const UploadFile = () => {
               id="file"
             />
             {file && (
-              <div
-                role="button"
+              <button
                 className="absolute right-3 top-2 font-bold font-inter cursor-pointer"
                 onClick={handleFileClear}
               >
@@ -120,7 +116,7 @@ const UploadFile = () => {
                     d="M6 18 18 6M6 6l12 12"
                   />
                 </svg>
-              </div>
+              </button>
             )}
           </div>
           <Button
@@ -147,4 +143,5 @@ const UploadFile = () => {
     </div>
   );
 };
+
 export default UploadFile;
