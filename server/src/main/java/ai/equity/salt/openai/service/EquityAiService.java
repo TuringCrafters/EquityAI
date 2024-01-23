@@ -9,6 +9,7 @@ import ai.equity.salt.openai.repository.JpaEquityAiRepo;
 import com.opencsv.exceptions.CsvValidationException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -28,15 +29,11 @@ public class EquityAiService {
 
     private final JpaEquityAiRepo repository;
 
-    public String getAiResponse(String prompt) {
-        String response = openAiModelFactory.create().generate(prompt).content();
-        repository.save(new EquityAi(prompt, response));
-        return response;
-    }
-
-    public EquityAiResponse<Integer, String> analyzeFile(MultipartFile file) throws IOException, CsvValidationException {
+    public EquityAiResponse analyzeFile(MultipartFile file) throws IOException, CsvValidationException {
         var inputStream = file.getInputStream();
         List<JobDataSet> jobDataList = readCSV(inputStream);
+
+        var jobDataStringList = jobDataList.stream().map(JobDataSet::toString).toList();
 
         var jobTitles = findUniqueJobs(jobDataList);
         var uniqueJobTitles = new HashSet<>(jobTitles);
@@ -48,11 +45,22 @@ public class EquityAiService {
 
         var response = openAiModelFactory.createDefaultChatModel()
                 .generate(SALARY_ANALYSIS_PROMPT + createPrompt(jobDataList));
+
+        log.trace("Response : " + response);
         var sysarbRecommendation = openAiModelFactory.createDefaultChatModel()
                 .generate(response + PRODUCT_RECOMMENDATION_PROMPT + SYSARB_PRODUCTS);
+        log.trace("Sysarb Recommendation : " + sysarbRecommendation);
 
-        return new EquityAiResponse<>(response, sysarbRecommendation,
-                uniqueJobTitles, mostCommonJob, experienceDataPoints, locationDataPoints);
+
+        //Try catch is here incase the data is too big for the database to save
+        // Then it will atleast respond with the data but not save it
+        //
+        try {
+            repository.save(new EquityAi(jobDataStringList, response, sysarbRecommendation));
+        } catch (Exception e) {
+            log.error(e.getMessage());
+        }
+        return new EquityAiResponse(response, sysarbRecommendation, uniqueJobTitles, mostCommonJob, experienceDataPoints, locationDataPoints);
     }
 
     private static String createPrompt(List<JobDataSet> jobDataList) {
