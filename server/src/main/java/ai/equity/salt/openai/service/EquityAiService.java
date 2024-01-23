@@ -19,6 +19,7 @@ import java.util.*;
 import static ai.equity.salt.openai.utils.AiPromptData.*;
 import static ai.equity.salt.openai.utils.DataAnalysis.*;
 import static ai.equity.salt.openai.utils.FileReader.readCSV;
+import static ai.equity.salt.openai.utils.FileReader.readExcel;
 
 @Service
 @RequiredArgsConstructor
@@ -61,6 +62,11 @@ public class EquityAiService {
             log.error(e.getMessage());
         }
         return new EquityAiResponse(response, sysarbRecommendation, uniqueJobTitles, mostCommonJob, experienceDataPoints, locationDataPoints);
+    }
+
+    public Map<Integer, List<String>> readExcelFile(MultipartFile file) throws IOException {
+        var inputStream = file.getInputStream();
+        return readExcel(inputStream);
     }
 
     private static String createPrompt(List<JobDataSet> jobDataList) {
