@@ -8,6 +8,7 @@ import { Progress } from "@radix-ui/react-progress";
 import { UploadIcon } from "lucide-react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
+import { quantum } from 'ldrs'
 
 const UploadFile = () => {
   const [file, setFile] = useState<FileList | null>(null);
@@ -16,6 +17,7 @@ const UploadFile = () => {
   const { toast } = useToast();
   const { data, setData } = useContext(DataContext);
   const router = useRouter();
+  quantum.register();
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>): void => {
     if (event.target.files) {
