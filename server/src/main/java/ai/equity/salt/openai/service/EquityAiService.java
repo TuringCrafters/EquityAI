@@ -17,13 +17,11 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 import static ai.equity.salt.openai.utils.AiPromptData.*;
 import static ai.equity.salt.openai.utils.DataAnalysis.*;
 import static ai.equity.salt.openai.utils.FileReader.readCSV;
-import static ai.equity.salt.openai.utils.FileReader.readExcel;
 
 @Service
 @RequiredArgsConstructor
@@ -67,11 +65,6 @@ public class EquityAiService {
             log.error(e.getMessage());
         }
         return new EquityAiResponse(response, sysarbRecommendation, uniqueJobTitles, mostCommonJob, experienceDataPoints, locationDataPoints);
-    }
-
-    public Map<Integer, List<String>> readExcelFile(MultipartFile file) throws IOException {
-        var inputStream = file.getInputStream();
-        return readExcel(inputStream);
     }
 
     public List<List<String>> readAnyFile(MultipartFile file){
