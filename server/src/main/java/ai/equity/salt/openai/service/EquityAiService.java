@@ -60,9 +60,7 @@ public class EquityAiService {
         log.trace("Sysarb Recommendation : " + sysarbRecommendation);
 
 
-        //Try catch is here incase the data is too big for the database to save
-        // Then it will atleast respond with the data but not save it
-        //
+        //TODO: use specific SQL exception to catch the error
         try {
             repository.save(new EquityAi(jobDataStringList, response, sysarbRecommendation));
         } catch (Exception e) {
