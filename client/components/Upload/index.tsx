@@ -14,7 +14,7 @@ const UploadFile = () => {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [progress, setProgress] = useState(0);
   const { toast } = useToast();
-  const { data, setData } = useContext(DataContext);
+  const { setData } = useContext(DataContext);
   const router = useRouter();
   quantum.register();
 
