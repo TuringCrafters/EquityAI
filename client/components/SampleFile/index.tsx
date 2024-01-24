@@ -1,9 +1,15 @@
-"use client";
 import Link from "next/link";
 
 const samples = ["Dataset.csv"];
 
 const SampleFileForUpload = () => {
+  const handleDownload = (fileName: string) => {
+    const link = document.createElement("a");
+    link.href = `/samples/${fileName}`;
+    link.download = fileName;
+    link.click();
+  };
+
   return (
     <div className="flex flex-col items-center justify-center pt-[20vh] text-neutral-50/100">
       <h1 className="text-xl font-bold text-center">Try with Sample File:</h1>
