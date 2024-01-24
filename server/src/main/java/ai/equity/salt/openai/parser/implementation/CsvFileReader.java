@@ -1,6 +1,5 @@
 package ai.equity.salt.openai.parser.implementation;
 
-import ai.equity.salt.openai.controller.dto.JobDataSet;
 import ai.equity.salt.openai.parser.FileReader;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
