@@ -30,6 +30,9 @@ public class EquityAiService {
 
     private final JpaEquityAiRepo repository;
 
+    private final CsvFileReader csvFileReader = new CsvFileReader();
+    private final XlsxFileReader xlsxFileReader = new XlsxFileReader();
+
     public EquityAiResponse analyzeFile(MultipartFile file) throws IOException, CsvValidationException {
         var inputStream = file.getInputStream();
         List<JobDataSet> jobDataList = readCSV(inputStream);
