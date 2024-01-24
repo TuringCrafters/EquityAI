@@ -32,4 +32,9 @@ public class EquityAiController {
         return service.readExcelFile(file);
     }
 
+    @PostMapping("file/any")
+    @ResponseStatus(CREATED)
+    public List<List<String>> sendAnyFile(@RequestParam MultipartFile file) {
+        return service.readAnyFile(file);
+    }
 }
