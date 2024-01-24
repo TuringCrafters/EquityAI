@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 import static org.springframework.http.HttpStatus.CREATED;
 
@@ -23,4 +25,11 @@ public class EquityAiController {
     public EquityAiResponse sendFile(@RequestParam MultipartFile file) throws IOException, CsvValidationException {
         return service.analyzeFile(file);
     }
+
+    @PostMapping("file/excel")
+    @ResponseStatus(CREATED)
+    public Map<Integer, List<String>> sendExcelFile(@RequestParam MultipartFile file) throws IOException {
+        return service.readExcelFile(file);
+    }
+
 }
