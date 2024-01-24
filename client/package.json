@@ -17,6 +17,7 @@
     "axios": "^1.6.5",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
+    "ldrs": "^1.0.1",
     "lucide-react": "^0.309.0",
     "next": "14.0.4",
     "react": "^18",
