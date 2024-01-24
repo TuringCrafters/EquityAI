@@ -26,11 +26,6 @@ public class EquityAiController {
         return service.analyzeFile(file);
     }
 
-    @PostMapping("file/excel")
-    @ResponseStatus(CREATED)
-    public Map<Integer, List<String>> sendExcelFile(@RequestParam MultipartFile file) throws IOException {
-        return service.readExcelFile(file);
-    }
 
     @PostMapping("file/any")
     @ResponseStatus(CREATED)
