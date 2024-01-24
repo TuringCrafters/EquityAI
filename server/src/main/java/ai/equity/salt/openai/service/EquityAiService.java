@@ -5,21 +5,23 @@ import ai.equity.salt.openai.controller.dto.JobDataSet;
 import ai.equity.salt.openai.controller.dto.SalaryDatapoint;
 import ai.equity.salt.openai.model.EquityAi;
 import ai.equity.salt.openai.model.OpenAiModelFactory;
+import ai.equity.salt.openai.parser.implementation.CsvFileReader;
+import ai.equity.salt.openai.parser.implementation.XlsxFileReader;
 import ai.equity.salt.openai.repository.JpaEquityAiRepo;
 import com.opencsv.exceptions.CsvValidationException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
 
 import static ai.equity.salt.openai.utils.AiPromptData.*;
 import static ai.equity.salt.openai.utils.DataAnalysis.*;
 import static ai.equity.salt.openai.utils.FileReader.readCSV;
-import static ai.equity.salt.openai.utils.FileReader.readExcel;
 
 @Service
 @RequiredArgsConstructor
@@ -29,6 +31,9 @@ public class EquityAiService {
     private final OpenAiModelFactory openAiModelFactory;
 
     private final JpaEquityAiRepo repository;
+
+    private final CsvFileReader csvFileReader = new CsvFileReader();
+    private final XlsxFileReader xlsxFileReader = new XlsxFileReader();
 
     public EquityAiResponse analyzeFile(MultipartFile file) throws IOException, CsvValidationException {
         var inputStream = file.getInputStream();
@@ -53,9 +58,7 @@ public class EquityAiService {
         log.trace("Sysarb Recommendation : " + sysarbRecommendation);
 
 
-        //Try catch is here incase the data is too big for the database to save
-        // Then it will atleast respond with the data but not save it
-        //
+        //TODO: use specific SQL exception to catch the error
         try {
             repository.save(new EquityAi(jobDataStringList, response, sysarbRecommendation));
         } catch (Exception e) {
@@ -64,9 +67,15 @@ public class EquityAiService {
         return new EquityAiResponse(response, sysarbRecommendation, uniqueJobTitles, mostCommonJob, experienceDataPoints, locationDataPoints);
     }
 
-    public Map<Integer, List<String>> readExcelFile(MultipartFile file) throws IOException {
-        var inputStream = file.getInputStream();
-        return readExcel(inputStream);
+    public List<List<String>> readAnyFile(MultipartFile file){
+        String fileExtension = Objects.requireNonNull(file.getOriginalFilename())
+                .split("\\.")[1];
+
+        return switch (fileExtension) {
+            case "csv" -> csvFileReader.readFile(file);
+            case "xlsx" -> xlsxFileReader.readFile(file);
+            default -> throw new IllegalArgumentException("Unsupported file. Please use .csv or .xlsx");
+        };
     }
 
     private static String createPrompt(List<JobDataSet> jobDataList) {

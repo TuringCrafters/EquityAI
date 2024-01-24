@@ -3,17 +3,13 @@ package ai.equity.salt.openai.utils;
 import ai.equity.salt.openai.controller.dto.JobDataSet;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
-import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 public class FileReader {
@@ -39,37 +35,5 @@ public class FileReader {
             }
         }
         return jobDataList;
-    }
-
-    public static Map<Integer, List<String>> readExcel(InputStream inputStream) throws IOException {
-        Workbook dataSet = new XSSFWorkbook(inputStream);
-        Sheet sheet = dataSet.getSheetAt(0);
-
-        Map<Integer, List<String>> data = new HashMap<>();
-        int i = 0;
-        for (Row row : sheet) {
-            List<String> rowData = new ArrayList<>();
-            for (Cell cell : row) {
-                String cellValue = "";
-                switch (cell.getCellType()) {
-                    case STRING:
-                        cellValue = cell.getStringCellValue();
-                        break;
-                    case NUMERIC:
-                        if (DateUtil.isCellDateFormatted(cell)) {
-                            cellValue = cell.getDateCellValue().toString();
-                        } else {
-                            cellValue = String.valueOf(cell.getNumericCellValue());
-                        }
-                        break;
-                    default:
-                        cellValue = " ";
-                }
-                rowData.add(cellValue);
-            }
-            data.put(i, rowData);
-            i++;
-        }
-        return data;
     }
 }
