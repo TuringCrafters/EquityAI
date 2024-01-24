@@ -1,6 +1,6 @@
 "use client";
 import axios from "axios";
-import React, { ChangeEvent, useContext, useRef, useState } from "react";
+import React, { ChangeEvent, useContext, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useToast } from "../ui/use-toast";
 import { DataContext } from "@/services/provider";
@@ -16,7 +16,12 @@ const UploadFile = () => {
   const { toast } = useToast();
   const { setData } = useContext(DataContext);
   const router = useRouter();
-  quantum.register();
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      quantum.register();
+    }
+  }, []);
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>): void => {
     if (event.target.files) {
