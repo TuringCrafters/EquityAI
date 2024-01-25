@@ -1,4 +1,4 @@
-package ai.equity.salt.openai.parser;
+package ai.equity.salt.openai.file.reader;
 
 import org.springframework.web.multipart.MultipartFile;
 
