@@ -1,5 +1,6 @@
 package ai.equity.salt.openai.service;
 
+import ai.equity.salt.openai.controller.dto.CompanyOverview;
 import ai.equity.salt.openai.controller.dto.EquityAiResponse;
 import ai.equity.salt.openai.controller.dto.JobDataSet;
 import ai.equity.salt.openai.controller.dto.SalaryDatapoint;
@@ -15,10 +16,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
+import java.text.DecimalFormat;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static ai.equity.salt.openai.utils.AiPromptData.*;
@@ -31,11 +30,10 @@ import static ai.equity.salt.openai.utils.FileReader.readCSV;
 public class EquityAiService {
 
     private final OpenAiModelFactory openAiModelFactory;
-
     private final JpaEquityAiRepo repository;
-
     private final CsvFileReader csvFileReader = new CsvFileReader();
     private final XlsxFileReader xlsxFileReader = new XlsxFileReader();
+    private final DecimalFormat decimalFormat = new DecimalFormat("0.00");
 
     private static String createPrompt(List<JobDataSet> jobDataList) {
         StringBuilder stringBuilder = new StringBuilder();
@@ -52,14 +50,33 @@ public class EquityAiService {
         var inputStream = file.getInputStream();
         List<JobDataSet> jobDataList = readCSV(inputStream);
         var overview = jobDataList.stream().collect(Collectors.summarizingDouble(JobDataSet::getSalary));
-        var totalNumberOfJobs = overview.getCount();
         var topFiveHighestPayingPositions = jobDataList.stream()
                 .sorted(Comparator.comparing(JobDataSet::getSalary).reversed())
                 .limit(5)
                 .toList();
-        System.out.println("overview: " + overview);
-        System.out.println("total jobs: " + totalNumberOfJobs);
-        System.out.println("top 5:" + topFiveHighestPayingPositions);
+        System.out.println("topFiveHighestPayingPositions = " + topFiveHighestPayingPositions);
+        Map<String, Long> genderCountMap = jobDataList.stream()
+                .collect(Collectors.groupingBy(JobDataSet::getGender, Collectors.counting()));
+        System.out.println("genderCountMap = " + genderCountMap);
+        long totalCount = genderCountMap.values().stream().mapToLong(Long::longValue).sum();
+        System.out.println("totalCount = " + totalCount);
+
+
+        Map<String, Double> genderAverageSalary = jobDataList.stream()
+                .collect(Collectors.groupingBy(JobDataSet::getGender,
+                        Collectors.averagingDouble(JobDataSet::getSalary)));
+
+// Calculate the gender pay gap
+        double maleAverageSalary = genderAverageSalary.getOrDefault("Male", 0.0);
+        double femaleAverageSalary = genderAverageSalary.getOrDefault("Female", 0.0);
+        double genderPayGap = (maleAverageSalary - femaleAverageSalary) / femaleAverageSalary;
+
+
+        System.out.println("Gender Pay Gap: " + decimalFormat.format(genderPayGap*100)  + "%");
+
+
+//        System.out.println("genderRatio = " + genderRatio);
+
         var jobDataStringList = jobDataList.stream().map(JobDataSet::toString).toList();
 
         var jobTitles = findUniqueJobs(jobDataList);
@@ -85,7 +102,9 @@ public class EquityAiService {
 //        } catch (Exception e) {
 //            log.error(e.getMessage());
 //        }
-        return new EquityAiResponse("response", "sysarbRecommendation", uniqueJobTitles, mostCommonJob, experienceDataPoints, locationDataPoints, null);
+        return new EquityAiResponse("response", "sysarbRecommendation",
+                uniqueJobTitles, mostCommonJob, experienceDataPoints, locationDataPoints,
+                new CompanyOverview(topFiveHighestPayingPositions, overview.getCount()));
     }
 
     public List<List<String>> readAnyFile(MultipartFile file) {
