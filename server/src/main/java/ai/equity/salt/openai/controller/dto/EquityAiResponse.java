@@ -9,6 +9,7 @@ public record EquityAiResponse(
         Set<String> uniqueJobTitles,
         String jobTitle,
         List<SalaryDatapoint<Integer>> experienceDetails,
-        List<SalaryDatapoint<String>> locationDetails
+        List<SalaryDatapoint<String>> locationDetails,
+        CompanyOverview companyOverview
 ) {
 }
