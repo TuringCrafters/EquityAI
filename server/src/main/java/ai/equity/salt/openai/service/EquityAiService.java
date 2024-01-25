@@ -53,7 +53,10 @@ public class EquityAiService {
         List<JobDataSet> jobDataList = readCSV(inputStream);
         var overview = jobDataList.stream().collect(Collectors.summarizingDouble(JobDataSet::getSalary));
         var totalNumberOfJobs = overview.getCount();
-        var topFiveHighestPayingPositions = jobDataList.stream().sorted(Comparator.comparing(JobDataSet::getSalary)).limit(5).toList();
+        var topFiveHighestPayingPositions = jobDataList.stream()
+                .sorted(Comparator.comparing(JobDataSet::getSalary).reversed())
+                .limit(5)
+                .toList();
         System.out.println("overview: " + overview);
         System.out.println("total jobs: " + totalNumberOfJobs);
         System.out.println("top 5:" + topFiveHighestPayingPositions);
