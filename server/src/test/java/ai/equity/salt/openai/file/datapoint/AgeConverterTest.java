@@ -6,13 +6,13 @@ import org.junit.jupiter.api.Test;
 
 class AgeConverterTest {
     /**
-     * Method under test: {@link AgeConverter#calculateAge(String)}
+     * Method under test: {@link DateConverter#calculateYears(String)}
      */
     @Test
     void testCalculateAge() {
         // Arrange, Act and Assert
-        assertEquals(28, AgeConverter.calculateAge("121LDFLAGS1996"));
-        assertEquals(61, AgeConverter.calculateAge("Tue Apr 09 00:00:00 CET 1963"));
+        assertEquals(28, DateConverter.calculateYears("121LDFLAGS1996"));
+        assertEquals(61, DateConverter.calculateYears("Tue Apr 09 00:00:00 CET 1963"));
 
     }
 }
