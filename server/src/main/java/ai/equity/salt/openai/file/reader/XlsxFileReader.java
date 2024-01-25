@@ -1,6 +1,5 @@
-package ai.equity.salt.openai.parser.implementation;
+package ai.equity.salt.openai.file.reader;
 
-import ai.equity.salt.openai.parser.FileReader;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.web.multipart.MultipartFile;
