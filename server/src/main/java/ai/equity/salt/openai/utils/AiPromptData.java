@@ -22,5 +22,15 @@ public class AiPromptData {
     public static final String PRODUCT_RECOMMENDATION_PROMPT = """
             Based on the analysis, recommend one of the Sysarb products to me.
             """;
+    public static final String DATAPOINT_EXTRACTOR_PROMPT = """
+            Reply as a json Object with the following fields
+                String position,
+                number salary,
+                number experience,
+                number age,
+                number locality,
+            Based on the following list, replace the headers where suitable;
+            
+            """;
 
 }
