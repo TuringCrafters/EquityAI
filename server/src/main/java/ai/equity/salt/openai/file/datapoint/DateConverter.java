@@ -33,7 +33,7 @@ public class DateConverter {
         return currentYear - originYear;
     }
 
-    private static Predicate<Integer> getReasonableDob() {
+    private static Predicate<Integer> getReasonableYear() {
         return year -> year > 1900 && year < 2024;
     }
 
