@@ -47,7 +47,7 @@ public class EquityAiService {
         String mostCommonJob = mostCommonJob(jobTitles);
 
         List<SalaryDatapoint<Integer>> experienceDataPoints = averageSalaryByDatapoint(jobDataList, mostCommonJob, JobDataSet::getExperience);
-        List<SalaryDatapoint<String>> locationDataPoints = averageSalaryByDatapoint(jobDataList, mostCommonJob, JobDataSet::getLocality);
+        List<SalaryDatapoint<String>> locationDataPoints = averageSalaryByDatapoint(jobDataList, mostCommonJob, JobDataSet::getGeographicLocation);
 
         var response = openAiModelFactory.createDefaultChatModel()
                 .generate(SALARY_ANALYSIS_PROMPT + createPrompt(jobDataList));
