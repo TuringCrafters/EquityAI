@@ -21,7 +21,7 @@ public class FileReader {
 
             String[] nextRecord;
             while ((nextRecord = csvReader.readNext()) != null) {
-                if (nextRecord.length < 5) {
+                if (nextRecord.length < 6) {
                     continue;
                 }
                 JobDataSet jobData = new JobDataSet();
@@ -30,6 +30,7 @@ public class FileReader {
                 jobData.setExperience(Integer.parseInt(nextRecord[2]));
                 jobData.setAge(Integer.parseInt(nextRecord[3]));
                 jobData.setGeographicLocation(nextRecord[4]);
+                jobData.setGender(nextRecord[5]);
 
                 jobDataList.add(jobData);
             }
