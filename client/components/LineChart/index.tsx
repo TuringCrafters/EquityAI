@@ -27,6 +27,10 @@ export default function LineOfBestFitChart({ data }: LinearChartGraphProps) {
     transformExperienceDetails(item)
   );
 
+  /*  const aboveAverage: number[] = convertedData
+  .filter((item)=> item.salary_above_average > item.salary_average)
+  .map((salaryAbove)=> salaryAbove.salary_above_average); */
+
   const lineOfBestFit = calculateLineOfBestFit(dataPoints);
   const allData: any = convertedData;
   allData.push(...lineOfBestFit);
@@ -73,25 +77,30 @@ export default function LineOfBestFitChart({ data }: LinearChartGraphProps) {
         tick={{ fill: "#aab0b7" }}
         width={80}
       />
+
+
+        <Scatter
+          key={`scatter-below-salary`}
+          name="Below average"
+          dataKey="salary_below_average"
+          fill="#62a46f"
+        />
+    
+
+
+        <Scatter
+          key={`scatter-above-salary`}
+          name="Above Average"
+          dataKey="salary_above_average"
+          fill="#376bec"
+        />
+
+
       <Scatter
         name="Average Salary"
         key={`scatter-salary-average`}
         dataKey="salary_average"
         fill="#c03dbb"
-      />
-
-        <Scatter
-          name="Below average"
-          key={`scatter-below-salary`}
-          dataKey="salary_below_average"
-          fill="#62a46f"
-        />
-
-      <Scatter
-        name="Above Average"
-        key={`scatter-above-salary`}
-        dataKey="salary_above_average"
-        fill="#376bec"
       />
       <Line
         dataKey="line"
