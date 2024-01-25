@@ -1,6 +1,6 @@
-package ai.equity.salt.openai.parser.implementation;
+package ai.equity.salt.openai.file.reader.implementation;
 
-import ai.equity.salt.openai.parser.FileReader;
+import ai.equity.salt.openai.file.reader.FileReader;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
 import org.springframework.web.multipart.MultipartFile;

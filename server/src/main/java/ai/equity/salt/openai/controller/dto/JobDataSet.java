@@ -2,19 +2,18 @@ package ai.equity.salt.openai.controller.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Setter
 @Getter
+@ToString
 public class JobDataSet {
-
+    private String id;
+    private String gender;
+    private int age;
     private String position;
     private double salary;
+    private String currency;
     private int experience;
-    private int age;
-    private String locality;
-
-    @Override
-    public String toString(){
-        return position + "," + salary + "," + experience + "," + age + "," + locality;
-    }
+    private String geographicLocation;
 }
