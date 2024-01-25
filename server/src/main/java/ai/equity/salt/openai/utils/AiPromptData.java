@@ -33,4 +33,5 @@ public class AiPromptData {
             
             """;
 
+    private AiPromptData(){}
 }
