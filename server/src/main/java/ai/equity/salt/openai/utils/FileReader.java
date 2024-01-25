@@ -29,7 +29,7 @@ public class FileReader {
                 jobData.setSalary(Double.parseDouble(nextRecord[1]));
                 jobData.setExperience(Integer.parseInt(nextRecord[2]));
                 jobData.setAge(Integer.parseInt(nextRecord[3]));
-                jobData.setLocality(nextRecord[4]);
+                jobData.setGeographicLocation(nextRecord[4]);
 
                 jobDataList.add(jobData);
             }
