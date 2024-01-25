@@ -1,6 +1,7 @@
 package ai.equity.salt.openai.controller;
 
 import ai.equity.salt.openai.controller.dto.EquityAiResponse;
+import ai.equity.salt.openai.file.datapoint.DatapointStandardizer;
 import ai.equity.salt.openai.service.EquityAiService;
 import com.opencsv.exceptions.CsvValidationException;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,8 @@ import static org.springframework.http.HttpStatus.CREATED;
 public class EquityAiController {
 
     private final EquityAiService service;
+    private final DatapointStandardizer datapointStandardizer;
+
 
     @PostMapping("file/analyze")
     @ResponseStatus(CREATED)
@@ -29,6 +32,9 @@ public class EquityAiController {
     @PostMapping("file/any")
     @ResponseStatus(CREATED)
     public List<List<String>> sendAnyFile(@RequestParam MultipartFile file) {
-        return service.readAnyFile(file);
+        var fileDetails = service.readAnyFile(file);
+        var standardizedDataPoints = datapointStandardizer.getFileStandardizedDataPoints(fileDetails.getFirst());
+        System.out.println("standardizedDataPoints = " + standardizedDataPoints);
+        return fileDetails;
     }
 }
