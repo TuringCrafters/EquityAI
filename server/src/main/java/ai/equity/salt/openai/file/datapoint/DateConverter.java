@@ -13,24 +13,24 @@ public class DateConverter {
     private DateConverter() {
     }
 
-    public static int calculateAge(String dateOfBirth) {
+    public static int calculateYears(String givenDate) {
         int currentYear = LocalDate.now().getYear();
         List<Integer> fourConsecutiveNumbers = new ArrayList<>();
-        int stringLength = dateOfBirth.length();
+        int stringLength = givenDate.length();
 
         for (int i = 0; i <= stringLength - 4; i++) {
-            String maybeDob = dateOfBirth.substring(i, i + 4);
+            String potentialYear = givenDate.substring(i, i + 4);
             try {
-                int year = Integer.parseInt(maybeDob);
+                int year = Integer.parseInt(potentialYear);
                 fourConsecutiveNumbers.add(year);
             } catch (NumberFormatException e) {
-                log.error("Unable to parse this string into int: " + maybeDob);
+                log.error("Unable to parse this string into int: " + potentialYear);
             }
         }
 
-        int dobYear = fourConsecutiveNumbers.stream().filter(getReasonableDob()).toList().getFirst();
+        int originYear = fourConsecutiveNumbers.stream().filter(getReasonableYear()).toList().getFirst();
 
-        return currentYear - dobYear;
+        return currentYear - originYear;
     }
 
     private static Predicate<Integer> getReasonableDob() {
