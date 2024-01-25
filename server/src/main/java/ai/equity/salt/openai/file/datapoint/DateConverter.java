@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.function.Predicate;
 
 @Slf4j
-public class AgeConverter {
+public class DateConverter {
 
-    private AgeConverter() {
+    private DateConverter() {
     }
 
     public static int calculateAge(String dateOfBirth) {
