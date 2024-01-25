@@ -1,1 +1,1 @@
-export const decimalConverter = (value: number): number => parseFloat((value ).toFixed(2));
+export const decimalConverter = (value: number): number => Math.round(value * 100) / 100;
