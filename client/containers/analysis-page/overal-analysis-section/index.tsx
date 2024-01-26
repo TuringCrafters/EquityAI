@@ -5,7 +5,8 @@ export const OveralAnalysis = () => {
   const { data } = useContext(DataContext);
     
   return (
-    <><section className="flex flex-row justify-evenly mx-20 mt-10 py-5">
+    <>
+    <section className="flex flex-row justify-evenly mx-20 mt-10 py-5">
     <article className="w-1/2 border-r-2 border-slate-200">
       <div className="px-20">
         <h2 className="text-slate-950 text-2xl font-bold">
