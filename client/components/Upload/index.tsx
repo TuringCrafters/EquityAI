@@ -8,6 +8,7 @@ import { UploadIcon } from "lucide-react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { quantum } from 'ldrs'
+import CancelIcon from "@/public/icon/cancelIcon";
 
 const UploadFile = () => {
   const [file, setFile] = useState<FileList | null>(null);
@@ -116,20 +117,7 @@ const UploadFile = () => {
                     className="absolute right-3 top-2 font-bold font-inter cursor-pointer"
                     onClick={handleFileClear}
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.5"
-                      stroke="red"
-                      className="w-6 h-6"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M6 18 18 6M6 6l12 12"
-                      />
-                    </svg>
+                    <CancelIcon />
                   </button>
                 )}
               </div>
