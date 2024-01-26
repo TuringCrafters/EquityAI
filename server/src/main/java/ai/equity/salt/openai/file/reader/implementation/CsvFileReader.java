@@ -4,22 +4,23 @@ import ai.equity.salt.openai.controller.dto.JobDataSet;
 import ai.equity.salt.openai.file.reader.FileReader;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class CsvFileReader implements FileReader {
 
     @Override
-    public List<JobDataSet> readFile(MultipartFile file) {
+    public List<JobDataSet> readFile(InputStream fileInputStream) {
 
         List<JobDataSet> jobDataList = new ArrayList<>();
 
-        try (CSVReader csvReader = new CSVReader((new InputStreamReader(file.getInputStream(), StandardCharsets.UTF_8)))) {
+        try (CSVReader csvReader = new CSVReader((new InputStreamReader(fileInputStream, UTF_8)))) {
             csvReader.readNext();
 
             String[] nextRecord;
