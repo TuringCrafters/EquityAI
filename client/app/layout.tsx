@@ -20,7 +20,7 @@ export default function RootLayout({
     <Providers>
       <html lang="en" className="h-full">
         <body className={inter.className}>
-          <NavBar />
+          {/* <NavBar /> */}
           {children}
           <Toaster />
         {/*   <Footer /> */}
