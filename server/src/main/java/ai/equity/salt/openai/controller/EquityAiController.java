@@ -26,7 +26,6 @@ public class EquityAiController {
         return service.analyzeFile(file);
     }
 
-
     @PostMapping("file/any")
     @ResponseStatus(CREATED)
     public List<JobDataSet> sendAnyFile(@RequestParam MultipartFile file) {
