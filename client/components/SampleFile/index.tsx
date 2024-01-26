@@ -11,14 +11,13 @@ const SampleFileForUpload = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center pt-[20vh] text-neutral-50/100">
-      <h1 className="text-xl font-bold text-center">Try with Sample File:</h1>
+    <div className="flex flex-col items-center justify-center text-black ">
       <ul className="flex flex-col gap-1 list-none">
         {samples.map((fileName) => {
           return (
             <li key={fileName} className="list-none flex items-center">
               <button
-                className="flex items-center"
+                className="mt-2 flex items-center bg-purple-600 text-white rounded-full px-3 py-2"
                 onClick={() => handleDownload(fileName)}
               >
                 <svg
