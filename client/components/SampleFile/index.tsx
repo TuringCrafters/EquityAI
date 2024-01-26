@@ -17,7 +17,7 @@ const SampleFileForUpload = () => {
           return (
             <li key={fileName} className="list-none flex items-center">
               <button
-                className="mt-2 flex items-center bg-purple-600 text-white rounded-full px-3 py-2"
+                className="mt-2 flex items-center bg-purple-600 hover:bg-purple-700 text-white rounded-full px-3 py-2"
                 onClick={() => handleDownload(fileName)}
               >
                 <svg
