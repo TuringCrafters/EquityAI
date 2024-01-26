@@ -1,5 +1,6 @@
 package ai.equity.salt.openai.file.reader.implementation;
 
+import ai.equity.salt.openai.controller.dto.JobDataSet;
 import ai.equity.salt.openai.file.reader.FileReader;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -10,8 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class XlsxFileReader implements FileReader {
+
     @Override
-    public List<List<String>> readFile(MultipartFile file) {
+    public List<JobDataSet> readFile(MultipartFile file) {
         Workbook dataSet = null;
         try {
             dataSet = new XSSFWorkbook(file.getInputStream());
@@ -19,8 +21,9 @@ public class XlsxFileReader implements FileReader {
             throw new RuntimeException(e);
         }
         Sheet sheet = dataSet.getSheetAt(0);
+        sheet.removeRow(sheet.getRow(0));
 
-        List<List<String>> data = new ArrayList<>();
+        List<JobDataSet> data = new ArrayList<>();
         int i = 0;
         for (Row row : sheet) {
             List<String> rowData = new ArrayList<>();
@@ -42,7 +45,9 @@ public class XlsxFileReader implements FileReader {
                 }
                 rowData.add(cellValue);
             }
-            data.add(i, rowData);
+            var jobData = new JobDataSet(rowData);
+            System.out.println("jobData = " + jobData);
+            data.add(jobData);
             i++;
         }
         return data;
