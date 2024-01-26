@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const ResponsiveLayout = () => {
+const HomePage = () => {
   const [showLeftOnMobile, setShowLeftOnMobile] = useState(false);
 
   return (
@@ -27,4 +27,4 @@ const ResponsiveLayout = () => {
   );
 };
 
-export default ResponsiveLayout;
+export default HomePage;
