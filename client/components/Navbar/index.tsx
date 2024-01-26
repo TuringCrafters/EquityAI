@@ -1,8 +1,10 @@
-"use client"
+"use client";
 export default function NavBar() {
-  return <nav>
-    <h1 className="text-2xl font-semibold ml-20 mt-5 tracking-tighter text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
-      equityAi
-    </h1>
-  </nav>;
+  return (
+    <nav className="fixed z-20 top-0 left-0 right-0 h-12 bg-white">
+      <h1 className="text-2xl font-semibold ml-20  mt-2 tracking-tighter text-slate-950">
+        equityAi
+      </h1>
+    </nav>
+  );
 }
