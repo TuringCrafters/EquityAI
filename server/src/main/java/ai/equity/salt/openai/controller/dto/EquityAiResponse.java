@@ -10,7 +10,7 @@ public record EquityAiResponse(
         String jobTitle,
         List<SalaryDatapoint<Integer>> experienceDetails,
         List<SalaryDatapoint<String>> locationDetails,
-        Double genderPayGap,
+        String genderPayGap,
         CompanyOverview companyOverview
 ) {
 }
