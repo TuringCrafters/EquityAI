@@ -50,7 +50,7 @@ public class XlsxFileReader implements FileReader {
                     rowData.add(cellValue);
                 }
             try {
-1                jobData = new JobDataSet(rowData);
+                jobData = new JobDataSet(rowData);
             } catch (NoSuchElementException e) {
                 log.error(String.valueOf(e));
                 return data;
