@@ -134,7 +134,7 @@ const UploadFile = () => {
                 )}
               </div>
               <Button
-                className="w-full h-8 mt-8 text-lg bg-blue-600 rounded-full"
+                className="w-full h-8 mt-8 text-lg bg-blue-600 hover:bg-blue-700 rounded-full"
                 disabled={!file}
                 type="submit"
               >
