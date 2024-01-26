@@ -79,70 +79,70 @@ const UploadFile = () => {
   };
 
   return (
-    <div className="flex flex-col m-4 items-center justify-center md:h-screen dark:bg-gray-900">
-      { progress > 0 ?
-        (<div className="p-4 max-w-md mx-auto bg-neutral-50/100 rounded-lg shadow-md flex flex-col items-center justify-center">
-          <div className="px-40 py-12">
+    <div className="flex flex-col m-4 items-center justify-center md:h-screen">
+      {progress > 0 ?
+        (<div className="w-5/6 h-4/6 mx-auto rounded-lg  flex flex-col items-center justify-center">
+          <div className="">
             <l-quantum
-              size="200"
-              speed="3.5"
-              color="#7710BC"
+              size="500"
+              speed="4"
+              color="white"
             ></l-quantum>
           </div>
-          <h3 className="text-xl m-7 font-semibold">Analysing your data, stay put</h3>
+          <h3 className="text-xl my-7 font-semibold text-white text-center">Analysing your data, stay put</h3>
         </div>
         ) : (
-        <div className="flex flex-col items-center justify-center w-full max-w-md p-6 space-y- mt-20 md:mt-0 bg-neutral-50/100 rounded-lg">
-          <form
-            onSubmit={handleSubmit}
-            className="w-full max-w-m px-1 py-6"
-            encType="multipart/form-data"
-          >
-            <h1 className="text-4xl font-bold text-center">Upload File</h1>
-            <div className="relative">
-              <UploadIcon
-                className="absolute left-2 top-2 cursor-pointer"
-                onClick={() => fileInputRef.current?.click()}
-              />
-              <Input
-                className="pl-8 mt-12 cursor-pointer"
-                type="file"
-                ref={fileInputRef}
-                onChange={handleFileChange}
-                id="file"
-              />
-              {file && (
-                <button
-                  className="absolute right-3 top-2 font-bold font-inter cursor-pointer"
-                  onClick={handleFileClear}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="red"
-                    className="w-6 h-6"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M6 18 18 6M6 6l12 12"
-                    />
-                  </svg>
-                </button>
-              )}
-            </div>
-            <Button
-              className="w-full h-8 mt-8 text-lg bg-blue-600 rounded-full"
-              disabled={!file}
-              type="submit"
+          <div className="flex flex-col items-center justify-center w-full max-w-md p-6 space-y- mt-20 md:mt-0 bg-neutral-50/100 rounded-lg">
+            <form
+              onSubmit={handleSubmit}
+              className="w-full max-w-m px-1 py-6"
+              encType="multipart/form-data"
             >
-              Submit
-            </Button>
-          </form>
-        </div>
-      )}
+              <h1 className="text-4xl font-bold text-center">Upload File</h1>
+              <div className="relative">
+                <UploadIcon
+                  className="absolute left-2 top-2 cursor-pointer"
+                  onClick={() => fileInputRef.current?.click()}
+                />
+                <Input
+                  className="pl-8 mt-12 cursor-pointer"
+                  type="file"
+                  ref={fileInputRef}
+                  onChange={handleFileChange}
+                  id="file"
+                />
+                {file && (
+                  <button
+                    className="absolute right-3 top-2 font-bold font-inter cursor-pointer"
+                    onClick={handleFileClear}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="red"
+                      className="w-6 h-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M6 18 18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </button>
+                )}
+              </div>
+              <Button
+                className="w-full h-8 mt-8 text-lg bg-blue-600 rounded-full"
+                disabled={!file}
+                type="submit"
+              >
+                Submit
+              </Button>
+            </form>
+          </div>
+        )}
     </div>
   );
 };
