@@ -1,6 +1,7 @@
 package ai.equity.salt.openai.controller;
 
 import ai.equity.salt.openai.controller.dto.EquityAiResponse;
+import ai.equity.salt.openai.controller.dto.JobDataSet;
 import ai.equity.salt.openai.service.EquityAiService;
 import com.opencsv.exceptions.CsvValidationException;
 import lombok.RequiredArgsConstructor;
@@ -21,14 +22,13 @@ public class EquityAiController {
 
     @PostMapping("file/analyze")
     @ResponseStatus(CREATED)
-    public EquityAiResponse sendFile(@RequestParam MultipartFile file) throws IOException, CsvValidationException {
+    public EquityAiResponse sendFile(@RequestParam MultipartFile file) throws IOException {
         return service.analyzeFile(file);
     }
 
-
     @PostMapping("file/any")
     @ResponseStatus(CREATED)
-    public List<List<String>> sendAnyFile(@RequestParam MultipartFile file) {
+    public List<JobDataSet> sendAnyFile(@RequestParam MultipartFile file) throws IOException {
         return service.readAnyFile(file);
     }
 }

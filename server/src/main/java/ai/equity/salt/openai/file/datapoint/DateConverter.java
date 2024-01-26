@@ -24,7 +24,7 @@ public class DateConverter {
                 int year = Integer.parseInt(potentialYear);
                 fourConsecutiveNumbers.add(year);
             } catch (NumberFormatException e) {
-                log.error("Unable to parse this string into int: " + potentialYear);
+                log.trace("Unable to parse this string into int: " + potentialYear);
             }
         }
 
