@@ -5,12 +5,14 @@ import ai.equity.salt.openai.controller.dto.SalaryDatapoint;
 import ai.equity.salt.openai.controller.dto.SalaryRangeDatapoint;
 import lombok.RequiredArgsConstructor;
 
+import java.text.DecimalFormat;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-@RequiredArgsConstructor
 public class DataAnalysis {
+
+
 
     public static double calculateAverage(List<Double> salaries) {
         return round(salaries.stream().mapToDouble(Double::doubleValue).average().orElse(0));
@@ -92,16 +94,11 @@ public class DataAnalysis {
         double maleAverageSalary = genderAverageSalary.getOrDefault("Male", 0.0);
         double femaleAverageSalary = genderAverageSalary.getOrDefault("Female", 0.0);
 
-        return (maleAverageSalary - femaleAverageSalary) / femaleAverageSalary;
+        return ((maleAverageSalary - femaleAverageSalary) / femaleAverageSalary);
     }
 
-    public static Double calculateGenderRatio(List<JobDataSet> jobDataList) {
-        Map<String, Long> genderCountMap = jobDataList.stream()
-                .collect(Collectors.groupingBy(JobDataSet::getGender, Collectors.counting()));
-
-        double totalCount = genderCountMap.values().stream().mapToLong(Long::longValue).sum();
-        System.out.println("totalCount = " + totalCount);
-        return totalCount;
+    public static Map<String, Long> calculateGenderRatio(List<JobDataSet> jobDataList) {
+        return jobDataList.stream().collect(Collectors.groupingBy(JobDataSet::getGender, Collectors.counting()));
     }
 
     public static double round(double number){
