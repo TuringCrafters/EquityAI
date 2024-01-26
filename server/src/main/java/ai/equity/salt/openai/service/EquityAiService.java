@@ -107,7 +107,7 @@ public class EquityAiService {
                 new CompanyOverview(topFiveHighestPayingPositions, overview.getCount()));
     }
 
-    public List<List<String>> readAnyFile(MultipartFile file) {
+    public List<JobDataSet> readAnyFile(MultipartFile file) {
         String fileExtension = Objects.requireNonNull(file.getOriginalFilename())
                 .split("\\.")[1];
 
