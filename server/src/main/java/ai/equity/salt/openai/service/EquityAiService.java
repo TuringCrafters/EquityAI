@@ -45,6 +45,10 @@ public class EquityAiService {
         return stringBuilder.toString();
     }
 
+    private static boolean checkFileExtension(String fileName, String extension) {
+        return fileName != null && fileName.endsWith(extension);
+    }
+
     public EquityAiResponse analyzeFile(MultipartFile file) throws IOException, CsvValidationException {
         var inputStream = file.getInputStream();
 
