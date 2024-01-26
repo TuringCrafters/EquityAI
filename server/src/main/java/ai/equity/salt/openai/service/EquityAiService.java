@@ -90,8 +90,8 @@ public class EquityAiService {
                 (int) salaryStats.getAverage());
 
         return new EquityAiResponse(
-                "response",
-                "sysarbRecommendation",
+                response,
+                sysarbRecommendation,
                 uniqueJobTitles,
                 mostCommonJob, experienceDataPoints, locationDataPoints,
                 decimalFormat.format(calculateGenderPayGap(jobDataList)),
