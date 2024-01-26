@@ -10,7 +10,7 @@ Equity AI is a predictive anomaly detection application designed to address the 
 Equity AI includes the following features:
 
 **1. File Upload and AI Data Analysis:**
-<p>Users easily upload files for efficient and accurate data analysis.</p>
+<p>Users easily upload csv and xlsx files for efficient and accurate data analysis.</p>
 
 **2. Data Visualizations:**
 <p>Generate clear and insightful visualizations to enhance data comprehension.</p>
@@ -36,6 +36,11 @@ Equity AI includes the following features:
 
 ## Project Board
 [Click Here](https://github.com/orgs/TuringCrafters/projects/1/views/1)
+
+## Weekly Sprint Result Videos
+**Week 2:** [![Week 2](https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/AiEDlcukrjI) 
+
+**Week 1:** [![Week 1](https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/ANy-IKPUMFk) 
 
 ## Acknowledgments
 <p>We extend our gratitude to the open-source community, and the developers who have contributed to the frameworks, libraries, and tools used in making Equity AI possible.</p>
