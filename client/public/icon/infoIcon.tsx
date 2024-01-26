@@ -6,7 +6,7 @@ function InfoIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
             {...props}
             xmlns="http://www.w3.org/2000/svg"
             fill="white" 
-            fill-opacity="0.9"
+            fillOpacity="0.9"
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="black"
