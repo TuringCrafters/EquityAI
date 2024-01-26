@@ -1,6 +1,7 @@
 package ai.equity.salt.openai.controller;
 
 import ai.equity.salt.openai.controller.dto.EquityAiResponse;
+import ai.equity.salt.openai.controller.dto.JobDataSet;
 import ai.equity.salt.openai.service.EquityAiService;
 import com.opencsv.exceptions.CsvValidationException;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +29,7 @@ public class EquityAiController {
 
     @PostMapping("file/any")
     @ResponseStatus(CREATED)
-    public List<List<String>> sendAnyFile(@RequestParam MultipartFile file) {
+    public List<JobDataSet> sendAnyFile(@RequestParam MultipartFile file) {
         return service.readAnyFile(file);
     }
 }
