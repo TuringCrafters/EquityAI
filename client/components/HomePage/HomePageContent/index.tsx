@@ -1,13 +1,10 @@
 import SampleFileForUpload from '@/components/SampleFile';
+import { HomePageContentType } from '@/types/HomePageContentType';
 import { ArrowRightIcon } from 'lucide-react';
 import React from 'react'
 
-type HomePafeContentType = { 
-    showLeftOnMobile: boolean;
-    setShowLeftOnMobile: (isOnMobile: boolean) => void;
-}
 
-const HomePageContent: React.FC<HomePafeContentType> = ({
+const HomePageContent: React.FC<HomePageContentType> = ({
     showLeftOnMobile,
     setShowLeftOnMobile
 }) => {
