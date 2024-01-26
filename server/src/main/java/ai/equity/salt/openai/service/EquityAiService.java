@@ -6,7 +6,6 @@ import ai.equity.salt.openai.controller.dto.JobDataSet;
 import ai.equity.salt.openai.controller.dto.SalaryDatapoint;
 import ai.equity.salt.openai.file.reader.implementation.CsvFileReader;
 import ai.equity.salt.openai.file.reader.implementation.XlsxFileReader;
-import ai.equity.salt.openai.model.EquityAi;
 import ai.equity.salt.openai.model.OpenAiModelFactory;
 import ai.equity.salt.openai.repository.JpaEquityAiRepo;
 import com.opencsv.exceptions.CsvValidationException;
@@ -22,7 +21,6 @@ import java.util.stream.Collectors;
 
 import static ai.equity.salt.openai.utils.AiPromptData.*;
 import static ai.equity.salt.openai.utils.DataAnalysis.*;
-import static ai.equity.salt.openai.utils.FileReader.readCSV;
 
 @Service
 @RequiredArgsConstructor
@@ -60,28 +58,6 @@ public class EquityAiService {
                 .sorted(Comparator.comparing(JobDataSet::getSalary).reversed())
                 .limit(5)
                 .toList();
-        System.out.println("topFiveHighestPayingPositions = " + topFiveHighestPayingPositions);
-        Map<String, Long> genderCountMap = jobDataList.stream()
-                .collect(Collectors.groupingBy(JobDataSet::getGender, Collectors.counting()));
-        System.out.println("genderCountMap = " + genderCountMap);
-        long totalCount = genderCountMap.values().stream().mapToLong(Long::longValue).sum();
-        System.out.println("totalCount = " + totalCount);
-
-
-        Map<String, Double> genderAverageSalary = jobDataList.stream()
-                .collect(Collectors.groupingBy(JobDataSet::getGender,
-                        Collectors.averagingDouble(JobDataSet::getSalary)));
-
-// Calculate the gender pay gap
-        double maleAverageSalary = genderAverageSalary.getOrDefault("Male", 0.0);
-        double femaleAverageSalary = genderAverageSalary.getOrDefault("Female", 0.0);
-        double genderPayGap = (maleAverageSalary - femaleAverageSalary) / femaleAverageSalary;
-
-
-        System.out.println("Gender Pay Gap: " + decimalFormat.format(genderPayGap*100)  + "%");
-
-
-//        System.out.println("genderRatio = " + genderRatio);
 
         var jobDataStringList = jobDataList.stream().map(JobDataSet::toString).toList();
 
@@ -109,7 +85,7 @@ public class EquityAiService {
 //            log.error(e.getMessage());
 //        }
         return new EquityAiResponse("response", "sysarbRecommendation",
-                uniqueJobTitles, mostCommonJob, experienceDataPoints, locationDataPoints,
+                uniqueJobTitles, mostCommonJob, experienceDataPoints, locationDataPoints, calculateGenderPayGap(jobDataList),
                 new CompanyOverview(topFiveHighestPayingPositions, salaryStats.getCount()));
     }
 
