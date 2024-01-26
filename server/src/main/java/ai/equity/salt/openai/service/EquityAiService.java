@@ -50,7 +50,19 @@ public class EquityAiService {
 
     public EquityAiResponse analyzeFile(MultipartFile file) throws IOException, CsvValidationException {
         var inputStream = file.getInputStream();
-        List<JobDataSet> jobDataList = readCSV(inputStream);
+
+        String fileName = file.getOriginalFilename();
+
+        List<JobDataSet> jobDataList = new ArrayList<>();
+
+        if (checkFileExtension(fileName, ".xlsx")) {
+              jobDataList      = readCSVFromExcel(convertXlsxToCsv(inputStream)); // update to support excel
+
+        } else if (checkFileExtension(fileName, ".csv")) {
+            jobDataList = readCSV(inputStream);
+        }
+
+
         var overview = jobDataList.stream().collect(Collectors.summarizingDouble(JobDataSet::getSalary));
         var totalNumberOfJobs = overview.getCount();
         var topFiveHighestPayingPositions = jobDataList.stream()
