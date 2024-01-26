@@ -83,6 +83,27 @@ public class DataAnalysis {
                 .orElse(null);
     }
 
+    public static Double calculateGenderPayGap(List<JobDataSet> jobDataList) {
+
+        Map<String, Double> genderAverageSalary = jobDataList.stream()
+                .collect(Collectors.groupingBy(JobDataSet::getGender,
+                        Collectors.averagingDouble(JobDataSet::getSalary)));
+
+        double maleAverageSalary = genderAverageSalary.getOrDefault("Male", 0.0);
+        double femaleAverageSalary = genderAverageSalary.getOrDefault("Female", 0.0);
+
+        return (maleAverageSalary - femaleAverageSalary) / femaleAverageSalary;
+    }
+
+    public static Double calculateGenderRatio(List<JobDataSet> jobDataList) {
+        Map<String, Long> genderCountMap = jobDataList.stream()
+                .collect(Collectors.groupingBy(JobDataSet::getGender, Collectors.counting()));
+
+        double totalCount = genderCountMap.values().stream().mapToLong(Long::longValue).sum();
+        System.out.println("totalCount = " + totalCount);
+        return totalCount;
+    }
+
     public static double round(double number){
         return (double) Math.round(number * 100)/100;
     }
