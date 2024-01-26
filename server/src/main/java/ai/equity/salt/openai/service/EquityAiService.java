@@ -85,7 +85,9 @@ public class EquityAiService {
         }
 
         var companyOverview = new CompanyOverview(topFiveHighestPayingPositions, jobDataList.size(),
-                ageStats.getAverage(), tenureStats.getAverage(), salaryStats.getAverage());
+                (int) ageStats.getAverage(),
+                (int) tenureStats.getAverage(),
+                (int) salaryStats.getAverage());
 
         return new EquityAiResponse(
                 "response",
