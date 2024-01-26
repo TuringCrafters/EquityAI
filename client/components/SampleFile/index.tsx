@@ -1,6 +1,7 @@
 import Link from "next/link";
 
-const samples = ["Dataset.csv", "Dataset.xlsx", "Template.csv", "Template.xlsx"];
+// const samples = ["Dataset.csv", "Dataset.xlsx", "Template.csv", "Template.xlsx"];
+const samples = ["Dataset.xlsx"];
 
 const SampleFileForUpload = () => {
   const handleDownload = (fileName: string) => {
