@@ -110,7 +110,7 @@ public class EquityAiService {
 //        }
         return new EquityAiResponse("response", "sysarbRecommendation",
                 uniqueJobTitles, mostCommonJob, experienceDataPoints, locationDataPoints,
-                new CompanyOverview(topFiveHighestPayingPositions, overview.getCount()));
+                new CompanyOverview(topFiveHighestPayingPositions, salaryStats.getCount()));
     }
 
     public List<JobDataSet> readAnyFile(MultipartFile file) {
