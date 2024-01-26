@@ -7,16 +7,17 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 public class XlsxFileReader implements FileReader {
 
     @Override
-    public List<JobDataSet> readFile(MultipartFile file) {
+    public List<JobDataSet> readFile(InputStream fileInputStream) {
         Workbook dataSet = null;
         try {
-            dataSet = new XSSFWorkbook(file.getInputStream());
+            dataSet = new XSSFWorkbook(fileInputStream);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -24,7 +25,6 @@ public class XlsxFileReader implements FileReader {
         sheet.removeRow(sheet.getRow(0));
 
         List<JobDataSet> data = new ArrayList<>();
-        int i = 0;
         for (Row row : sheet) {
             List<String> rowData = new ArrayList<>();
             for (Cell cell : row) {
@@ -46,9 +46,7 @@ public class XlsxFileReader implements FileReader {
                 rowData.add(cellValue);
             }
             var jobData = new JobDataSet(rowData);
-            System.out.println("jobData = " + jobData);
             data.add(jobData);
-            i++;
         }
         return data;
     }
