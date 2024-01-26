@@ -13,7 +13,13 @@ export type Analysis = {
     average_age: number;
     average_salary: number;
     average_tenure: number;
-    top_five_highest_paying_positions: string[];
+    top_five_highest_paying_positions:[
+      { position: string; salary: number },
+      { position: string; salary: number },
+      { position: string; salary: number },
+      { position: string; salary: number },
+      { position: string; salary: number }
+    ];
     total_number_of_employees: number;
   };
 };

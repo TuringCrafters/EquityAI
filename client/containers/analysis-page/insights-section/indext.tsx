@@ -1,3 +1,4 @@
+import { PayGapPieChart } from '@/components/PayGapChart/idex';
 import { DataContext } from '@/services/provider';
 import { splitTextIntoTwoParts } from '@/services/splitTextIntoTwoParts';
 import React, { useContext } from 'react'
@@ -16,6 +17,7 @@ export const Insights = () => {
           <p className="text-sm text-neutral-500 mb-2 px-20">
             {firstHalf}.
           </p>
+          <PayGapPieChart/>
           <p className="text-sm text-neutral-500 mb-2 px-20">
             {secondHalf}
           </p>

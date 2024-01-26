@@ -7,6 +7,8 @@ import { AnalysisHeader } from '../../containers/analysis-page/header-section/in
 import { OveralAnalysis } from "@/containers/analysis-page/overal-analysis-section";
 import { MostCommonPosition } from "@/containers/analysis-page/most-common-position-section";
 import { Insights } from "@/containers/analysis-page/insights-section/indext";
+import { Recommendations } from "@/containers/analysis-page/recomendation-section";
+import NavBarAnalysis from "@/components/NavbarAnalysis";
 
 
 
@@ -19,6 +21,7 @@ const AnalysisPage = () => {
 
   return (
     <main className="h-dvh" ref={pageRef}>
+      <NavBarAnalysis/>
       <AnalysisHeader/>
       <Button
         onClick={handlePDF}
@@ -26,12 +29,13 @@ const AnalysisPage = () => {
       >
         Save as PDF
       </Button>
-      <Button className="absolute top-4 right-36 rounded-full bg-blue-600 ">
+      {/* <Button className="absolute top-4 right-36 rounded-full bg-blue-600 ">
         Share PDF
-      </Button>
+      </Button> */}
       <OveralAnalysis/>
       <Insights/>
-     {/*  <MostCommonPosition/> */}
+     <MostCommonPosition/>
+     <Recommendations/>
     </main>
   );
 };
