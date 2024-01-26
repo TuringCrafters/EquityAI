@@ -6,9 +6,9 @@ import ai.equity.salt.openai.controller.dto.JobDataSet;
 import ai.equity.salt.openai.controller.dto.SalaryDatapoint;
 import ai.equity.salt.openai.file.reader.implementation.CsvFileReader;
 import ai.equity.salt.openai.file.reader.implementation.XlsxFileReader;
+import ai.equity.salt.openai.model.EquityAi;
 import ai.equity.salt.openai.model.OpenAiModelFactory;
 import ai.equity.salt.openai.repository.JpaEquityAiRepo;
-import com.opencsv.exceptions.CsvValidationException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
-import java.util.*;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static ai.equity.salt.openai.utils.AiPromptData.*;
@@ -33,6 +36,7 @@ public class EquityAiService {
     private final XlsxFileReader xlsxFileReader = new XlsxFileReader();
     private final DecimalFormat decimalFormat = new DecimalFormat("0.00");
 
+
     private static String createPrompt(List<JobDataSet> jobDataList) {
         StringBuilder stringBuilder = new StringBuilder();
 
@@ -44,20 +48,14 @@ public class EquityAiService {
         return stringBuilder.toString();
     }
 
-    public EquityAiResponse analyzeFile(MultipartFile file) throws IOException, CsvValidationException {
-        var inputStream = file.getInputStream();
-        List<JobDataSet> jobDataList = csvFileReader.readFile(file);
+    public EquityAiResponse analyzeFile(MultipartFile file) throws IOException {
+        List<JobDataSet> jobDataList = readAnyFile(file);
         var ageStats = jobDataList.stream().collect(Collectors.summarizingDouble(JobDataSet::getAge));
-        ageStats.getAverage();
         var salaryStats = jobDataList.stream().collect(Collectors.summarizingDouble(JobDataSet::getSalary));
-        salaryStats.getAverage();
         var tenureStats = jobDataList.stream().collect(Collectors.summarizingDouble(JobDataSet::getExperience));
-        tenureStats.getAverage();
 
-        var topFiveHighestPayingPositions = jobDataList.stream()
-                .sorted(Comparator.comparing(JobDataSet::getSalary).reversed())
-                .limit(5)
-                .toList();
+        var topFiveHighestPayingPositions = jobDataList.stream().sorted(Comparator.comparing(JobDataSet::getSalary)
+                .reversed()).limit(5).toList();
 
         var jobDataStringList = jobDataList.stream().map(JobDataSet::toString).toList();
 
@@ -66,36 +64,44 @@ public class EquityAiService {
 
         String mostCommonJob = mostCommonJob(jobTitles);
 
-        List<SalaryDatapoint<Integer>> experienceDataPoints = averageSalaryByDatapoint(jobDataList, mostCommonJob, JobDataSet::getExperience);
-        List<SalaryDatapoint<String>> locationDataPoints = averageSalaryByDatapoint(jobDataList, mostCommonJob, JobDataSet::getGeographicLocation);
+        List<SalaryDatapoint<Integer>> experienceDataPoints = averageSalaryByDatapoint(jobDataList, mostCommonJob,
+                JobDataSet::getExperience);
+        List<SalaryDatapoint<String>> locationDataPoints = averageSalaryByDatapoint(jobDataList, mostCommonJob,
+                JobDataSet::getGeographicLocation);
 
-//        var response = openAiModelFactory.createDefaultChatModel()
-//                .generate(SALARY_ANALYSIS_PROMPT + createPrompt(jobDataList));
-//
-//        log.trace("Response : " + response);
-//        var sysarbRecommendation = openAiModelFactory.createDefaultChatModel()
-//                .generate(response + PRODUCT_RECOMMENDATION_PROMPT + SYSARB_PRODUCTS);
-//        log.trace("Sysarb Recommendation : " + sysarbRecommendation);
-//
-//
-//        //TODO: use specific SQL exception to catch the error
-//        try {
-//            repository.save(new EquityAi(jobDataStringList, response, sysarbRecommendation));
-//        } catch (Exception e) {
-//            log.error(e.getMessage());
-//        }
-        return new EquityAiResponse("response", "sysarbRecommendation",
-                uniqueJobTitles, mostCommonJob, experienceDataPoints, locationDataPoints, calculateGenderPayGap(jobDataList),
-                new CompanyOverview(topFiveHighestPayingPositions, salaryStats.getCount()));
+        var response = openAiModelFactory.createDefaultChatModel().generate(SALARY_ANALYSIS_PROMPT +
+                createPrompt(jobDataList));
+
+        log.trace("Response : " + response);
+        var sysarbRecommendation = openAiModelFactory.createDefaultChatModel().generate(response +
+                PRODUCT_RECOMMENDATION_PROMPT + SYSARB_PRODUCTS);
+        log.trace("Sysarb Recommendation : " + sysarbRecommendation);
+
+        //TODO: use specific SQL exception to catch the error
+        try {
+            repository.save(new EquityAi(jobDataStringList, response, sysarbRecommendation));
+        } catch (Exception e) {
+            log.error(e.getMessage());
+        }
+
+        var companyOverview = new CompanyOverview(topFiveHighestPayingPositions, jobDataList.size(),
+                ageStats.getAverage(), tenureStats.getAverage(), salaryStats.getAverage());
+
+        return new EquityAiResponse(
+                "response",
+                "sysarbRecommendation",
+                uniqueJobTitles,
+                mostCommonJob, experienceDataPoints, locationDataPoints,
+                decimalFormat.format(calculateGenderPayGap(jobDataList)),
+                companyOverview);
     }
 
-    public List<JobDataSet> readAnyFile(MultipartFile file) {
-        String fileExtension = Objects.requireNonNull(file.getOriginalFilename())
-                .split("\\.")[1];
+    public List<JobDataSet> readAnyFile(MultipartFile file) throws IOException {
+        String fileExtension = Objects.requireNonNull(file.getOriginalFilename()).split("\\.")[1];
 
         return switch (fileExtension) {
-            case "csv" -> csvFileReader.readFile(file);
-            case "xlsx" -> xlsxFileReader.readFile(file);
+            case "csv" -> csvFileReader.readFile(file.getInputStream());
+            case "xlsx" -> xlsxFileReader.readFile(file.getInputStream());
             default -> throw new IllegalArgumentException("Unsupported file. Please use .csv or .xlsx");
         };
     }
