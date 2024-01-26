@@ -79,7 +79,7 @@ const UploadFile = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center pt-[20vh] dark:bg-gray-900">
+    <div className="flex flex-col m-4 items-center justify-center md:h-screen dark:bg-gray-900">
       { progress > 0 ?
         (<div className="p-4 max-w-md mx-auto bg-neutral-50/100 rounded-lg shadow-md flex flex-col items-center justify-center">
           <div className="px-40 py-12">
@@ -92,7 +92,7 @@ const UploadFile = () => {
           <h3 className="text-xl m-7 font-semibold">Analysing your data, stay put</h3>
         </div>
         ) : (
-        <div className="w-full max-w-md p-6 space-y-4 bg-neutral-50/100 rounded-lg">
+        <div className="flex flex-col items-center justify-center w-full max-w-md p-6 space-y- mt-20 md:mt-0 bg-neutral-50/100 rounded-lg">
           <form
             onSubmit={handleSubmit}
             className="w-full max-w-m px-1 py-6"
