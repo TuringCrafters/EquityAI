@@ -1,12 +1,9 @@
 "use client";
-import React, { useContext, useRef } from "react";
-import dynamic from "next/dynamic";
+import React, { useRef } from "react";
 import { useReactToPrint } from "react-to-print";
-import { DataContext } from "@/services/provider";
-import LineOfBestFitChart from "@/components/LineChart";
 import { Button } from "../../components/ui/button";
 import "../../styles/AnalysisPagePdfStyles.css";
-import { AnalysisHeader } from "@/containers/analysis-page/header-section";
+import { AnalysisHeader } from '../../containers/analysis-page/header-section/index';
 import { OveralAnalysis } from "@/containers/analysis-page/overal-analysis-section";
 import { MostCommonPosition } from "@/containers/analysis-page/most-common-position-section";
 import { Insights } from "@/containers/analysis-page/insights-section/indext";
@@ -34,7 +31,7 @@ const AnalysisPage = () => {
       </Button>
       <OveralAnalysis/>
       <Insights/>
-      <MostCommonPosition/>
+     {/*  <MostCommonPosition/> */}
     </main>
   );
 };
