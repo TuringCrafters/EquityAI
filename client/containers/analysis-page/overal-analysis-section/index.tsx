@@ -1,6 +1,8 @@
-import React from 'react'
+import { DataContext } from '@/services/provider';
+import React, { useContext } from 'react'
 
 export const OveralAnalysis = () => {
+  const { data } = useContext(DataContext);
     
   return (
     <><section className="flex flex-row justify-evenly mx-20 mt-10 py-5">
@@ -10,13 +12,13 @@ export const OveralAnalysis = () => {
           Your company average worker
         </h2>
         <div className="flex flex-row justify-around my-5">
-        <div className="bg-neutral-200 rounded-lg h-20 w-20"></div>
-        <div className="bg-neutral-200 rounded-lg h-20 w-20"></div>
-        <div className=" bg-neutral-200 rounded-lg h-20 w-20"></div>
+        <div className="bg-neutral-200 rounded-lg h-20 w-20">{data?.company_overview.average_age}</div>
+        <div className="bg-neutral-200 rounded-lg h-20 w-20">{data?.company_overview.average_salary}</div>
+        <div className=" bg-neutral-200 rounded-lg h-20 w-20">{data?.company_overview.average_tenure}</div>
         </div>
         <p className="text-sm text-neutral-500 mb-2">Number of employees</p>
         <h3 className="text-slate-950 text-2xl font-bold">
-          PLACEHOLDER NUMBER
+          {data?.company_overview.total_number_of_employees}
         </h3>
       </div>
     </article>
