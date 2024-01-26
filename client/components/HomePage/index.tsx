@@ -1,6 +1,7 @@
 import ArrowRightIcon from '@/public/icon/arrowRightIcon';
 import InfoIcon from '@/public/icon/infoIcon';
 import React, { useState } from 'react';
+import UploadFile from '../Upload';
 
 const HomePage = () => {
     const [showLeftOnMobile, setShowLeftOnMobile] = useState(false);
@@ -23,6 +24,7 @@ const HomePage = () => {
                         className="w-8 h-8 mt-16 mr-4 md:hidden"
                         onClick={() => setShowLeftOnMobile(true)} />
                 </div>
+                <UploadFile/>
             </div>
         </div>
     );
