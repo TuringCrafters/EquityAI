@@ -71,13 +71,32 @@
     --ring: 212.7 26.8% 83.9%;
   }
 }
- 
+.slide-in {
+  transform: translateX(0%);
+  transition: transform 0.3s ease-in-out;
+  width: 100%; 
+}
+
+.slide-out {
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+  width: 100%;
+}
+
+
+
 @layer base {
   * {
     @apply border-border;
   }
   body {
     @apply bg-neutral-100 text-neutral-700;
+  }
+}
+
+@media (min-width: 768px) { 
+  .slide-in, .slide-out {
+    transform: translateX(0%);
   }
 }
 
