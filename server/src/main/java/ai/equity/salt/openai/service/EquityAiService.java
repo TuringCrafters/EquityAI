@@ -65,6 +65,9 @@ public class EquityAiService {
 
 
         var overview = jobDataList.stream().collect(Collectors.summarizingDouble(JobDataSet::getSalary));
+        var overview1 = jobDataList.stream().collect(Collectors.summarizingDouble(JobDataSet::getAge));
+        overview1.getAverage(); // age
+        overview.getAverage(); // salary
         var totalNumberOfJobs = overview.getCount();
         var topFiveHighestPayingPositions = jobDataList.stream()
                 .sorted(Comparator.comparing(JobDataSet::getSalary).reversed())
