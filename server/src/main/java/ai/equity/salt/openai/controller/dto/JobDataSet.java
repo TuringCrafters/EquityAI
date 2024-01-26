@@ -6,6 +6,7 @@ import lombok.ToString;
 
 @Setter
 @Getter
+@NoArgsConstructor
 @ToString
 public class JobDataSet {
     private String id;
