@@ -10,10 +10,7 @@ export type Analysis = {
   location_details: LocationDetails[];
   gender_pay_gap: string;
   company_overview: {
-    average_age: number;
-    average_salary: number;
-    average_tenure: number;
-    top_five_highest_paying_positions:[
+    top_five_highest_paying_positions: [
       { position: string; salary: number },
       { position: string; salary: number },
       { position: string; salary: number },
@@ -21,5 +18,9 @@ export type Analysis = {
       { position: string; salary: number }
     ];
     total_number_of_employees: number;
+    gender_ratio: Record<string, number>;
+    average_age: number;
+    average_salary: number;
+    average_tenure: number;
   };
 };
