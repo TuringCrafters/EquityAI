@@ -1,4 +1,4 @@
-export const splitTextIntoTwoParts = (text: String ) => {
+export const splitTextIntoTwoParts = (text: string ) => {
     const splitText = text?.split('.') || [];
     const midpoint = Math.ceil(splitText.length / 2);
     const firstHalf = splitText.slice(0, midpoint).join('.');
