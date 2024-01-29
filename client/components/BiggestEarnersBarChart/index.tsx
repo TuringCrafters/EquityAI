@@ -1,6 +1,6 @@
 import { DataContext } from "@/services/provider";
 import React, { useContext } from "react";
-import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer } from "recharts";
+import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, LabelList } from "recharts";
 
 export default function HorizontalBarChart() {
   const { data } = useContext(DataContext);
@@ -24,18 +24,25 @@ export default function HorizontalBarChart() {
             left: 20,
           }}
         >
-          <XAxis type="number" tick={false} axisLine={false} />
+          <XAxis type="number" tick={false} axisLine={false} label='sek/month'/>
           <YAxis
             dataKey="position"
             type="category"
-            className="text-xs text-neutral-500"
+            className="text-xs text-neutral-500 "
           />
           <Bar
             dataKey="salary"
             fill="#376bec"
             barSize={30}
             radius={[0, 100, 100, 0]}
+            >
+             
+          <LabelList 
+          dataKey="salary"
+          position="outside"
+          fill="white"
           />
+          </Bar>
         </BarChart>
       </ResponsiveContainer>
     </div>
