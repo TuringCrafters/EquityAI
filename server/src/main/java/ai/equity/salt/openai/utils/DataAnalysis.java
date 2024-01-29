@@ -8,6 +8,8 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import static java.util.function.UnaryOperator.identity;
+
 public class DataAnalysis {
 
 
@@ -72,10 +74,10 @@ public class DataAnalysis {
         return new ArrayList<>(uniqueJobTitles);
     }
 
-    public static String mostCommonJob(List<String> jobTitles) {
-        return jobTitles
-                .stream()
-                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+    public static String mostCommonJob(List<JobDataSet> jobDataSetList) {
+        return jobDataSetList.stream()
+                .map(JobDataSet::getPosition)
+                .collect(Collectors.groupingBy(identity(), Collectors.counting()))
                 .entrySet()
                 .stream()
                 .max(Map.Entry.comparingByValue())
