@@ -4,6 +4,7 @@ import ai.equity.salt.openai.controller.dto.CompanyOverview;
 import ai.equity.salt.openai.controller.dto.EquityAiResponse;
 import ai.equity.salt.openai.controller.dto.JobDataSet;
 import ai.equity.salt.openai.controller.dto.SalaryDatapoint;
+import ai.equity.salt.openai.exception.custom.FileReaderException;
 import ai.equity.salt.openai.file.reader.implementation.CsvFileReader;
 import ai.equity.salt.openai.file.reader.implementation.XlsxFileReader;
 import ai.equity.salt.openai.model.EquityAi;
@@ -13,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.UnsupportedMediaTypeStatusException;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -48,7 +50,7 @@ public class EquityAiService {
         return stringBuilder.toString();
     }
 
-    public EquityAiResponse analyzeFile(MultipartFile file) throws IOException {
+    public EquityAiResponse analyzeFile(MultipartFile file) {
         List<JobDataSet> jobDataList = readAnyFile(file);
         var ageStats = jobDataList.stream().collect(Collectors.summarizingDouble(JobDataSet::getAge));
         var salaryStats = jobDataList.stream().collect(Collectors.summarizingDouble(JobDataSet::getSalary));
@@ -98,13 +100,18 @@ public class EquityAiService {
                 companyOverview);
     }
 
-    public List<JobDataSet> readAnyFile(MultipartFile file) throws IOException {
+    public List<JobDataSet> readAnyFile(MultipartFile file) {
         String fileExtension = Objects.requireNonNull(file.getOriginalFilename()).split("\\.")[1];
 
-        return switch (fileExtension) {
-            case "csv" -> csvFileReader.readFile(file.getInputStream());
-            case "xlsx" -> xlsxFileReader.readFile(file.getInputStream());
-            default -> throw new IllegalArgumentException("Unsupported file. Please use .csv or .xlsx");
-        };
+        try {
+            return switch (fileExtension) {
+                case "csv" -> csvFileReader.readFile(file.getInputStream());
+                case "xlsx" -> xlsxFileReader.readFile(file.getInputStream());
+                default -> throw new UnsupportedMediaTypeStatusException("Unsupported file. Please use .csv or .xlsx");
+            };
+        } catch (IOException e) {
+            log.error(e.getLocalizedMessage());
+            throw new FileReaderException();
+        }
     }
 }
