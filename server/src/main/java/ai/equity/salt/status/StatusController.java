@@ -13,7 +13,7 @@ public class StatusController {
 
     @RequestMapping(method = {HEAD})
     @ResponseStatus(OK)
-    public void status(){
+    public void status() {
     /*
     Only returns the status code 200
      */
