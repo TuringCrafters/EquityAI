@@ -21,6 +21,7 @@ public class OpenAiModelFactory {
                 .logResponses(true)
                 .build();
     }
+
     public OpenAiChatModel createDefaultChatModel() {
         return OpenAiChatModel.builder()
                 .modelName(GPT_3_5_TURBO_1106)

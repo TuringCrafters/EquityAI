@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class SalaryDatapoint<T>{
+public class SalaryDatapoint<T> {
     private T dataValue;
     private SalaryRangeDatapoint salary;
 }

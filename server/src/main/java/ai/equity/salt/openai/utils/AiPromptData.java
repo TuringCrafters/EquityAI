@@ -39,7 +39,8 @@ public class AiPromptData {
             Based on the following list, replace the headers where suitable;
 
             """;
-    public static List<String> datapointFields(){
+
+    public static List<String> datapointFields() {
 
         return Arrays.stream(JobDataSet.class.getDeclaredFields())
                 .map(Field::getName).toList();
