@@ -1,6 +1,7 @@
 package ai.equity.salt.openai.file.reader.implementation;
 
 import ai.equity.salt.openai.controller.dto.JobDataSet;
+import ai.equity.salt.openai.exception.custom.FileReaderException;
 import ai.equity.salt.openai.file.reader.FileReader;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.*;
@@ -21,7 +22,8 @@ public class XlsxFileReader implements FileReader {
         try {
             dataSet = new XSSFWorkbook(fileInputStream);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            log.error(e.getLocalizedMessage());
+            throw new FileReaderException();
         }
         Sheet sheet = dataSet.getSheetAt(0);
         sheet.removeRow(sheet.getRow(0));
@@ -31,24 +33,24 @@ public class XlsxFileReader implements FileReader {
             List<String> rowData = new ArrayList<>();
             JobDataSet jobData;
 
-                for (Cell cell : row) {
-                    String cellValue;
-                    switch (cell.getCellType()) {
-                        case STRING:
-                            cellValue = cell.getStringCellValue();
-                            break;
-                        case NUMERIC:
-                            if (DateUtil.isCellDateFormatted(cell)) {
-                                cellValue = cell.getDateCellValue().toString();
-                            } else {
-                                cellValue = String.valueOf(cell.getNumericCellValue());
-                            }
-                            break;
-                        default:
-                            cellValue = "N/A";
-                    }
-                    rowData.add(cellValue);
+            for (Cell cell : row) {
+                String cellValue;
+                switch (cell.getCellType()) {
+                    case STRING:
+                        cellValue = cell.getStringCellValue();
+                        break;
+                    case NUMERIC:
+                        if (DateUtil.isCellDateFormatted(cell)) {
+                            cellValue = cell.getDateCellValue().toString();
+                        } else {
+                            cellValue = String.valueOf(cell.getNumericCellValue());
+                        }
+                        break;
+                    default:
+                        cellValue = "N/A";
                 }
+                rowData.add(cellValue);
+            }
             try {
                 jobData = new JobDataSet(rowData);
             } catch (NoSuchElementException e) {

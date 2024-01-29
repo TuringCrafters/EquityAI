@@ -13,7 +13,6 @@ import static java.util.function.UnaryOperator.identity;
 public class DataAnalysis {
 
 
-
     public static double calculateAverage(List<Double> salaries) {
         return round(salaries.stream().mapToDouble(Double::doubleValue).average().orElse(0));
     }
@@ -101,7 +100,7 @@ public class DataAnalysis {
         return jobDataList.stream().collect(Collectors.groupingBy(JobDataSet::getGender, Collectors.counting()));
     }
 
-    public static double round(double number){
-        return (double) Math.round(number * 100)/100;
+    public static double round(double number) {
+        return (double) Math.round(number * 100) / 100;
     }
 }

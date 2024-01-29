@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @RequiredArgsConstructor
-public class WebConfig{
+public class WebConfig {
 
     private final WebsiteProperties properties;
 
@@ -17,7 +17,7 @@ public class WebConfig{
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
             @Override
-            public void addCorsMappings (@NotNull CorsRegistry registry){
+            public void addCorsMappings(@NotNull CorsRegistry registry) {
                 registry.addMapping("/api/**")
                         .allowedOrigins(properties.frontend())
                         .allowedMethods("GET", "POST", "DELETE", "PUT");

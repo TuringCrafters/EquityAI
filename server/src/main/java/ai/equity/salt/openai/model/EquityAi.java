@@ -32,5 +32,6 @@ public class EquityAi {
         this.recommendation = recommendation;
     }
 
-    public EquityAi() {}
+    public EquityAi() {
+    }
 }

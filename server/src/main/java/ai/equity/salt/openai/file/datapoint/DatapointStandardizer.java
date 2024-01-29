@@ -13,6 +13,7 @@ import static ai.equity.salt.openai.utils.AiPromptData.DATAPOINT_EXTRACTOR_PROMP
 @RequiredArgsConstructor
 public class DatapointStandardizer {
     private final OpenAiModelFactory openAiModelFactory;
+
     public List<String> getFileStandardizedDataPoints(List<String> fileDataPoints) {
         return Collections.singletonList(openAiModelFactory.createDefaultChatModel()
                 .generate(DATAPOINT_EXTRACTOR_PROMPT + fileDataPoints));

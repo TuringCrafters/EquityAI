@@ -1,9 +1,12 @@
 package ai.equity.salt.openai.file.reader.implementation;
 
 import ai.equity.salt.openai.controller.dto.JobDataSet;
+import ai.equity.salt.openai.exception.custom.CsvFileReaderException;
+import ai.equity.salt.openai.exception.custom.FileReaderException;
 import ai.equity.salt.openai.file.reader.FileReader;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,6 +16,7 @@ import java.util.List;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
+@Slf4j
 public class CsvFileReader implements FileReader {
 
     @Override
@@ -39,9 +43,11 @@ public class CsvFileReader implements FileReader {
                 jobDataList.add(jobData);
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            log.error(e.getLocalizedMessage());
+            throw new FileReaderException();
         } catch (CsvValidationException e) {
-            throw new RuntimeException(e);
+            log.error(e.getLocalizedMessage());
+            throw new CsvFileReaderException();
         }
         return jobDataList;
     }

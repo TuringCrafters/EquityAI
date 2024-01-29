@@ -3,7 +3,6 @@ package ai.equity.salt.openai.controller;
 import ai.equity.salt.openai.controller.dto.EquityAiResponse;
 import ai.equity.salt.openai.controller.dto.JobDataSet;
 import ai.equity.salt.openai.service.EquityAiService;
-import com.opencsv.exceptions.CsvValidationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
