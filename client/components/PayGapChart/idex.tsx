@@ -79,7 +79,7 @@ export const PayGapPieChart = () => {
             ) : (
               <>
                 <div className="flex flex-col pt-4">
-                  <p className="text-sm text-neutral-500">Women only receive</p>
+                  <p className="text-sm text-neutral-500">Women receive</p>
                   <h4 className=" font-bold text-4xl">{womenPayGap}%</h4>
                 </div>
               </>
