@@ -86,6 +86,7 @@ public class EquityAiService {
         }
 
         var companyOverview = new CompanyOverview(topFiveHighestPayingPositions, jobDataList.size(),
+                calculateGenderRatio(jobDataList),
                 (int) ageStats.getAverage(),
                 (int) tenureStats.getAverage(),
                 (int) salaryStats.getAverage());
