@@ -59,10 +59,9 @@ public class EquityAiService {
 
         var jobDataStringList = jobDataList.stream().map(JobDataSet::toString).toList();
 
-        var jobTitles = findUniqueJobs(jobDataList);
-        var uniqueJobTitles = new HashSet<>(jobTitles);
+        var uniqueJobTitles = findUniqueJobs(jobDataList);
 
-        String mostCommonJob = mostCommonJob(jobTitles);
+        String mostCommonJob = mostCommonJob(jobDataList);
 
         List<SalaryDatapoint<Integer>> experienceDataPoints = averageSalaryByDatapoint(jobDataList, mostCommonJob,
                 JobDataSet::getExperience);

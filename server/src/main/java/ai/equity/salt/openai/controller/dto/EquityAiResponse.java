@@ -6,7 +6,7 @@ import java.util.Set;
 public record EquityAiResponse(
         String response,
         String productRecommendation,
-        Set<String> uniqueJobTitles,
+        List<String> uniqueJobTitles,
         String jobTitle,
         List<SalaryDatapoint<Integer>> experienceDetails,
         List<SalaryDatapoint<String>> locationDetails,
