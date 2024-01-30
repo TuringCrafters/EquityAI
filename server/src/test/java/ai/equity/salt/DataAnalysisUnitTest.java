@@ -19,8 +19,8 @@ class DataAnalysisUnitTest  {
     @SneakyThrows
     void test(){
 
-        var dataSetFile = new File("src/test/java/ai/equity/salt/data/DataSet.csv");
-        Assertions.assertEquals("DataSet.csv", dataSetFile.toPath().getFileName().toString());
+        var dataSetFile = new File("src/test/java/ai/equity/salt/data/Dataset.csv");
+        Assertions.assertEquals("Dataset.csv", dataSetFile.toPath().getFileName().toString());
         Assertions.assertTrue(dataSetFile.exists());
 
         var jobDataList = csvFileReader.readFile(new FileInputStream(dataSetFile));
