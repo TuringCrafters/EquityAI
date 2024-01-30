@@ -28,4 +28,4 @@ jobs:
 
       - name: Run BE File Tests
         run: |
-          mvn -f server/pom.xml test -Dtest="ai.equity.salt.openai.file.**"
+          mvn -f server/pom.xml test -Dtest="ai.equity.salt.openai.file"
