@@ -1,4 +1,4 @@
-name: Run BE Data Analysis Tests
+name: Run BE Utils Tests
 on:
   push:
     paths:
@@ -27,4 +27,4 @@ jobs:
 
       - name: Run BE Data Analysis Tests
         run: |
-          mvn -f server/pom.xml test -Dtest=DataAnalysisUnitTest
+          mvn -f server/pom.xml test -Dtest=ai.equity.salt.openai.utils
