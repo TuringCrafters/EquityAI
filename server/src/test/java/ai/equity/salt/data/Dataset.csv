@@ -1,0 +1,66 @@
+Unique-ID,Gender,Date of birth,Company tenure start date,Position,Salary ,Salary Increment 1,Salary year,Organization level 1,Location,Currency,Job Funtion,Level
+101,Male,1980-03-15,2022-01-10,Senior Software Engineer,95000,8,2023,Software Engineering,Stockholm,SEK,Engineering,3
+102,Female,1985-07-20,2021-11-05,Marketing Specialist,60000,15,2023,Marketing,Stockholm,SEK,Marketing,3
+103,Male,1992-11-30,2023-02-15,Financial Analyst,75000,5,2023,Finance,Stockholm,SEK,Finance,2
+104,Female,1988-04-18,2020-06-22,Human Resources Manager,90000,10,2023,Human Resources,Stockholm,SEK,Human Resources,4
+105,Male,1983-09-05,2022-03-10,Project Manager,70000,12,2023,Project Management,Stockholm,SEK,Project Management,4
+106,Male,1990-01-12,2021-09-30,Software Developer,75000,7,2023,Software Engineering,Stockholm,SEK,Engineering,3
+107,Female,1995-06-28,2021-04-15,Customer Support Representative,49000,6,2023,Customer Support,Stockholm,SEK,Customer Support,2
+108,Male,1987-12-03,2022-07-20,Sales Manager,100000,18,2023,Sales,Stockholm,SEK,Sales,5
+109,Female,1993-03-22,2021-08-08,IT Support Specialist,60000,9,2023,IT,Stockholm,SEK,IT,3
+110,Male,1989-08-14,2021-02-01,Operations Manager,95000,11,2023,Operations,Stockholm,SEK,Operations,4
+111,Male,1998-05-10,2022-09-15,Data Analyst,60000,15,2023,Data Analytics,Stockholm,SEK,Data Analytics,3
+112,Female,1991-11-19,2020-10-01,Marketing Coordinator,65000,6,2023,Marketing,Stockholm,SEK,Marketing,3
+113,Male,1997-07-03,2022-05-05,IT Support Specialist,65000,8,2023,IT,Stockholm,SEK,IT,3
+114,Female,1986-09-28,2021-06-14,Executive Assistant,62000,10,2023,Executive,Stockholm,SEK,Executive,4
+115,Male,1994-04-08,2021-10-18,Quality Assurance Analyst,70000,14,2023,Quality Assurance,Stockholm,SEK,Quality Assurance,3
+116,Female,1982-02-17,2021-01-01,Finance Manager,60000,5,2023,Finance,Stockholm,SEK,Finance,2
+117,Male,1984-10-20,2021-07-12,IT Manager,83333,12,2023,IT,Stockholm,SEK,IT,4
+118,Female,1989-12-15,2020-12-01,Customer Success Manager,63000,9,2023,Customer Success,Stockholm,SEK,Customer Success,3
+119,Male,1996-03-25,2021-03-01,Software Engineer,80000,7,2023,Software Engineering,Stockholm,SEK,Engineering,3
+120,Female,1990-08-02,2021-09-08,Marketing Manager,60000,6,2023,Marketing,Stockholm,SEK,Marketing,4
+121,Male,1985-12-08,2021-05-04,Software Engineer,79167,11,2023,Software Engineering,Stockholm,SEK,Engineering,3
+122,Female,1995-02-05,2021-10-11,HR Generalist,50667,10,2023,Human Resources,Malmö,SEK,Human Resources,3
+123,Male,1998-04-20,2021-10-24,Onsite Engineer,75000,8,2023,Onsite Operations,Malmö,SEK,Engineering,2
+124,Female,1974-01-24,2022-04-05,Project Coordinator,55000,12,2023,Project Management,Malmö,SEK,Project Management,3
+125,Male,1990-07-11,2022-06-01,Warehouse Supervisor,85000,14,2023,Warehouse Operations,Malmö,SEK,Operations,4
+126,Male,1992-05-24,2022-04-05,Software Engineer,60000,10,2023,Software Engineering,Malmö,SEK,Engineering,4
+127,Male,1975-10-09,2023-04-03,IT Specialist,75000,7,2023,IT,Malmö,SEK,IT,3
+128,Female,1978-11-13,2013-08-12,HR Coordinator,55000,13,2023,Human Resources,Malmö,SEK,Human Resources,3
+129,Male,1980-06-30,2013-07-01,Software Developer,83333,6,2023,Software Engineering,Malmö,SEK,Engineering,3
+130,Male,1978-02-13,2022-07-13,Product Manager,80000,11,2023,Product Management,Malmö,SEK,Product Management,4
+131,Male,1989-02-03,2014-05-12,Sales Coordinator,95000,8,2023,Sales,Malmö,SEK,Sales,5
+132,Female,1989-02-06,2021-02-08,Business Analyst,56167,5,2023,Business Analytics,Malmö,SEK,Analytics,4
+133,Female,1989-02-25,2021-02-01,HR Assistant,40000,9,2023,Human Resources,Malmö,SEK,Human Resources,3
+134,Male,1990-03-21,2022-08-26,IT Consultant,75000,14,2023,IT,Malmö,SEK,IT,3
+135,Male,1990-12-10,2020-11-09,Customer Service Representative,83333,10,2023,Customer Service,Malmö,SEK,Customer Service,4
+136,Female,1990-12-28,2022-09-26,Marketing Coordinator,38000,7,2023,Marketing,Gothenburg,SEK,Marketing,2
+137,Male,1991-02-24,2021-05-04,Financial Analyst,95000,12,2023,Financial,Gothenburg,SEK,Finance,3
+138,Female,1991-06-19,2020-09-07,Operations Coordinator,55000,6,2023,Operations,Gothenburg,SEK,Operations,4
+139,Female,1991-08-31,2022-10-13,Software Developer,70000,11,2023,Software Engineering,Gothenburg,SEK,Engineering,3
+140,Male,1992-09-08,2022-11-01,Project Manager,66667,10,2023,Project Management,Gothenburg,SEK,Project Management,2
+141,Male,1992-10-16,2020-07-06,IT Manager,70000,8,2023,IT,Gothenburg,SEK,IT,4
+142,Female,1992-12-18,2022-03-21,Quality Assurance Specialist,60000,5,2023,Quality Assurance,Gothenburg,SEK,Quality Assurance,3
+143,Male,1993-02-25,2021-08-23,Sales Manager,85000,15,2023,Sales,Gothenburg,SEK,Sales,3
+144,Male,1994-12-09,2022-09-12,Data Analyst,79167,9,2023,Data Analytics,Gothenburg,SEK,Data Analytics,2
+145,Male,1995-03-16,2021-11-22,IT Specialist,83333,7,2023,IT,Gothenburg,SEK,IT,4
+146,Female,1995-04-02,2020-09-07,Executive Assistant,35000,14,2023,Software Engineering,Gothenburg,SEK,Engineering,3
+147,Male,1996-02-07,2023-03-21,Software Engineer,79167,8,2023,Marketing,Gothenburg,SEK,Marketing,4
+148,Male,1996-11-04,2022-07-28,IT Support Specialist,95000,12,2023,Operations,Gothenburg,SEK,Operations,3
+149,Female,1998-07-15,2022-07-28,Customer Support Representative,45000,10,2023,Customer Support,Gothenburg,SEK,Customer Support,2
+150,Female,1996-01-24,2021-04-05,Software Engineer,50000,10,2023,Software Engineering,Malmö,SEK,Engineering,4
+151,Male,1988-02-11,2014-08-12,Sales Manager,95000,15,2023,Sales,Gothenburg,SEK,Sales,3
+152,Female,1991-04-01,2023-09-07,Software Engineer,45000,14,2023,Software Engineering,Gothenburg,SEK,Engineering,3
+152,Male,1987-12-08,2022-11-03,Software Engineer,77000,11,2023,Software Engineering,Stockholm,SEK,Engineering,3
+153,Female,1971-01-03,2007-10-11,HR Generalist,60667,10,2023,Human Resources,Stockholm,SEK,Human Resources,3
+154,Female,1985-12-03,2017-02-18,Business Analyst,58000,5,2023,Business Analytics,Malmö,SEK,Analytics,4
+155,Male,1997-05-11,2021-03-13,Software Engineer,66000,10,2023,Software Engineering,Gothenburg,SEK,Engineering,4
+156,Female,1985-12-04,2018-10-12,IT Specialist,80500,7,2023,IT,Malmö,SEK,IT,4
+157,Male,1991-03-15,2022-07-13,Sales Manager,95000,15,2023,Sales,Stockholm,SEK,Sales,3
+158,Female,1979-04-01,2020-10-07,Software Engineer,85000,14,2023,Software Engineering,Gothenburg,SEK,Engineering,3
+159,Male,1984-02-13,2017-08-19,Product Manager,101000,11,2023,Product Management,Stockholm,SEK,Product Management,4
+160,Female,1992-02-11,2023-10-19,Software Engineer,65000,14,2023,Software Engineering,Stockholm,SEK,Engineering,3
+161,Male,1981-04-01,2020-01-07,Software Engineer,95000,14,2023,Software Engineering,Stockholm,SEK,Engineering,3
+162,Female,1991-02-13,2019-05-12,Human Resources Manager,92000,10,2023,Human Resources,Stockholm,SEK,Human Resources,4
+163,Male,1991-02-11,2022-01-05,Data Analyst,62000,15,2023,Data Analytics,Malmö,SEK,Data Analytics,3
+164,Male,1988-07-17,2020-10-01,Software Engineer,108000,14,2023,Software Engineering,Stockholm,SEK,Engineering,3
