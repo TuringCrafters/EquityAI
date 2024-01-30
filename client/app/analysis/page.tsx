@@ -26,7 +26,7 @@ const AnalysisPage = () => {
       <AnalysisHeader/>
       <Button
         onClick={handlePDF}
-        className="absolute top-4 right-6 rounded-full bg-blue-600 "
+        className="absolute top-4 right-6 rounded-full bg-blue-600 noprint"
       >
         Save as PDF
       </Button>
