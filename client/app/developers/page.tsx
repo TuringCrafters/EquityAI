@@ -1,3 +1,4 @@
+import NavBar from '@/components/Navbar';
 import GitHubIcon from '@/public/icon/gitHubIcon';
 import { developers } from '@/services/devInfo';
 import { DeveloperCardProps } from '@/types/DeveloperCardProps';
@@ -31,20 +32,23 @@ const DeveloperCard: React.FC<DeveloperCardProps> = ({ name, role, avatar, info,
 
 const Developers = () => {
     return (
-        <div className="container mx-auto my-8 px-16">
-            <h3 className="text-center text-3xl font-bold mb-4">Developers Page</h3>
-            <div className="bg-white shadow-md rounded-2xl p-8 mb-6">
-                <p className="text-center">
-                    Welcome! Here you can find information and resources for developers working on EquityAI project.
-                </p>
+        <>
+            <NavBar link="analysis" buttonContent="Back to analysis" />
+            <div className="container mx-auto mt-16 mb-8 px-16">
+                <h3 className="text-center text-3xl font-bold mb-4">Developers Page</h3>
+                <div className="bg-white shadow-md rounded-2xl p-8 mb-6">
+                    <p className="text-center">
+                        Welcome! Here you can find information and resources for developers working on EquityAI project.
+                    </p>
+                </div>
+                <h4 className="text-center text-2xl font-bold my-8">Meet the Team</h4>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    {developers.map((developer, index) => (
+                        <DeveloperCard key={index} {...developer} />
+                    ))}
+                </div>
             </div>
-            <h4 className="text-center text-2xl font-bold my-8">Meet the Team</h4>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                {developers.map((developer, index) => (
-                    <DeveloperCard key={index} {...developer} />
-                ))}
-            </div>
-        </div>
+        </>
     )
 }
 
