@@ -83,6 +83,9 @@
   width: 100%;
 }
 
+.default-gradient {
+    background: linear-gradient(180deg,#f5f5f5 0,#c3d9f7 100%);
+}
 
 
 @layer base {
