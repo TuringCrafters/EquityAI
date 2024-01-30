@@ -38,6 +38,4 @@ class DataAnalysisUnitTest  {
         Assertions.assertEquals(37, result.get("Male"));
         Assertions.assertEquals(28, result.get("Female"));
     }
-
-
 }
