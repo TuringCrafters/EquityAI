@@ -1,4 +1,4 @@
-name: Run BE Equity Smoke Test
+name: Run BE Open Ai Api Tests
 on:
   push:
     paths:
@@ -26,6 +26,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-m2
 
-      - name: Run BE Equity Smoke Test
+      - name: Run BE Open Ai Api Tests
         run: |
-          mvn -f server/pom.xml test -Dtest=SmokeTest
+          mvn -f server/pom.xml test -Dtest=OpenAiApiTest
