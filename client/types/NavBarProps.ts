@@ -1,4 +1,4 @@
 export interface NavBarProps {
-    link: string; 
-    buttonContent: string;
+    link?: string; 
+    buttonContent?: string;
   }
