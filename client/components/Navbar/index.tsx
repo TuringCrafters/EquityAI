@@ -9,10 +9,10 @@ const NavBar: React.FC<NavBarProps> = ({
   const router = useRouter();
   return (
     <nav className="fixed flex justify-between z-20 top-0 left-0 right-0 h-12 bg-neutral-100 shadow md:shadow-lg">
-      <h1 className="text-2xl font-semibold ml-20  mt-2 tracking-tighter text-slate-950 hover:cursor-pointer"
+      <button className="text-2xl font-semibold ml-20  mt-2 tracking-tighter text-slate-950"
         onClick={() => router.push('/')}>
         equityAi
-      </h1>
+      </button>
       {link && buttonContent &&
         <button className="mr-8 hover:text-violet-800"
           onClick={() => router.push(`/${link}`)}>{buttonContent}</button>
