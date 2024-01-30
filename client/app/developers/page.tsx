@@ -33,7 +33,7 @@ const DeveloperCard: React.FC<DeveloperCardProps> = ({ name, role, avatar, info,
 const Developers = () => {
     return (
         <>
-            <NavBar link="analysis" buttonContent="Back to analysis" />
+            <NavBar />
             <div className="container mx-auto mt-16 mb-8 px-16">
                 <h3 className="text-center text-3xl font-bold mb-4">Developers Page</h3>
                 <div className="bg-white shadow-md rounded-2xl p-8 mb-6">
