@@ -2,10 +2,12 @@ package ai.equity.salt.openai.file.reader.implementation;
 
 import ai.equity.salt.openai.controller.dto.JobDataSet;
 import ai.equity.salt.openai.exception.custom.FileReaderException;
+import ai.equity.salt.openai.file.datapoint.DateConverter;
 import ai.equity.salt.openai.file.reader.FileReader;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -52,7 +54,7 @@ public class XlsxFileReader implements FileReader {
                 rowData.add(cellValue);
             }
             try {
-                jobData = new JobDataSet(rowData);
+                jobData = getJobDataSet(rowData);
             } catch (NoSuchElementException e) {
                 log.error(String.valueOf(e));
                 return data;
@@ -62,5 +64,19 @@ public class XlsxFileReader implements FileReader {
 
         }
         return data;
+    }
+
+    @NotNull
+    private static JobDataSet getJobDataSet(List<String> rowData) {
+        JobDataSet jobData = new JobDataSet();
+        jobData.setId(rowData.getFirst());
+        jobData.setGender(rowData.get(1));
+        jobData.setAge(DateConverter.calculateYears(rowData.get(2)));
+        jobData.setExperience(DateConverter.calculateYears(rowData.get(3)));
+        jobData.setPosition(rowData.get(4));
+        jobData.setSalary(Double.parseDouble(rowData.get(5)));
+        jobData.setGeographicLocation(rowData.get(9));
+        jobData.setCurrency(rowData.get(10));
+        return jobData;
     }
 }
