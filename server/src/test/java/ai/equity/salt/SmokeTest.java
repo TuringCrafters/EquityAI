@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Import;
 
 @SpringBootTest
 @Import(LocalDevTestcontainersConfig.class)
-class ApplicationTests {
+class SmokeTest {
 
 	@Autowired
 	private EquityAiController controller;

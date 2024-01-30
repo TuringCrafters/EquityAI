@@ -1,8 +1,9 @@
-name: Run BE Equity Application Tests
+name: Run BE Utils Tests
 on:
   push:
     paths:
       - "server/**"
+      - ".github/**"
 
 jobs:
   run_tests:
@@ -25,6 +26,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-m2
 
-      - name: Run BE Equity Application Tests
+      - name: Run BE Data Analysis Tests
         run: |
-          mvn -f server/pom.xml test -Dtest=ApplicationTests
+          mvn -f server/pom.xml test -Dtest="ai.equity.salt.openai.utils.**"

@@ -3,6 +3,8 @@ on:
   push:
     paths:
       - "server/**"
+      - ".github/**"
+
 jobs:
   run_tests:
     runs-on: ubuntu-22.04
