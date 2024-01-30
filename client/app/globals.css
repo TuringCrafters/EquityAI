@@ -116,4 +116,18 @@
     margin-left: 1rem;
     margin-right: 1rem;
   }
+  .print-overall {
+    flex-direction: column;
+  }
+
+  .print-overall__chart {
+    width: 100%;
+    border: none;
+    margin-bottom: 2rem;
+  }
+
+  .print-overall__boxes {
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+  }
 }
