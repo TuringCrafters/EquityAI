@@ -25,6 +25,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-m2
 
-      - name: Run BE Equity Application Tests
+      - name: Run BE Equity Smoke Test
         run: |
           mvn -f server/pom.xml test -Dtest=SmokeTest
