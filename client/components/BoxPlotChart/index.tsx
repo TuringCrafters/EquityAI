@@ -1,7 +1,12 @@
+"use client";
+
 import React from "react";
-import ReactApexChart from "react-apexcharts";
 import { ApexOptions } from "apexcharts";
 import { LocationDetails } from "@/types/LocationDetails";
+import dynamic from "next/dynamic";
+const ReactApexChart = dynamic(() => import("react-apexcharts"), {
+  ssr: false,
+});
 
 type BoxPlotChartProps = {
   data: LocationDetails[];
@@ -66,14 +71,18 @@ export default function BoxPlotChart({ data }: BoxPlotChartProps) {
 
   return (
     <>
-      <ReactApexChart
-        options={options}
-        series={[
-          { data: chartData.map((item) => ({ x: item?.name, y: item?.data })) },
-        ]}
-        type="boxPlot"
-        height={400}
-      />
+      {typeof window !== "undefined" && (
+        <ReactApexChart
+          options={options}
+          series={[
+            {
+              data: chartData.map((item) => ({ x: item?.name, y: item?.data })),
+            },
+          ]}
+          type="boxPlot"
+          height={400}
+        />
+      )}
     </>
   );
 }
