@@ -19,8 +19,8 @@ class DataAnalysisUnitTest  {
     @SneakyThrows
     void test(){
 
-        var dataSetFile = new File("src/test/java/ai/equity/salt/data/DataSet.csv");
-        Assertions.assertEquals("DataSet.csv", dataSetFile.toPath().getFileName().toString());
+        var dataSetFile = new File("src/test/java/ai/equity/salt/data/Dataset.csv");
+        Assertions.assertEquals("Dataset.csv", dataSetFile.toPath().getFileName().toString());
         Assertions.assertTrue(dataSetFile.exists());
 
         var jobDataList = csvFileReader.readFile(new FileInputStream(dataSetFile));
@@ -32,12 +32,10 @@ class DataAnalysisUnitTest  {
     @SneakyThrows
     void calculateGenderRatioTest(){
 
-        var dataSetFile = new File("src/test/java/ai/equity/salt/data/DataSet.csv");
+        var dataSetFile = new File("src/test/java/ai/equity/salt/data/Dataset.csv");
         var jobDataList = csvFileReader.readFile(new FileInputStream(dataSetFile));
         var result = calculateGenderRatio(jobDataList);
-        Assertions.assertEquals(14, result.get("Male"));
-        Assertions.assertEquals(36, result.get("Female"));
+        Assertions.assertEquals(37, result.get("Male"));
+        Assertions.assertEquals(28, result.get("Female"));
     }
-
-
 }
