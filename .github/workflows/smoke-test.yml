@@ -27,4 +27,4 @@ jobs:
 
       - name: Run BE Equity Application Tests
         run: |
-          mvn -f server/pom.xml test -Dtest=SomeTest
+          mvn -f server/pom.xml test -Dtest=SmokeTest
