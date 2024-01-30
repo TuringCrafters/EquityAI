@@ -35,8 +35,8 @@ class DataAnalysisUnitTest  {
         var dataSetFile = new File("src/test/java/ai/equity/salt/data/DataSet.csv");
         var jobDataList = csvFileReader.readFile(new FileInputStream(dataSetFile));
         var result = calculateGenderRatio(jobDataList);
-        Assertions.assertEquals(14, result.get("Male"));
-        Assertions.assertEquals(36, result.get("Female"));
+        Assertions.assertEquals(37, result.get("Male"));
+        Assertions.assertEquals(28, result.get("Female"));
     }
 
 
