@@ -14,7 +14,12 @@ export default function Footer() {
         <div className="">
           <h5>Turing Crafters</h5>
           <div className="flex items-center justify-center space-x-4">
-            <GitHubIcon />
+            <a
+              href="https://github.com/TuringCrafters/EquityAI"
+              target="_blank"
+            >
+              <GitHubIcon />
+            </a>
           </div>
         </div>
       </div>
