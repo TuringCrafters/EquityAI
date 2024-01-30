@@ -30,7 +30,7 @@ const AnalysisPage = () => {
       >
         Save as PDF
       </Button>
-      {/* <Button className="absolute top-4 right-36 rounded-full bg-blue-600 ">
+      {/* <Button className="absolute top-4 right-36 rounded-full bg-blue-600 noprint">
         Share PDF
       </Button> */}
       <OveralAnalysis/>
