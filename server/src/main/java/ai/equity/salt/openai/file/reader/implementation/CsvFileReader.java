@@ -3,10 +3,12 @@ package ai.equity.salt.openai.file.reader.implementation;
 import ai.equity.salt.openai.controller.dto.JobDataSet;
 import ai.equity.salt.openai.exception.custom.CsvFileReaderException;
 import ai.equity.salt.openai.exception.custom.FileReaderException;
+import ai.equity.salt.openai.file.datapoint.DateConverter;
 import ai.equity.salt.openai.file.reader.FileReader;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
 import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -32,13 +34,7 @@ public class CsvFileReader implements FileReader {
                 if (nextRecord.length < 6) {
                     continue;
                 }
-                JobDataSet jobData = new JobDataSet();
-                jobData.setPosition(nextRecord[0]);
-                jobData.setSalary(Double.parseDouble(nextRecord[1]));
-                jobData.setExperience(Integer.parseInt(nextRecord[2]));
-                jobData.setAge(Integer.parseInt(nextRecord[3]));
-                jobData.setGeographicLocation(nextRecord[4]);
-                jobData.setGender(nextRecord[5]);
+                JobDataSet jobData = getJobDataSet(nextRecord);
 
                 jobDataList.add(jobData);
             }
@@ -50,5 +46,19 @@ public class CsvFileReader implements FileReader {
             throw new CsvFileReaderException();
         }
         return jobDataList;
+    }
+
+    @NotNull
+    private static JobDataSet getJobDataSet(String[] nextRecord) {
+        JobDataSet jobData = new JobDataSet();
+        jobData.setId(nextRecord[0]);
+        jobData.setGender(nextRecord[1]);
+        jobData.setAge(DateConverter.calculateYears(nextRecord[2]));
+        jobData.setExperience(DateConverter.calculateYears(nextRecord[3]));
+        jobData.setPosition(nextRecord[4]);
+        jobData.setSalary(Double.parseDouble(nextRecord[5]));
+        jobData.setGeographicLocation(nextRecord[9]);
+        jobData.setCurrency(nextRecord[10]);
+        return jobData;
     }
 }

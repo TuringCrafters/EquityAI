@@ -9,6 +9,7 @@ import { MostCommonPosition } from "@/containers/analysis-page/most-common-posit
 import { Insights } from "@/containers/analysis-page/insights-section/indext";
 import { Recommendations } from "@/containers/analysis-page/recomendation-section";
 import NavBarAnalysis from "@/components/NavbarAnalysis";
+import Footer from "@/components/Footer";
 
 const AnalysisPage = () => {
   const pageRef = useRef<HTMLElement | null>(null);
@@ -30,10 +31,11 @@ const AnalysisPage = () => {
       {/* <Button className="absolute top-4 right-36 rounded-full bg-blue-600 ">
         Share PDF
       </Button> */}
-      <OveralAnalysis />
-      <Insights />
-      <MostCommonPosition />
-      <Recommendations />
+      <OveralAnalysis/>
+      <Insights/>
+     <MostCommonPosition/>
+     <Recommendations/>
+     <Footer />
     </main>
   );
 };

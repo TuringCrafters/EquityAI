@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.util.List;
 
+import static ai.equity.salt.openai.utils.DataAnalysis.calculateGenderRatio;
 import static ai.equity.salt.openai.utils.DataAnalysis.mostCommonJob;
 
 class DataAnalysisTest {
@@ -24,11 +25,11 @@ class DataAnalysisTest {
     @SneakyThrows
     void testMostCommonJobCsv() {
 
-        var dataSetFile = new File("src/test/java/ai/equity/salt/data/DataSet.csv");
+        var dataSetFile = new File("src/test/java/ai/equity/salt/data/Dataset.csv");
 
         var jobDataList = csvFileReader.readFile(new FileInputStream(dataSetFile));
         var mostCommonJOb = mostCommonJob(jobDataList);
-        Assertions.assertEquals("Financial Analyst", mostCommonJOb);
+        Assertions.assertEquals("Software Engineer", mostCommonJOb);
     }
 
     @Test
@@ -40,6 +41,30 @@ class DataAnalysisTest {
         var jobDataList = xlsxFileReader.readFile(new FileInputStream(dataSetFile));
         var mostCommonJOb = mostCommonJob(jobDataList);
         Assertions.assertEquals("Software Engineer", mostCommonJOb);
+    }
+
+    @Test
+    @SneakyThrows
+    void test(){
+
+        var dataSetFile = new File("src/test/java/ai/equity/salt/data/Dataset.csv");
+        Assertions.assertEquals("Dataset.csv", dataSetFile.toPath().getFileName().toString());
+        Assertions.assertTrue(dataSetFile.exists());
+
+        var jobDataList = csvFileReader.readFile(new FileInputStream(dataSetFile));
+
+        System.out.println(jobDataList);
+    }
+
+    @Test
+    @SneakyThrows
+    void calculateGenderRatioTest(){
+
+        var dataSetFile = new File("src/test/java/ai/equity/salt/data/Dataset.csv");
+        var jobDataList = csvFileReader.readFile(new FileInputStream(dataSetFile));
+        var result = calculateGenderRatio(jobDataList);
+        Assertions.assertEquals(37, result.get("Male"));
+        Assertions.assertEquals(28, result.get("Female"));
     }
 
 }
