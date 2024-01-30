@@ -1,10 +1,6 @@
 "use client";
+import { NavBarProps } from "@/types/NavBarProps";
 import { useRouter } from "next/navigation";
-
-interface NavBarProps {
-  link: string; 
-  buttonContent: string;
-}
 
 const NavBar: React.FC<NavBarProps> = ({
   link, 
