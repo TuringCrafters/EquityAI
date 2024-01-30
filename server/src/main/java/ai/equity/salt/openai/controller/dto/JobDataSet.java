@@ -29,7 +29,7 @@ public class JobDataSet {
         this.experience = DateConverter.calculateYears(rowData.get(3));
         this.position = rowData.get(4);
         this.salary = Double.parseDouble(rowData.get(5));
-        this.currency = rowData.get(10);
         this.geographicLocation = rowData.get(9);
+        this.currency = rowData.get(10);
     }
 }
