@@ -1,7 +1,15 @@
 "use client";
 import { useRouter } from "next/navigation";
 
-export default function NavBar() {
+interface NavBarProps {
+  link: string; 
+  buttonContent: string;
+}
+
+const NavBar: React.FC<NavBarProps> = ({
+  link, 
+  buttonContent
+}) => {
   const router = useRouter();
   return (
     <nav className="fixed flex justify-between z-20 top-0 left-0 right-0 h-12 bg-neutral-100 shadow md:shadow-lg">
@@ -9,7 +17,9 @@ export default function NavBar() {
         equityAi
       </h1>
       <button className="mr-8 hover:text-violet-800" 
-      onClick={() => router.push("/developers")}>About developers</button>
+      onClick={() => router.push(`/${link}`)}>{buttonContent}</button>
     </nav>
   );
 }
+
+export default NavBar;
