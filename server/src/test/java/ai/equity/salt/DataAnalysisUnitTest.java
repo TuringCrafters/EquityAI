@@ -32,7 +32,7 @@ class DataAnalysisUnitTest  {
     @SneakyThrows
     void calculateGenderRatioTest(){
 
-        var dataSetFile = new File("src/test/java/ai/equity/salt/data/DataSet.csv");
+        var dataSetFile = new File("src/test/java/ai/equity/salt/data/Dataset.csv");
         var jobDataList = csvFileReader.readFile(new FileInputStream(dataSetFile));
         var result = calculateGenderRatio(jobDataList);
         Assertions.assertEquals(37, result.get("Male"));
