@@ -28,4 +28,4 @@ jobs:
 
       - name: Run BE Data Analysis Tests
         run: |
-          mvn -f server/pom.xml test -Dtest="ai.equity.salt.openai.utils"
+          mvn -f server/pom.xml test -Dtest="ai.equity.salt.openai.utils.**"
