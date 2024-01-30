@@ -9,6 +9,7 @@ import { MostCommonPosition } from "@/containers/analysis-page/most-common-posit
 import { Insights } from "@/containers/analysis-page/insights-section/indext";
 import { Recommendations } from "@/containers/analysis-page/recomendation-section";
 import NavBarAnalysis from "@/components/NavbarAnalysis";
+import Footer from "@/components/Footer";
 
 
 
@@ -36,6 +37,7 @@ const AnalysisPage = () => {
       <Insights/>
      <MostCommonPosition/>
      <Recommendations/>
+     <Footer />
     </main>
   );
 };
