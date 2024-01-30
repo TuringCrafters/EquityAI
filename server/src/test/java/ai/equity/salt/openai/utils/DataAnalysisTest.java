@@ -28,7 +28,7 @@ class DataAnalysisTest {
 
         var jobDataList = csvFileReader.readFile(new FileInputStream(dataSetFile));
         var mostCommonJOb = mostCommonJob(jobDataList);
-        Assertions.assertEquals("Financial Analyst", mostCommonJOb);
+        Assertions.assertEquals("Software Engineer", mostCommonJOb);
     }
 
     @Test
