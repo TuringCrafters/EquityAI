@@ -1,6 +1,4 @@
 import DownloadIcon from "@/public/icon/downloadIcon";
-import { Download } from "lucide-react";
-import Link from "next/link";
 
 const SampleFileForUpload = () => {
   const handleDownload = (fileName: string) => {
