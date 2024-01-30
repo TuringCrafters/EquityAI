@@ -6,7 +6,7 @@ import React from 'react'
 
 const DeveloperCard: React.FC<DeveloperCardProps> = ({ name, role, avatar, info, linkedin, github }) => (
     <div className="card bg-white shadow-md rounded-lg overflow-hidden">
-        <img src={`/devAvatars/${avatar}`} alt={`${name} avatar`} className="w-24 h-24 mx-auto mt-4" />
+        <img src={`/devAvatars/${avatar}`} alt={`${name} avatar`} className="w-40 h-40 mx-auto mt-4" />
         <div className="p-4">
             <h6 className="text-center text-lg font-semibold">{name}</h6>
             <p className="text-center text-sm text-gray-600 py-2">{role}</p>
