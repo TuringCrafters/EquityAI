@@ -4,7 +4,7 @@ import NavBar from "@/components/Navbar";
 
 export default function Home() {
   return <div>
-  <NavBar />
+  <NavBar link="developers" buttonContent="About developers"/>
   <HomePage />
 </div>
 }
