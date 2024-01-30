@@ -51,4 +51,18 @@ public class CsvFileReader implements FileReader {
         }
         return jobDataList;
     }
+
+    @NotNull
+    private static JobDataSet getJobDataSet(String[] nextRecord) {
+        JobDataSet jobData = new JobDataSet();
+        jobData.setId(nextRecord[0]);
+        jobData.setGender(nextRecord[1]);
+        jobData.setAge(DateConverter.calculateYears(nextRecord[2]));
+        jobData.setExperience(DateConverter.calculateYears(nextRecord[3]));
+        jobData.setPosition(nextRecord[4]);
+        jobData.setSalary(Double.parseDouble(nextRecord[5]));
+        jobData.setGeographicLocation(nextRecord[9]);
+        jobData.setCurrency(nextRecord[10]);
+        return jobData;
+    }
 }
