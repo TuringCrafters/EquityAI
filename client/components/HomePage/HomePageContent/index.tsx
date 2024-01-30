@@ -62,6 +62,7 @@ const HomePageContent: React.FC<HomePageContentType> = ({
                     <SampleFileForUpload />
                 </div>
             </div>
+            <div className="mt-8 ml-4">&copy;EquityAi, 2024</div>
         </div>
     )
 }
