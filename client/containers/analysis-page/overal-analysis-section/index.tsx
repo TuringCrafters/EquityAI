@@ -28,7 +28,7 @@ export const OveralAnalysis = () => {
   );
 
   return (
-    <section className="flex flex-row justify-evenly mx-20 mt-10 ">
+    <section className="flex flex-row justify-evenly mx-20 mt-10 print">
       <article className="w-1/2 border-r-2 border-neutral-200">
         <div className="px-20">
           <h2 className="text-slate-950 text-2xl font-bold">

@@ -2,7 +2,7 @@ import React from "react";
 
 export const AnalysisHeader = () => {
   return (
-    <section className="mt-20 mx-20">
+    <section className="mt-20 mx-20 print">
       <div className="ml-20">
         <h1 className="text-slate-950 text-4xl font-bold mb-4">
           Pay Equity AI Analysis

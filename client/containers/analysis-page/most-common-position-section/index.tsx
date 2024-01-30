@@ -11,7 +11,7 @@ export const MostCommonPosition = () => {
   const { data } = useContext(DataContext);
   return (
 
-    <section className="px-20 mx-20 mt-10 border-b-2 border-b-neutral-200">
+    <section className="px-20 mx-20 mt-10 border-b-2 border-b-neutral-200 print">
       <h2 className="text-slate-950 text-2xl font-bold title-for-print mb-3">Your most common position</h2>
     <h3 className=" text-neutral-500 text-xl font-semibold ">
       {data?.job_title}
