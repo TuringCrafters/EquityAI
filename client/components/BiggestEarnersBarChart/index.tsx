@@ -25,7 +25,7 @@ export default function HorizontalBarChart() {
             left: 20,
           }}
         >
-          <XAxis type="number" tick={false} axisLine={false} label={`${barData[0].currency.toLowerCase()}/month`}/>
+          <XAxis type="number" tick={false} axisLine={false} label={barData[0]?.currency ? `${barData[0].currency.toLowerCase()}/month` : ""}/>
           <YAxis
             dataKey="position"
             type="category"
