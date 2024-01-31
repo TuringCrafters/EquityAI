@@ -79,7 +79,7 @@ export const OveralAnalysis = () => {
           </div>
         </div>
       </article>
-      <article className="w-1/2 print-overall__chart">
+      <article className="w-1/2 print-overall__chart-two">
         <div className="px-20">
           <h2 className="text-slate-950 text-2xl font-bold mb-4">
             Your biggest earners
