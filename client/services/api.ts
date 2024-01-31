@@ -1,4 +1,5 @@
 
+import { UploadFileError } from "@/lib/exceptions";
 import axios from "axios";
 
 export const analyzeFile = async (file: FileList, onProgress: (progress: number) => void) => {
@@ -21,6 +22,6 @@ export const analyzeFile = async (file: FileList, onProgress: (progress: number)
 
     return response;
   } catch (error) {
-    throw error;
+    throw UploadFileError;
   }
 };
