@@ -18,9 +18,6 @@ export const PayGapPieChart = () => {
     womenPayGap = 100 - 100 * genderPayGap;
   }
 
-  console.log(genderPayGap);
-  console.log(womenPayGap);
-
   const pieChartData = [
     { name: "Woman", value: womenPayGap },
     { name: "Men", value: 100 - womenPayGap },

@@ -1,18 +1,16 @@
-import LineOfBestFitChart from '@/components/LineChart'
-import { DataContext } from '@/services/provider';
-import dynamic from 'next/dynamic';
-import React, { useContext } from 'react'
+import BoxPlotChart from "@/components/BoxPlotChart";
+import LineOfBestFitChart from "@/components/LineChart";
+import { DataContext } from "@/services/provider";
+import React, { useContext } from "react";
 
-const StaticBarChartgraph = dynamic(() => import("@/components/BarChart"), {
-  ssr: false,
-});
 
 export const MostCommonPosition = () => {
   const { data } = useContext(DataContext);
   return (
-
     <section className="px-20 mx-20 mt-10 border-b-2 border-b-neutral-200 print print-position">
-      <h2 className="text-slate-950 text-2xl font-bold title-for-print mb-3">Your most common position</h2>
+      <h2 className="text-slate-950 text-2xl font-bold title-for-print mb-3">
+        Your most common position
+      </h2>
     <h3 className=" text-neutral-500 text-xl font-semibold ">
       {data?.job_title}
     </h3>
@@ -46,4 +44,4 @@ export const MostCommonPosition = () => {
     </section>     
   </section>
   )
-}
+};
