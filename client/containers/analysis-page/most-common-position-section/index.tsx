@@ -21,8 +21,7 @@ export const MostCommonPosition = () => {
             <h3 className="ml-10 mt-5 font-semibold tracking-tighter print-position__chart__title">
               Salary based on Location
             </h3>
-            <StaticBarChartgraph
-              key="barchart"
+            <BoxPlotChart
               data={data.location_details}
             />
           </>
