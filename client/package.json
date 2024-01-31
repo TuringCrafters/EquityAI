@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@azure/storage-blob": "^12.17.0",
     "@radix-ui/react-label": "^2.0.2",
     "@radix-ui/react-progress": "^1.0.3",
     "@radix-ui/react-slot": "^1.0.2",
@@ -21,6 +22,7 @@
     "ldrs": "^1.0.1",
     "lucide-react": "^0.309.0",
     "next": "14.0.4",
+    "puppeteer": "^21.10.0",
     "react": "^18",
     "react-apexcharts": "^1.4.1",
     "react-dom": "^18",
