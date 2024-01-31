@@ -36,7 +36,7 @@ const UploadFile = () => {
 
       setData(response.data);
       toast({
-        className: "text-white font-bold tracking-wide",
+        className: "text-white font-bold tracking-wide noprint",
         variant: "success",
         description: "Analysis Completed: Presenting insights from your file",
       });
