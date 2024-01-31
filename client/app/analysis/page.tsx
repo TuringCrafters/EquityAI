@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useReactToPrint } from "react-to-print";
 import { Button } from "../../components/ui/button";
 import "../../styles/AnalysisPagePdfStyles.css";
@@ -15,9 +15,12 @@ import { MostCommonPosition } from "@/containers/analysis-page/most-common-posit
 
 const AnalysisPage = () => {
   const pageRef = useRef<HTMLElement | null>(null);
+  const [isGenerating, setIsGenerating] = useState(false);
+
   const handlePDF = useReactToPrint({
     content: () => pageRef.current,
     documentTitle: "analysis-data",
+    onAfterPrint() {},
   });
 
   function getAllCSS() {
@@ -66,15 +69,26 @@ const AnalysisPage = () => {
     <main className="h-dvh" ref={pageRef}>
       <NavBarAnalysis />
       <AnalysisHeader />
-      <Button
-        onClick={handlePDF}
-        className="absolute top-4 right-6 rounded-full bg-blue-600 noprint"
-      >
-        Save as PDF
-      </Button>
-      {/* <Button className="absolute top-4 right-36 rounded-full bg-blue-600 noprint">
-        Share PDF
-      </Button> */}
+      <aside className="absolute top-4 right-6 z-20 flex gap-2 noprint">
+        <Button
+          onClick={generatePdfBlob}
+          className="relative rounded-full bg-blue-600 noprint min-w-36"
+          disabled={isGenerating}
+        >
+          {isGenerating ? (
+            <span className="animate-pulse">Generating...</span>
+          ) : (
+            "Share PDF URL"
+          )}
+        </Button>
+        <Button
+          onClick={handlePDF}
+          className="relative rounded-full bg-blue-600"
+        >
+          Save as PDF
+        </Button>
+      </aside>
+
       <OveralAnalysis />
       <Insights />
       <MostCommonPosition />
