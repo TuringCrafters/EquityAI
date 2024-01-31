@@ -1,7 +1,6 @@
 import React from "react";
 import {
   ComposedChart,
-  Line,
   XAxis,
   YAxis,
   CartesianGrid,
