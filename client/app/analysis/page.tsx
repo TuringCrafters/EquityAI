@@ -33,11 +33,11 @@ const AnalysisPage = () => {
       {/* <Button className="absolute top-4 right-36 rounded-full bg-blue-600 noprint">
         Share PDF
       </Button> */}
-      <OveralAnalysis/>
-      <Insights/>
-     <MostCommonPosition/>
-     <Recommendations/>
-     <Footer />
+      <OveralAnalysis />
+      <Insights />
+      <MostCommonPosition />
+      <Recommendations />
+      <Footer />
     </main>
   );
 };
