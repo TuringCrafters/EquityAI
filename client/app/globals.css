@@ -106,10 +106,70 @@
 @media print {
   @page {
     size: A4;
-    margin: 1cm; 
   }
 
-  body {
-    margin: 1cm;
+  .noprint{
+    display: none;
+  }
+
+  .print {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    border: none;
+  }
+  .print-overall {
+    flex-direction: column;
+    page-break-after: always; 
+  }
+
+  .print-overall__chart {
+    width: 100%;
+    border: none;
+    margin-bottom: 5rem;
+  }
+
+  .print-overall__chart-two {
+    width: 100%;
+  }
+
+  .print-overall__boxes {
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+  }
+
+  .print-insights {
+    margin: 1.5rem;
+    page-break-after: always; 
+  }
+
+  .print-insights__chart {
+    width: 80%;
+    margin: 5rem auto;
+  }
+
+  .print-position {
+    page-break-after: always;
+  }
+
+  .print-position__chart {
+    border: none;
+    margin: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .print-position__chart__boxplot {
+    align-self: center;
+  }
+
+  .print-position__chart__title {
+    margin: 0;
+    align-self: flex-start;
+
+  }
+  .print-position__chart__title-two {
+    margin: 2rem 0;
+    align-self: flex-start;
   }
 }

@@ -9,7 +9,7 @@ export const Insights = () => {
   const { firstHalf, secondHalf } = splitTextIntoTwoParts(textToSplit);
 
   return (
-    <section className="mx-20 mt-10 py-5 border-t-2 border-slate-200">
+    <section className="mx-20 mt-10 py-5 border-t-2 border-slate-200 print print-insights">
       <h2 className="px-20 text-slate-950 text-2xl font-bold mb-5">Insights</h2>
       <p className="text-sm text-neutral-500 mb-2 px-20">{firstHalf}.</p>
       <PayGapPieChart />

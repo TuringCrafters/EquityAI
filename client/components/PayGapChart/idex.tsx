@@ -23,7 +23,7 @@ export const PayGapPieChart = () => {
     { name: "Men", value: 100 - womenPayGap },
   ];
   return (
-    <div className="flex items-center justify-around mx-40 my-8 py-5 bg-white rounded-lg shadow-md">
+    <div className="flex items-center justify-around mx-40 my-8 py-5 bg-white rounded-lg shadow-md print-insights__chart">
       <div>
         <p className="text-lg text-neutral-700 font-bold pl-10">
           {genderPayGap === 0 ? (

@@ -26,18 +26,18 @@ const AnalysisPage = () => {
       <AnalysisHeader />
       <Button
         onClick={handlePDF}
-        className="absolute top-4 right-6 rounded-full bg-blue-600 "
+        className="absolute top-4 right-6 rounded-full bg-blue-600 noprint"
       >
         Save as PDF
       </Button>
-      {/* <Button className="absolute top-4 right-36 rounded-full bg-blue-600 ">
+      {/* <Button className="absolute top-4 right-36 rounded-full bg-blue-600 noprint">
         Share PDF
       </Button> */}
-      <OveralAnalysis/>
-      <Insights/>
-     <MostCommonPosition/>
-     <Recommendations/>
-     <Footer />
+      <OveralAnalysis />
+      <Insights />
+      <MostCommonPosition />
+      <Recommendations />
+      <Footer />
     </main>
   );
 };

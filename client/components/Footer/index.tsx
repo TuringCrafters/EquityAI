@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 export default function Footer() {
   const router = useRouter();
   return (
-    <footer className="bottom-0 w-full default-gradient">
+    <footer className="bottom-0 w-full default-gradient noprint">
       <div className="flex flex-row justify-between pt-24 pb-14 px-24 items-center">
         <div>
           <div>&copy;EquityAi, 2024</div>
