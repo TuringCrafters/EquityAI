@@ -2,15 +2,11 @@
 
 import React from "react";
 import { ApexOptions } from "apexcharts";
-import { LocationDetails } from "@/types/LocationDetails";
 import dynamic from "next/dynamic";
+import { BoxPlotChartProps } from "@/types/BoxPlotChartProps";
 const ReactApexChart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
 });
-
-type BoxPlotChartProps = {
-  data: LocationDetails[];
-};
 
 export default function BoxPlotChart({ data }: BoxPlotChartProps) {
   const chartData = data
@@ -74,13 +70,10 @@ export default function BoxPlotChart({ data }: BoxPlotChartProps) {
       {typeof window !== "undefined" && (
         <ReactApexChart
           options={options}
-          series={[
-            {
-              data: chartData.map((item) => ({ x: item?.name, y: item?.data })),
-            },
-          ]}
+          series={options.series}
           type="boxPlot"
           height={400}
+          width={"100%"}
         />
       )}
     </>
