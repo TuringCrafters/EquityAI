@@ -20,6 +20,48 @@ const AnalysisPage = () => {
     documentTitle: "analysis-data",
   });
 
+  function getAllCSS() {
+    let css = "";
+
+    for (let i = 0; i < document.styleSheets.length; i++) {
+      const styleSheet = document.styleSheets[i];
+
+      if ("cssRules" in styleSheet) {
+        for (let j = 0; j < styleSheet.cssRules.length; j++) {
+          const rule = styleSheet.cssRules[j];
+          if ("cssText" in rule) {
+            css += rule.cssText + "\n";
+          }
+        }
+      }
+    }
+
+    return css;
+  }
+
+  const generatePdfBlob = () => {
+    setIsGenerating(true);
+    const html = document.documentElement.outerHTML;
+
+    fetch("/api/upload", {
+      method: "POST",
+      headers: {
+        Content: "application/json",
+      },
+      body: JSON.stringify({
+        html,
+        css: getAllCSS(),
+      }),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        window.open(res.url, "_blank");
+      })
+      .finally(() => {
+        setIsGenerating(false);
+      });
+  };
+
   return (
     <main className="h-dvh" ref={pageRef}>
       <NavBarAnalysis />
