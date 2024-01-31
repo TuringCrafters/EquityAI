@@ -2,14 +2,14 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import CancelIcon from '@/public/icon/cancelIcon';
 import UploadIcon from '@/public/icon/uploadIcon';
-import React from 'react'
+import React, { ChangeEvent } from 'react'
 
 interface FileUploadFormProps {
     fileInputRef: React.MutableRefObject<HTMLInputElement | null>;
-    handleSubmit: () => void;
-    handleFileChange: () => void;
-    handleFileClear: () => void;
-    file: FileList;
+    handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+    handleFileChange: (event: ChangeEvent<HTMLInputElement>) => void;
+    handleFileClear: (e: React.MouseEvent<HTMLButtonElement>)  => void;
+    file: FileList | null;
 }
 
 const FileUploadForm: React.FC<FileUploadFormProps> = ({
