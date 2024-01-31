@@ -115,15 +115,21 @@
   .print {
     margin-left: 1rem;
     margin-right: 1rem;
+    border: none;
   }
   .print-overall {
     flex-direction: column;
+    page-break-after: always; 
   }
 
   .print-overall__chart {
     width: 100%;
     border: none;
-    margin-bottom: 4rem;
+    margin-bottom: 5rem;
+  }
+
+  .print-overall__chart-two {
+    width: 100%;
   }
 
   .print-overall__boxes {
@@ -132,13 +138,28 @@
   }
 
   .print-insights {
-    padding-top: 3rem;
-    height: 100vh;
+    margin: 1.5rem;
     page-break-after: always; 
   }
 
   .print-insights__chart {
     width: 80%;
     margin: 5rem auto;
+  }
+
+  .print-position {
+    page-break-after: always;
+  }
+
+  .print-position__chart {
+    border: none;
+    margin: 0;
+  }
+
+  .print-position__chart__title {
+    margin: 0;
+  }
+  .print-position__chart__title-two {
+    margin: 2rem 0;
   }
 }
