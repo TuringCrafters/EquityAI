@@ -1,13 +1,8 @@
 "use client";
-import React, { ChangeEvent, useContext, useEffect, useRef, useState } from "react";
+import React, { ChangeEvent, useContext, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useToast } from "../ui/use-toast";
 import { DataContext } from "@/services/provider";
-import { UploadIcon } from "lucide-react";
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
-import { quantum } from 'ldrs'
-import CancelIcon from "@/public/icon/cancelIcon";
 import { analyzeFile } from "@/services/api";
 import FileUploadForm from "./fileUploadForm";
 import ProgressDisplay from "./progressDisplay";
@@ -19,12 +14,6 @@ const UploadFile = () => {
   const { toast } = useToast();
   const { setData } = useContext(DataContext);
   const router = useRouter();
-
-  // useEffect(() => {
-  //   if (typeof window !== 'undefined') {
-  //     quantum.register();
-  //   }
-  // }, []);
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>): void => {
     if (event.target.files) {
