@@ -9,6 +9,7 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { quantum } from 'ldrs'
 import CancelIcon from "@/public/icon/cancelIcon";
+import { analyzeFile } from "@/services/api";
 
 const UploadFile = () => {
   const [file, setFile] = useState<FileList | null>(null);
@@ -41,18 +42,8 @@ const UploadFile = () => {
       const formData = new FormData();
       formData.append("file", file[0]);
 
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/file/analyze`,
-        formData,
-        {
-          onUploadProgress: (progressEvent) => {
-            const percentCompleted = Math.round(
-              (progressEvent.loaded * 100) / (progressEvent.total ?? 0)
-            );
-            setProgress(percentCompleted);
-          },
-        }
-      );
+      const response = await analyzeFile(file, setProgress);
+      console.log(response.data);
 
       setData(response.data);
       toast({
