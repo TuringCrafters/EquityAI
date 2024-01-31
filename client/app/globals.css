@@ -154,12 +154,22 @@
   .print-position__chart {
     border: none;
     margin: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .print-position__chart__boxplot {
+    align-self: center;
   }
 
   .print-position__chart__title {
     margin: 0;
+    align-self: flex-start;
+
   }
   .print-position__chart__title-two {
     margin: 2rem 0;
+    align-self: flex-start;
   }
 }
