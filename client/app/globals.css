@@ -130,4 +130,15 @@
     margin-top: 4rem;
     margin-bottom: 4rem;
   }
+
+  .print-insights {
+    padding-top: 3rem;
+    height: 100vh;
+    page-break-after: always; 
+  }
+
+  .print-insights__chart {
+    width: 80%;
+    margin: 5rem auto;
+  }
 }
