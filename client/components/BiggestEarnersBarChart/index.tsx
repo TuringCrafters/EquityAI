@@ -4,11 +4,12 @@ import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, LabelList } from "rec
 
 export default function HorizontalBarChart() {
   const { data } = useContext(DataContext);
-  const positionsAndSalaries: { position: string; salary: number }[] =
+  const positionsAndSalaries: { position: string; salary: number; currency: string }[] =
     data?.company_overview.top_five_highest_paying_positions || [];
-  const barData = positionsAndSalaries.map(({ position, salary }) => ({
+  const barData = positionsAndSalaries.map(({ position, salary,currency }) => ({
     position,
     salary,
+    currency
   }));
   return (
     <div className="w-3/4 mx-20 ">
@@ -24,7 +25,7 @@ export default function HorizontalBarChart() {
             left: 20,
           }}
         >
-          <XAxis type="number" tick={false} axisLine={false} label='sek/month'/>
+          <XAxis type="number" tick={false} axisLine={false} label={barData[0]?.currency ? `${barData[0].currency.toLowerCase()}/month` : ""}/>
           <YAxis
             dataKey="position"
             type="category"

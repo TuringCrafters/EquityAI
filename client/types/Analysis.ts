@@ -11,11 +11,11 @@ export type Analysis = {
   gender_pay_gap: string;
   company_overview: {
     top_five_highest_paying_positions: [
-      { position: string; salary: number },
-      { position: string; salary: number },
-      { position: string; salary: number },
-      { position: string; salary: number },
-      { position: string; salary: number }
+      { position: string; salary: number; currency:string },
+      { position: string; salary: number; currency:string },
+      { position: string; salary: number ; currency:string},
+      { position: string; salary: number ; currency:string},
+      { position: string; salary: number ; currency:string}
     ];
     total_number_of_employees: number;
     gender_ratio: Record<string, number>;
