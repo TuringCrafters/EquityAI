@@ -10,6 +10,7 @@ import { quantum } from 'ldrs'
 import CancelIcon from "@/public/icon/cancelIcon";
 import { analyzeFile } from "@/services/api";
 import FileUploadForm from "./fileUploadForm";
+import ProgressDisplay from "./progressDisplay";
 
 const UploadFile = () => {
   const [file, setFile] = useState<FileList | null>(null);
@@ -19,11 +20,11 @@ const UploadFile = () => {
   const { setData } = useContext(DataContext);
   const router = useRouter();
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      quantum.register();
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (typeof window !== 'undefined') {
+  //     quantum.register();
+  //   }
+  // }, []);
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>): void => {
     if (event.target.files) {
@@ -43,7 +44,6 @@ const UploadFile = () => {
       formData.append("file", file[0]);
 
       const response = await analyzeFile(file, setProgress);
-      console.log(response.data);
 
       setData(response.data);
       toast({
@@ -73,16 +73,7 @@ const UploadFile = () => {
   return (
     <div className="flex flex-col m-4 items-center justify-center md:h-screen">
       {progress > 0 ?
-        (<div className="w-5/6 h-4/6 mx-auto rounded-lg  flex flex-col items-center justify-center">
-          <div className="">
-            <l-quantum
-              size="500"
-              speed="4"
-              color="white"
-            ></l-quantum>
-          </div>
-          <h3 className="text-xl my-7 font-semibold text-white text-center">Analysing your data, stay put</h3>
-        </div>
+        ( <ProgressDisplay />
         ) : (
           <FileUploadForm
             fileInputRef={fileInputRef}
