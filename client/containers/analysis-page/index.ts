@@ -1,0 +1,5 @@
+export * from "./header-section"
+export * from "./insights-section"
+export * from "./most-common-position-section"
+export * from "./recomendation-section"
+export * from "./overal-analysis-section"
