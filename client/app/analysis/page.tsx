@@ -27,7 +27,7 @@ const AnalysisPage = () => {
       <div className="absolute top-4 right-6 z-20 flex">
       <Button
         onClick={handlePDF}
-        className="absolute top-4 right-6 rounded-full bg-blue-600 noprint"
+        className="rounded-full bg-blue-600 noprint"
       >
         Save as PDF
       </Button>
