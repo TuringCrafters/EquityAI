@@ -5,14 +5,16 @@ import Providers from "../services/provider";
 import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
+
 export const metadata: Metadata = {
   title: "Equity Ai",
   description: "Equity Ai",
 };
+
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  readonly children: React.ReactNode;
 }) {
   return (
     <Providers>
