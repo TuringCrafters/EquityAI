@@ -1,6 +1,6 @@
 import { DataContext } from "@/services/provider";
 import React, { useContext } from "react";
-import HorizontalBarChart from "../../../components/BiggestEarnersBarChart/index";
+import HorizontalBarChart from "../../../components/HorizontalBarChart/HorizontalBarChart";
 import FemaleIcon from "@/public/icon/femaleIcon";
 import MaleIcon from "@/public/icon/maleIcon";
 
