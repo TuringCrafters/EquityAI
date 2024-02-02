@@ -12,7 +12,7 @@ import static java.util.function.UnaryOperator.identity;
 
 public class DataAnalysis {
 
-    public DataAnalysis() {
+    private DataAnalysis() {
     }
 
     public static double calculateAverage(List<Double> salaries) {

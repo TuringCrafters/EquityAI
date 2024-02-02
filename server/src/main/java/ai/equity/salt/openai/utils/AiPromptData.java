@@ -8,7 +8,7 @@ import java.util.List;
 
 public class AiPromptData {
 
-    public AiPromptData() {
+    private AiPromptData() {
     }
 
     public static final String SALARY_ANALYSIS_PROMPT = """
