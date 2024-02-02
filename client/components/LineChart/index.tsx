@@ -17,7 +17,7 @@ import { calculateLineOfBestFit } from "@/services/lineOfBestFit";
 import { LinearChartGraphProps } from "@/types/LinearChartGraphProps";
 import { TransformedExperienceDetails } from "@/types/TransformedExperienceDetails";
 
-export default function LineOfBestFitChart({ data }: LinearChartGraphProps) {
+export default function LineOfBestFitChart({ data }: Readonly<LinearChartGraphProps>) {
   const sortedData = data.sort((a, b) => a.data_value - b.data_value);
 
   const dataPoints: DataPoint[] = convertToPolynomialDataPoints(sortedData);
