@@ -7,8 +7,11 @@ import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.List;
 
-@NoArgsConstructor
 public class AiPromptData {
+
+    public AiPromptData() {
+    }
+
     public static final String SALARY_ANALYSIS_PROMPT = """
             Analyze the provided dataset, which includes positions, salaries, age, and locality to identify significant discrepancies. Focus on:
             -Any unexpected patterns or outliers.
