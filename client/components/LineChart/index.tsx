@@ -7,6 +7,7 @@ import {
   Tooltip,
   Legend,
   Scatter,
+  Line,
 } from "recharts";
 import {
   convertToPolynomialDataPoints,
@@ -34,7 +35,7 @@ export default function LineOfBestFitChart({
 
   return (
     <ComposedChart
-      width={600}
+      width={500}
       height={400}
       data={convertedData}
       margin={{
@@ -52,9 +53,6 @@ export default function LineOfBestFitChart({
         align="center"
         iconSize={9}
         wrapperStyle={{ top: 0, left: 50 }}
-        formatter={(value) => (
-          <span className=" text-black text-xs font-semibold">{value}</span>
-        )}
       />
       <XAxis
         dataKey="yearsOfExperience"
@@ -93,15 +91,6 @@ export default function LineOfBestFitChart({
         fill="#c03dbb"
         shape="diamond"
       />
-      {/*  <Line
-        dataKey="line"
-        stroke="#c03dbb"
-        strokeWidth={2}
-        strokeDasharray="3 3"
-        dot={false}
-        activeDot={false}
-        legendType="none"
-      /> */}
     </ComposedChart>
   );
 }
