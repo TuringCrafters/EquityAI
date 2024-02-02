@@ -14,7 +14,7 @@ export const DataContext = createContext<DataContextType>({
   setData: () => {},
 });
 
-export default function Providers({ children }: { children: React.ReactNode }) {
+export default function Providers({ children }: Readonly<{ children: React.ReactNode }>) {
   const queryClient = new QueryClient();
 
   const [data, setData] = useState<Analysis | null>(null);
