@@ -21,13 +21,13 @@ public class EquityAiController {
 
     @PostMapping("file/analyze")
     @ResponseStatus(CREATED)
-    public EquityAiResponse sendFile(@RequestParam MultipartFile file) throws IOException {
+    public EquityAiResponse sendFile(@RequestParam MultipartFile file) {
         return service.analyzeFile(file);
     }
 
     @PostMapping("file/any")
     @ResponseStatus(CREATED)
-    public List<JobDataSet> sendAnyFile(@RequestParam MultipartFile file) throws IOException {
+    public List<JobDataSet> sendAnyFile(@RequestParam MultipartFile file) {
         return service.readAnyFile(file);
     }
 }
