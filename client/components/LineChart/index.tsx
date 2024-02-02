@@ -17,8 +17,10 @@ import { calculateLineOfBestFit } from "@/services/lineOfBestFit";
 import { LinearChartGraphProps } from "@/types/LinearChartGraphProps";
 import { TransformedExperienceDetails } from "@/types/TransformedExperienceDetails";
 
-export default function LineOfBestFitChart({ data }: Readonly<LinearChartGraphProps>) {
-  const sortedData = data.sort((a, b) => a.data_value - b.data_value);
+export default function LineOfBestFitChart({
+  data,
+}: Readonly<LinearChartGraphProps>) {
+  const sortedData = data.toSorted();
 
   const dataPoints: DataPoint[] = convertToPolynomialDataPoints(sortedData);
 
@@ -72,18 +74,18 @@ export default function LineOfBestFitChart({ data }: Readonly<LinearChartGraphPr
         tick={{ fill: "#aab0b7" }}
         width={80}
       />
-        <Scatter
-          key={`scatter-below-salary`}
-          name="Below average"
-          dataKey="salary_below_average"
-          fill="#62a46f"
-        />
-        <Scatter
-          key={`scatter-above-salary`}
-          name="Above Average"
-          dataKey="salary_above_average"
-          fill="#376bec"
-        />
+      <Scatter
+        key={`scatter-below-salary`}
+        name="Below average"
+        dataKey="salary_below_average"
+        fill="#62a46f"
+      />
+      <Scatter
+        key={`scatter-above-salary`}
+        name="Above Average"
+        dataKey="salary_above_average"
+        fill="#376bec"
+      />
       <Scatter
         name="Average"
         key={`scatter-salary-average`}
@@ -91,7 +93,7 @@ export default function LineOfBestFitChart({ data }: Readonly<LinearChartGraphPr
         fill="#c03dbb"
         shape="diamond"
       />
-     {/*  <Line
+      {/*  <Line
         dataKey="line"
         stroke="#c03dbb"
         strokeWidth={2}
