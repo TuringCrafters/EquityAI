@@ -1,7 +1,7 @@
-import { PayGapPieChart } from "@/components/PayGapChart/idex";
+import { PayGapPieChart } from "@/components/PayGapChart/PayGapPieChart";
 import { DataContext } from "@/services/provider";
-import { splitTextIntoTwoParts } from "@/services/splitTextIntoTwoParts";
 import React, { useContext } from "react";
+import { splitTextIntoTwoParts } from "../splitTextIntoTwoParts";
 
 export const Insights = () => {
   const { data } = useContext(DataContext);

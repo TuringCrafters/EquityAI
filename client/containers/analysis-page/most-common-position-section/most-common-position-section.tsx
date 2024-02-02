@@ -1,8 +1,7 @@
-import BoxPlotChart from "@/components/BoxPlotChart";
-import LineOfBestFitChart from "@/components/LineChart";
+import BoxPlotChart from "@/components/BoxPlotChart/BoxPlotChart";
+import LineOfBestFitChart from "@/components/LineChart/LineChart";
 import { DataContext } from "@/services/provider";
 import React, { useContext } from "react";
-
 
 export const MostCommonPosition = () => {
   const { data } = useContext(DataContext);
@@ -22,9 +21,7 @@ export const MostCommonPosition = () => {
                 Salary based on Location
               </h3>
               <div className="print-position__chart__boxplot">
-                <BoxPlotChart
-                  data={data.location_details}
-                />
+                <BoxPlotChart data={data.location_details} />
               </div>
             </>
           )}
@@ -44,5 +41,5 @@ export const MostCommonPosition = () => {
         </div>
       </section>
     </section>
-  )
+  );
 };

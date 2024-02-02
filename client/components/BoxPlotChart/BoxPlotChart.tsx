@@ -3,11 +3,16 @@
 import React from "react";
 import { ApexOptions } from "apexcharts";
 import dynamic from "next/dynamic";
-import { BoxPlotChartProps } from "@/types/BoxPlotChartProps";
 import { generateBoxplotChartOptions } from "@/services/generateBoxPlotChartOptions";
+import { LocationDetails } from "@/types/LocationDetails";
 const ReactApexChart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
 });
+
+
+export type BoxPlotChartProps = {
+    data: LocationDetails[];
+  };
 
 export default function BoxPlotChart({ data }: BoxPlotChartProps) {
   const options: ApexOptions = generateBoxplotChartOptions(data);
