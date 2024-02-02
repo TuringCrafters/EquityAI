@@ -1,7 +1,6 @@
 package ai.equity.salt.openai.utils;
 
 import ai.equity.salt.openai.controller.dto.JobDataSet;
-import lombok.NoArgsConstructor;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;

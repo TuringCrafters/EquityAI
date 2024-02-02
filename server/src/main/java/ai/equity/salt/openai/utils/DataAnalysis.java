@@ -3,7 +3,6 @@ package ai.equity.salt.openai.utils;
 import ai.equity.salt.openai.controller.dto.JobDataSet;
 import ai.equity.salt.openai.controller.dto.SalaryDatapoint;
 import ai.equity.salt.openai.controller.dto.SalaryRangeDatapoint;
-import lombok.NoArgsConstructor;
 
 import java.util.*;
 import java.util.function.Function;
