@@ -11,9 +11,10 @@ import java.util.stream.Collectors;
 
 import static java.util.function.UnaryOperator.identity;
 
-@NoArgsConstructor
 public class DataAnalysis {
 
+    public DataAnalysis() {
+    }
 
     public static double calculateAverage(List<Double> salaries) {
         return round(salaries.stream().mapToDouble(Double::doubleValue).average().orElse(0));
