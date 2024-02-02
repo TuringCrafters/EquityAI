@@ -20,7 +20,8 @@ import { TransformedExperienceDetails } from "@/types/TransformedExperienceDetai
 export default function LineOfBestFitChart({
   data,
 }: Readonly<LinearChartGraphProps>) {
-  const sortedData = data.toSorted();
+  const sortedData = [...data];
+  sortedData.sort((a, b) => a.data_value - b.data_value);
 
   const dataPoints: DataPoint[] = convertToPolynomialDataPoints(sortedData);
 
