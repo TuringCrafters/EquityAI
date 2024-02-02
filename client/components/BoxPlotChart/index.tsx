@@ -19,7 +19,7 @@ export default function BoxPlotChart({ data }: Readonly<BoxPlotChartProps>) {
           series={options.series}
           type="boxPlot"
           height={400}
-          width={"100%"}
+          width={500}
         />
       )}
     </>
