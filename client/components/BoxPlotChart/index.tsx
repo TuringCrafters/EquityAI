@@ -9,7 +9,7 @@ const ReactApexChart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
 });
 
-export default function BoxPlotChart({ data }: BoxPlotChartProps) {
+export default function BoxPlotChart({ data }: Readonly<BoxPlotChartProps>) {
   const options: ApexOptions = generateBoxplotChartOptions(data);
   return (
     <>
@@ -19,7 +19,7 @@ export default function BoxPlotChart({ data }: BoxPlotChartProps) {
           series={options.series}
           type="boxPlot"
           height={400}
-          width={"100%"}
+          width={500}
         />
       )}
     </>

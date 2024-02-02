@@ -2,7 +2,7 @@
 
 import { Analysis } from "@/types/Analysis";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useMemo, useState } from "react";
 
 interface DataContextType {
   data: Analysis | null;
@@ -14,7 +14,7 @@ export const DataContext = createContext<DataContextType>({
   setData: () => {},
 });
 
-export default function Providers({ children }: { children: React.ReactNode }) {
+export default function Providers({ children }: Readonly<{ children: React.ReactNode }>) {
   const queryClient = new QueryClient();
 
   const [data, setData] = useState<Analysis | null>(null);
@@ -42,9 +42,13 @@ export default function Providers({ children }: { children: React.ReactNode }) {
       localStorage.setItem("dataTimestamp", new Date().getTime().toString());
     }
   }, [data]);
+
+  const contextValue = useMemo(() => {
+    return { data, setData };
+  }, [data, setData]);
   return (
     <QueryClientProvider client={queryClient}>
-      <DataContext.Provider value={{ data, setData }}>
+      <DataContext.Provider value={contextValue}>
         {children}
       </DataContext.Provider>
     </QueryClientProvider>

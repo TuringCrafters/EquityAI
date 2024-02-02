@@ -17,8 +17,11 @@ import { calculateLineOfBestFit } from "@/services/lineOfBestFit";
 import { LinearChartGraphProps } from "@/types/LinearChartGraphProps";
 import { TransformedExperienceDetails } from "@/types/TransformedExperienceDetails";
 
-export default function LineOfBestFitChart({ data }: LinearChartGraphProps) {
-  const sortedData = data.sort((a, b) => a.data_value - b.data_value);
+export default function LineOfBestFitChart({
+  data,
+}: Readonly<LinearChartGraphProps>) {
+  const sortedData = [...data];
+  sortedData.sort((a, b) => a.data_value - b.data_value);
 
   const dataPoints: DataPoint[] = convertToPolynomialDataPoints(sortedData);
 
@@ -32,7 +35,7 @@ export default function LineOfBestFitChart({ data }: LinearChartGraphProps) {
 
   return (
     <ComposedChart
-      width={600}
+      width={500}
       height={400}
       data={convertedData}
       margin={{
@@ -50,9 +53,6 @@ export default function LineOfBestFitChart({ data }: LinearChartGraphProps) {
         align="center"
         iconSize={9}
         wrapperStyle={{ top: 0, left: 50 }}
-        formatter={(value) => (
-          <span className=" text-black text-xs font-semibold">{value}</span>
-        )}
       />
       <XAxis
         dataKey="yearsOfExperience"
@@ -72,18 +72,18 @@ export default function LineOfBestFitChart({ data }: LinearChartGraphProps) {
         tick={{ fill: "#aab0b7" }}
         width={80}
       />
-        <Scatter
-          key={`scatter-below-salary`}
-          name="Below average"
-          dataKey="salary_below_average"
-          fill="#62a46f"
-        />
-        <Scatter
-          key={`scatter-above-salary`}
-          name="Above Average"
-          dataKey="salary_above_average"
-          fill="#376bec"
-        />
+      <Scatter
+        key={`scatter-below-salary`}
+        name="Below average"
+        dataKey="salary_below_average"
+        fill="#62a46f"
+      />
+      <Scatter
+        key={`scatter-above-salary`}
+        name="Above Average"
+        dataKey="salary_above_average"
+        fill="#376bec"
+      />
       <Scatter
         name="Average"
         key={`scatter-salary-average`}
@@ -91,15 +91,6 @@ export default function LineOfBestFitChart({ data }: LinearChartGraphProps) {
         fill="#c03dbb"
         shape="diamond"
       />
-     {/*  <Line
-        dataKey="line"
-        stroke="#c03dbb"
-        strokeWidth={2}
-        strokeDasharray="3 3"
-        dot={false}
-        activeDot={false}
-        legendType="none"
-      /> */}
     </ComposedChart>
   );
 }
