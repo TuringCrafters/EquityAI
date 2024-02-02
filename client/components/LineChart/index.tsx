@@ -7,7 +7,6 @@ import {
   Tooltip,
   Legend,
   Scatter,
-  Line,
 } from "recharts";
 import {
   convertToPolynomialDataPoints,
