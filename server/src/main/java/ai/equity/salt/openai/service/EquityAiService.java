@@ -77,7 +77,6 @@ public class EquityAiService {
                 PRODUCT_RECOMMENDATION_PROMPT + SYSARB_PRODUCTS);
         log.trace("Sysarb Recommendation : " + sysarbRecommendation);
 
-        //TODO: use specific SQL exception to catch the error
         try {
             repository.save(new EquityAi(jobDataStringList, response, sysarbRecommendation));
         } catch (Exception e) {
