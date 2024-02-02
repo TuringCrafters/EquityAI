@@ -1,11 +1,13 @@
 package ai.equity.salt.openai.utils;
 
 import ai.equity.salt.openai.controller.dto.JobDataSet;
+import lombok.NoArgsConstructor;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.List;
 
+@NoArgsConstructor
 public class AiPromptData {
     public static final String SALARY_ANALYSIS_PROMPT = """
             Analyze the provided dataset, which includes positions, salaries, age, and locality to identify significant discrepancies. Focus on:
