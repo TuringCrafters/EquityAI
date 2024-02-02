@@ -27,14 +27,33 @@ export const generateBoxplotChartOptions = (
     plotOptions: {
       boxPlot: {
         colors: {
-          upper: "#FF4560",
-          lower: "#008FFB",
+          upper: "#376bec",
+          lower: "#c03dbb",
         },
       },
     },
     xaxis: {
       type: "category",
       categories: data.map((location) => location.data_value),
+      labels: {
+        style: {
+          colors: "#aab0b7",
+          fontFamily: "Inter, sans-serif",
+          fontWeight: 500,
+        },
+      },
+    },
+    yaxis: {
+      labels: {
+        style: {
+          colors: "#aab0b7",
+          fontFamily: "Inter, sans-serif",
+          fontWeight: 500,
+        },
+        formatter: function (value) {
+          return value / 1000 + "k";
+        },
+      },
     },
   };
 };
