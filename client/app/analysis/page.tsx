@@ -2,16 +2,9 @@
 import React, { useRef } from "react";
 import { useReactToPrint } from "react-to-print";
 import { Button } from "@/components/ui/button";
-import "@/styles/AnalysisPagePdfStyles.css";
-import NavBarAnalysis from "@/components/NavbarAnalysis";
-import Footer from "@/components/Footer";
-import {
-  AnalysisHeader,
-  OveralAnalysis,
-  Insights,
-  MostCommonPosition,
-  Recommendations,
-} from "@/containers/analysis-page";
+import "@/features/analysis/"
+import { AnalysisHeader, Footer, Insights, MostCommonPosition, NavBarAnalysis, OveralAnalysis, Recommendations } from "@/features/analysis";
+
 
 const AnalysisPage = () => {
   const pageRef = useRef<HTMLElement | null>(null);
