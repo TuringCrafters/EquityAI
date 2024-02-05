@@ -10,12 +10,12 @@ import { Recommendations } from "@/containers/analysis-page/recomendation-sectio
 import NavBarAnalysis from "@/components/NavbarAnalysis";
 import Footer from "@/components/Footer";
 import { MostCommonPosition } from "@/containers/analysis-page/most-common-position-section";
-
-
+import ClipboardCopyButton from "./ClipboardCopyButton";
 
 const AnalysisPage = () => {
   const pageRef = useRef<HTMLElement | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
+  const [shareLink, setShareLink] = useState();
 
   const handlePDF = useReactToPrint({
     content: () => pageRef.current,
@@ -58,7 +58,7 @@ const AnalysisPage = () => {
     })
       .then((res) => res.json())
       .then((res) => {
-        window.open(res.url, "_blank");
+        setShareLink(res.url);
       })
       .finally(() => {
         setIsGenerating(false);
@@ -69,18 +69,22 @@ const AnalysisPage = () => {
     <main className="h-dvh" ref={pageRef}>
       <NavBarAnalysis />
       <AnalysisHeader />
-      <aside className="absolute top-4 right-6 z-20 flex gap-2 noprint">
-        <Button
-          onClick={generatePdfBlob}
-          className="relative rounded-full bg-blue-600 noprint min-w-36"
-          disabled={isGenerating}
-        >
-          {isGenerating ? (
-            <span className="animate-pulse">Generating...</span>
-          ) : (
-            "Share PDF URL"
-          )}
-        </Button>
+      <aside className="absolute top-4 right-6 z-20 flex gap-3 noprint">
+        {shareLink ? (
+          <ClipboardCopyButton value={shareLink} />
+        ) : (
+          <Button
+            onClick={generatePdfBlob}
+            className="relative rounded-full bg-blue-600 noprint min-w-36"
+            disabled={isGenerating}
+          >
+            {isGenerating ? (
+              <span className="animate-pulse">Generating...</span>
+            ) : (
+              "Share PDF"
+            )}
+          </Button>
+        )}
         <Button
           onClick={handlePDF}
           className="relative rounded-full bg-blue-600"
