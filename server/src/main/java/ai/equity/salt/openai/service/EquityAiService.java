@@ -19,8 +19,8 @@ import static ai.equity.salt.openai.utils.AiPromptData.*;
 @Slf4j
 public class EquityAiService {
     private final DecimalFormat decimalFormat = new DecimalFormat("0.00");
-    private final OpenAiModelFactory openAiModelFactory;
     private final FileReaderService fileReader;
+    private final AiResponse aiResponse;
 
     public EquityAiResponse analyzeFile(MultipartFile file) {
         var jobs = Jobs.from(fileReader.readFile(file));
@@ -29,10 +29,8 @@ public class EquityAiService {
         var experienceDataPoints = jobs.averageSalaryByDatapoint(mostCommonJob, JobDataSet::getExperience);
         var locationDataPoints = jobs.averageSalaryByDatapoint(mostCommonJob, JobDataSet::getGeographicLocation);
 
-        var response = openAiModelFactory.createDefaultChatModel().generate(SALARY_ANALYSIS_PROMPT +
-                createPrompt(jobs.getData()));
-        var sysarbRecommendation = openAiModelFactory.createDefaultChatModel().generate(response +
-                PRODUCT_RECOMMENDATION_PROMPT + SYSARB_PRODUCTS);
+        var response = aiResponse.generateResponse(jobs.getData());
+        var sysarbRecommendation = aiResponse.generateRecommendation(response);
 
         var companyOverview = new CompanyOverview(jobs.getTopFiveHighestPayingPositions(), jobs.toListString().size(),
                 jobs.calculateGenderRatio(),
