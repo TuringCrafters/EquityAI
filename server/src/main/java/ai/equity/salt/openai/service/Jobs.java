@@ -5,8 +5,6 @@ import ai.equity.salt.openai.controller.dto.CompanyOverview;
 import ai.equity.salt.openai.controller.dto.JobDataSet;
 import ai.equity.salt.openai.controller.dto.SalaryDatapoint;
 import ai.equity.salt.openai.controller.dto.SalaryRangeDatapoint;
-import ai.equity.salt.openai.file.reader.implementation.CsvFileReader;
-import ai.equity.salt.openai.file.reader.implementation.XlsxFileReader;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -25,9 +23,6 @@ import static java.util.function.UnaryOperator.identity;
 public class Jobs {
 
     private final List<JobDataSet> data;
-    private final CsvFileReader csvFileReader = new CsvFileReader();
-    private final XlsxFileReader xlsxFileReader = new XlsxFileReader();
-
 
     private Jobs(List<JobDataSet> jobDataSets) {
         this.data = jobDataSets;
