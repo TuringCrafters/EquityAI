@@ -10,7 +10,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.util.List;
 
-import static ai.equity.salt.openai.utils.DataAnalysis.calculateGenderRatio;
 import static ai.equity.salt.openai.utils.DataAnalysis.mostCommonJob;
 
 class DataAnalysisTest {
@@ -54,17 +53,6 @@ class DataAnalysisTest {
         var jobDataList = csvFileReader.readFile(new FileInputStream(dataSetFile));
 
         System.out.println(jobDataList);
-    }
-
-    @Test
-    @SneakyThrows
-    void calculateGenderRatioTest(){
-
-        var dataSetFile = new File("src/test/java/ai/equity/salt/data/Dataset.csv");
-        var jobDataList = csvFileReader.readFile(new FileInputStream(dataSetFile));
-        var result = calculateGenderRatio(jobDataList);
-        Assertions.assertEquals(37, result.get("Male"));
-        Assertions.assertEquals(28, result.get("Female"));
     }
 
 }

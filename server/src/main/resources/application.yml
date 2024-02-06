@@ -18,9 +18,9 @@ spring:
     default: deploy
   jackson:
     property-naming-strategy: SNAKE_CASE
-logging:
-  level:
-    ai.equity.salt.openai.service.EquityAiService: trace
+#logging:
+#  level:
+#    ai.equity.salt.openai.service.EquityAiService: trace
 openai:
   api:
     key: ${OPENAI_API_KEY}

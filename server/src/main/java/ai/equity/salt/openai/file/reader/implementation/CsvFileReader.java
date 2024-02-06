@@ -49,7 +49,7 @@ public class CsvFileReader implements FileReader {
     }
 
     @NotNull
-    private static JobDataSet getJobDataSet(String[] nextRecord) {
+    private JobDataSet getJobDataSet(String[] nextRecord) {
         JobDataSet jobData = new JobDataSet();
         jobData.setId(nextRecord[0]);
         jobData.setGender(nextRecord[1]);
