@@ -28,4 +28,14 @@ public class AiResponse {
                 PRODUCT_RECOMMENDATION_PROMPT + SYSARB_PRODUCTS);
     }
 
+    private String createPrompt(List<JobDataSet> jobDataList) {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append(DATA_HEADER);
+
+        for (JobDataSet jobData : jobDataList) {
+            stringBuilder.append(jobData.toString()).append("\n");
+        }
+        return stringBuilder.toString();
+    }
 }
