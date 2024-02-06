@@ -3,16 +3,12 @@ package ai.equity.salt.openai.service;
 import ai.equity.salt.openai.controller.dto.CompanyOverview;
 import ai.equity.salt.openai.controller.dto.EquityAiResponse;
 import ai.equity.salt.openai.controller.dto.JobDataSet;
-import ai.equity.salt.openai.model.OpenAiModelFactory;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.text.DecimalFormat;
-import java.util.List;
-
-import static ai.equity.salt.openai.utils.AiPromptData.*;
 
 @Service
 @RequiredArgsConstructor
