@@ -25,7 +25,7 @@ public class EquityAiService {
         var experienceDataPoints = jobs.averageSalaryByDatapoint(mostCommonJob, JobDataSet::getExperience);
         var locationDataPoints = jobs.averageSalaryByDatapoint(mostCommonJob, JobDataSet::getGeographicLocation);
 
-        var response = aiResponse.generateResponse(jobs.getData());
+        var response = aiResponse.generateAnalysis(jobs.getData());
         var sysarbRecommendation = aiResponse.generateRecommendation(response);
 
         var companyOverview = new CompanyOverview(jobs.getTopFiveHighestPayingPositions(), jobs.toListString().size(),
