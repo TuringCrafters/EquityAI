@@ -67,7 +67,7 @@ public class XlsxFileReader implements FileReader {
     }
 
     @NotNull
-    private static JobDataSet getJobDataSet(List<String> rowData) {
+    private JobDataSet getJobDataSet(List<String> rowData) {
         JobDataSet jobData = new JobDataSet();
         jobData.setId(rowData.getFirst());
         jobData.setGender(rowData.get(1));
