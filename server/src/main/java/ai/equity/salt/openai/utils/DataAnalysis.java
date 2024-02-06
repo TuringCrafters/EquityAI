@@ -4,7 +4,8 @@ import ai.equity.salt.openai.controller.dto.JobDataSet;
 import ai.equity.salt.openai.controller.dto.SalaryDatapoint;
 import ai.equity.salt.openai.controller.dto.SalaryRangeDatapoint;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -40,41 +41,6 @@ public class DataAnalysis {
                 .orElse(average);
     }
 
-    public static <T> List<SalaryDatapoint<T>> averageSalaryByDatapoint(List<JobDataSet> jobDataList, String mostCommonJob, Function<JobDataSet, T> getBydataPointFunction) {
-        Map<T, List<Double>> averageSalaryByDatapoint = jobDataList.stream()
-                .filter(data -> data.getPosition().equals(mostCommonJob))
-                .collect(Collectors.groupingBy(
-                        getBydataPointFunction,
-                        Collectors.mapping(JobDataSet::getSalary, Collectors.toList())
-                ));
-
-        return averageSalaryByDatapoint.entrySet().stream()
-                .map(entry -> {
-                    List<Double> salaries = entry.getValue();
-                    T datapoint = entry.getKey();
-                    double average = calculateAverage(salaries);
-                    double standardDeviation = calculateStandardDeviation(salaries, average);
-
-                    double aboveAverage = findAboveAverage(salaries, average, standardDeviation);
-                    double belowAverage = findBelowAverage(salaries, average, standardDeviation);
-
-                    return new SalaryDatapoint<>(datapoint, new SalaryRangeDatapoint(average, aboveAverage, belowAverage));
-                })
-                .toList();
-    }
-
-    public static List<String> findUniqueJobs(List<JobDataSet> jobDataList) {
-        Set<String> uniqueJobTitles = new HashSet<>();
-
-        for (JobDataSet jobData : jobDataList) {
-            String jobTitle = jobData.getPosition();
-            if (jobTitle != null && !jobTitle.isEmpty()) {
-                uniqueJobTitles.add(jobTitle);
-            }
-        }
-        return new ArrayList<>(uniqueJobTitles);
-    }
-
     public static String mostCommonJob(List<JobDataSet> jobDataSetList) {
         return jobDataSetList.stream()
                 .map(JobDataSet::getPosition)
@@ -86,21 +52,6 @@ public class DataAnalysis {
                 .orElse(null);
     }
 
-    public static Double calculateGenderPayGap(List<JobDataSet> jobDataList) {
-
-        Map<String, Double> genderAverageSalary = jobDataList.stream()
-                .collect(Collectors.groupingBy(JobDataSet::getGender,
-                        Collectors.averagingDouble(JobDataSet::getSalary)));
-
-        double maleAverageSalary = genderAverageSalary.getOrDefault("Male", 0.0);
-        double femaleAverageSalary = genderAverageSalary.getOrDefault("Female", 0.0);
-
-        return ((maleAverageSalary - femaleAverageSalary) / femaleAverageSalary);
-    }
-
-    public static Map<String, Long> calculateGenderRatio(List<JobDataSet> jobDataList) {
-        return jobDataList.stream().collect(Collectors.groupingBy(JobDataSet::getGender, Collectors.counting()));
-    }
 
     public static double round(double number) {
         return (double) Math.round(number * 100) / 100;
