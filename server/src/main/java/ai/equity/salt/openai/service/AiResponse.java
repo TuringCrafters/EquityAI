@@ -18,5 +18,14 @@ public class AiResponse {
         this.openAiModelFactory = openAiModelFactory;
     }
 
+    public String generateResponse(List<JobDataSet> jobDataList){
+        return openAiModelFactory.createDefaultChatModel().generate(SALARY_ANALYSIS_PROMPT +
+                createPrompt(jobDataList));
+    }
+
+    public String generateRecommendation(String response){
+        return openAiModelFactory.createDefaultChatModel().generate(response +
+                PRODUCT_RECOMMENDATION_PROMPT + SYSARB_PRODUCTS);
+    }
 
 }
