@@ -18,7 +18,7 @@ public class AiResponse {
         this.openAiModelFactory = openAiModelFactory;
     }
 
-    public String generateResponse(List<JobDataSet> jobDataList){
+    public String generateAnalysis(List<JobDataSet> jobDataList){
         return openAiModelFactory.createDefaultChatModel().generate(SALARY_ANALYSIS_PROMPT +
                 createPrompt(jobDataList));
     }
