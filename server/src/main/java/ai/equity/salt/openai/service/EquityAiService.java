@@ -28,18 +28,12 @@ public class EquityAiService {
         var response = aiResponse.generateAnalysis(jobs.getData());
         var sysarbRecommendation = aiResponse.generateRecommendation(response);
 
-        var companyOverview = new CompanyOverview(jobs.getTopFiveHighestPayingPositions(), jobs.toListString().size(),
-                jobs.calculateGenderRatio(),
-                (int) jobs.getStatistics().age().getAverage(),
-                (int) jobs.getStatistics().salary().getAverage(),
-                (int) jobs.getStatistics().tenure().getAverage());
-
         return new EquityAiResponse(
                 response,
                 sysarbRecommendation,
                 jobs.uniqueTitles(),
                 mostCommonJob, experienceDataPoints, locationDataPoints,
                 decimalFormat.format(jobs.calculateGenderPayGap()),
-                companyOverview);
+                jobs.createCompanyOverview());
     }
 }

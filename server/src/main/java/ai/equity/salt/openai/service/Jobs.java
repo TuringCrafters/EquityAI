@@ -1,6 +1,7 @@
 package ai.equity.salt.openai.service;
 
 
+import ai.equity.salt.openai.controller.dto.CompanyOverview;
 import ai.equity.salt.openai.controller.dto.JobDataSet;
 import ai.equity.salt.openai.controller.dto.SalaryDatapoint;
 import ai.equity.salt.openai.controller.dto.SalaryRangeDatapoint;
@@ -114,6 +115,17 @@ public class Jobs {
                 .max(Map.Entry.comparingByValue())
                 .map(Map.Entry::getKey)
                 .orElse(null);
+    }
+
+    public CompanyOverview createCompanyOverview() {
+        return new CompanyOverview(
+                getTopFiveHighestPayingPositions(),
+                toListString().size(),
+                calculateGenderRatio(),
+                (int) getStatistics().age().getAverage(),
+                (int) getStatistics().salary().getAverage(),
+                (int) getStatistics().tenure().getAverage()
+        );
     }
 
 }
