@@ -3,7 +3,7 @@ import React, { useRef } from "react";
 import { useReactToPrint } from "react-to-print";
 import { Button } from "@/components/ui/button";
 import "@/features/analysis/"
-import { AnalysisHeader, Footer, Insights, MostCommonPosition, NavBarAnalysis, OveralAnalysis, Recommendations } from "@/features/analysis";
+import { AnalysisHeader, Footer, Insights, MostCommonPosition, NavBarAnalysis, OveralAnalysis, Recommendations } from "@/features";
 
 
 const AnalysisPage = () => {
